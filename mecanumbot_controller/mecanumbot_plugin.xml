@@ -1,0 +1,7 @@
+<library path="mecanumbot_controller">
+  <class name="mecanumbot_controller/MecanumBotController" type="mecanumbot_controller::MecanumBotController" base_class_type="controller_interface::ControllerInterface">
+  <description>
+    The mecanum drive controller transforms linear and angular velocity messages into signals for each wheel(s) for the robot to move fwd, bkwd, rotate and strafe.
+  </description>
+  </class>
+</library>
