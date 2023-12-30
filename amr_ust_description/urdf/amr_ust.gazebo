@@ -1,0 +1,290 @@
+<?xml version="1.0" ?>
+<robot name="amr_ust" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<xacro:property name="body_color" value="Gazebo/Black" />
+
+<gazebo>
+  <plugin name="control" filename="libgazebo_ros_control.so"/>
+</gazebo>
+<gazebo reference="base_link">
+  <material name="body_color" value="Gazebo/Gold"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+  <gravity>true</gravity>
+</gazebo>
+
+<gazebo reference="wheel_hub_1">
+  <material name="body_color" value="Gazebo/Silver"/>
+  <mu1>100000</mu1>
+  <mu2>100000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="wheel_hub_2_1">
+  <material name="body_color" value="Gazebo/Silver"/>
+  <mu1>100000</mu1>
+  <mu2>100000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="wheel_hub_3_1">
+  <material name="body_color" value="Gazebo/Silver"/>
+  <mu1>100000</mu1>
+  <mu2>100000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="wheel_hub_4_1">
+  <material name="body_color" value="Gazebo/Silver"/>
+  <mu1>100000</mu1>
+  <mu2>100000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_1_1">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>10000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_1_2">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_1_3">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_1_4">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_1_5">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_1_6">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_1_7">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_1_8">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_2_1">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_2_2">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_2_3">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_2_4">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_2_5">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_2_6">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_2_7">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_2_8">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_3_1">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_3_2">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_3_3">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_3_4">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_3_5">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_3_6">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_3_7">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_3_8">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_4_1">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_4_2">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_4_3">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_4_4">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_4_5">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_4_6">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_4_7">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="roller_4_8">
+  <material>${body_color}</material>
+  <mu1>100000</mu1>
+  <mu2>1000</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="imu_link">
+  <material name="body_color" value="Gazebo/Grass"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="Camera_1">
+  <material name="body_color" value="Gazebo/Wood"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="Intel_Realsense_RPLIDAR_1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+</robot>

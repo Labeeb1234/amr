@@ -1,0 +1,23 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+    use_sim_time: true
+
+    joint_broad:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    
+    mecanumbot_controller:
+      type: mecanumbot_controller/MecanumBotController
+    
+
+mecanumbot_controller:
+  ros__parameters:
+    rim_joint_names: ['Revolute 1', 'Revolute 2', 'Revolute 3', 'Revolute 4']
+    rim_radius: 0.03
+    rim_separation_length: 0.520
+    rim_separation_width: 0.610
+    base_frame_id: "base_link"
+    publish_rate: 100.0
+
+
+
