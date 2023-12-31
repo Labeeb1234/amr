@@ -265,9 +265,9 @@ namespace mecanumbot_controller
         // wheel angular velocity calculated from desired robot velocity
         std::vector<double> wheel_velocity(4);
         wheel_velocity[0] = (1/rim_radius_)*(u + v + r*((rim_separation_length_- rim_separation_width_)/2)); // revolute-1
-        wheel_velocity[1] = (1/rim_radius_)*(u - v + r*((rim_separation_length_- rim_separation_width_)/2)); // revolute-2
+        wheel_velocity[1] = (1/rim_radius_)*(u - v - r*((rim_separation_length_- rim_separation_width_)/2)); // revolute-2
         wheel_velocity[2] = (1/rim_radius_)*(u - v + r*((rim_separation_length_- rim_separation_width_)/2)); // revolute-3
-        wheel_velocity[3] = (1/rim_radius_)*(u + v + r*((rim_separation_length_- rim_separation_width_)/2)); // revolute-4
+        wheel_velocity[3] = (1/rim_radius_)*(u + v - r*((rim_separation_length_- rim_separation_width_)/2)); // revolute-4
         
         registered_rim_handles_[0].velocity_command.get().set_value(wheel_velocity[0]);
         registered_rim_handles_[1].velocity_command.get().set_value(wheel_velocity[1]);
