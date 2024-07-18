@@ -26,7 +26,7 @@ endif()
 
 
 install(
-  DIRECTORY launch urdf rviz meshes
+  DIRECTORY launch urdf rviz meshes bot_config
   DESTINATION share/${PROJECT_NAME}
 )
 

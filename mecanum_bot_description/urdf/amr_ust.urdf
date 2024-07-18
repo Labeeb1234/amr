@@ -18,14 +18,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -38,14 +38,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.244627 -0.278967 -0.032976"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.244627 -0.278967 -0.032976"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -58,14 +58,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.244627 0.279033 -0.032976"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_2_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_2_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.244627 0.279033 -0.032976"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_2_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_2_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -78,14 +78,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.268017 -0.278467 -0.032976"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_3_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_3_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.268017 -0.278467 -0.032976"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_3_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_3_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -98,14 +98,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.268017 0.279533 -0.032976"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_4_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_4_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.268017 0.279533 -0.032976"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_4_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/wheel_hub_4_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -118,14 +118,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.227018 -0.323284 -0.070476"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.227018 -0.323284 -0.070476"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -138,14 +138,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.258692 -0.323284 -0.071944"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.258692 -0.323284 -0.071944"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -158,14 +158,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.282127 -0.323284 -0.050585"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.282127 -0.323284 -0.050585"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -178,14 +178,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.283595 -0.323284 -0.018911"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_4.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.283595 -0.323284 -0.018911"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_4.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -198,14 +198,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.262236 -0.323284 0.004524"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_5.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_5.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.262236 -0.323284 0.004524"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_5.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_5.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -218,14 +218,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.230562 -0.323284 0.005992"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_6.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_6.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.230562 -0.323284 0.005992"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_6.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_6.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -238,14 +238,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.207127 -0.323284 -0.015367"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_7.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_7.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.207127 -0.323284 -0.015367"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_7.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_7.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -258,14 +258,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.205659 -0.323284 -0.047041"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_8.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_8.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.205659 -0.323284 -0.047041"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_8.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_1_8.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -278,14 +278,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.258692 0.323351 -0.071944"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.258692 0.323351 -0.071944"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -298,14 +298,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.227018 0.323351 -0.070476"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.227018 0.323351 -0.070476"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -318,14 +318,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.282127 0.323351 -0.050585"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.282127 0.323351 -0.050585"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -338,14 +338,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.283595 0.323351 -0.018911"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_4.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.283595 0.323351 -0.018911"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_4.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -358,14 +358,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.262236 0.323351 0.004524"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_5.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_5.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.262236 0.323351 0.004524"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_5.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_5.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -378,14 +378,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.230562 0.323351 0.005992"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_6.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_6.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.230562 0.323351 0.005992"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_6.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_6.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -398,14 +398,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.207127 0.323351 -0.015367"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_7.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_7.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.207127 0.323351 -0.015367"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_7.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_7.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -418,14 +418,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.205659 0.323351 -0.047041"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_8.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_8.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.205659 0.323351 -0.047041"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_8.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_2_8.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -438,14 +438,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.250408 -0.322784 -0.070476"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.250408 -0.322784 -0.070476"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -458,14 +458,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.282082 -0.322784 -0.071944"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.282082 -0.322784 -0.071944"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -478,14 +478,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.305517 -0.322784 -0.050585"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.305517 -0.322784 -0.050585"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -498,14 +498,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.306985 -0.322784 -0.018911"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_4.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.306985 -0.322784 -0.018911"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_4.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -518,14 +518,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.285626 -0.322784 0.004524"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_5.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_5.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.285626 -0.322784 0.004524"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_5.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_5.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -538,14 +538,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.253952 -0.322784 0.005992"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_6.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_6.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.253952 -0.322784 0.005992"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_6.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_6.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -558,14 +558,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.229049 -0.322784 -0.047041"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_7.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_7.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.229049 -0.322784 -0.047041"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_7.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_7.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -578,14 +578,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.230517 -0.322784 -0.015367"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_8.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_8.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.230517 -0.322784 -0.015367"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_8.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_3_8.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -598,14 +598,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.250408 0.323851 -0.070476"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.250408 0.323851 -0.070476"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -618,14 +618,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.282082 0.323851 -0.071944"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.282082 0.323851 -0.071944"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -638,14 +638,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.305517 0.323851 -0.050585"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.305517 0.323851 -0.050585"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -658,14 +658,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.306985 0.323851 -0.018911"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_4.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.306985 0.323851 -0.018911"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_4.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -678,14 +678,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.285626 0.323851 0.004524"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_5.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_5.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.285626 0.323851 0.004524"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_5.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_5.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -698,14 +698,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.253952 0.323851 0.005992"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_6.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_6.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.253952 0.323851 0.005992"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_6.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_6.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -718,14 +718,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.230517 0.323851 -0.015367"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_7.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_7.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.230517 0.323851 -0.015367"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_7.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_7.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -738,14 +738,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.229049 0.323851 -0.047041"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_8.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_8.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.229049 0.323851 -0.047041"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_8.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/roller_4_8.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -758,18 +758,18 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.331142 0.000425 -0.054538"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/imu_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/imu_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.331142 0.000425 -0.054538"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/imu_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/imu_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
-  <link name="Camera_1">
+  <link name="camera_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0.017956856789517806 2.2171102201271888e-05 0.00015529819733451494"/>
       <mass value="37.8261563112952"/>
@@ -778,14 +778,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.331142 -0.000425 -0.054538"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/Camera_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/Camera_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.331142 -0.000425 -0.054538"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/Camera_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/Camera_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -798,14 +798,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.024557 0.000233 -0.105076"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/Intel_Realsense_RPLIDAR_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/Intel_Realsense_RPLIDAR_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.024557 0.000233 -0.105076"/>
       <geometry>
-        <mesh filename="file:///home/labeeb/ubot_ws/labeeb_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/Intel_Realsense_RPLIDAR_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/inlabamr/linorobot2_ws/install/mecanum_bot_description/share/mecanum_bot_description/meshes/Intel_Realsense_RPLIDAR_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -813,7 +813,7 @@
   <joint name="fixed" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/> <!-- only need to measure and change the z position -->
+    <origin xyz="0 0 0.12" rpy="0 0 0"/> <!-- only need to measure and change the z position -->
   </joint>
   <joint name="Revolute 1" type="continuous">
     <origin rpy="0 0 0" xyz="0.244627 0.278967 0.032976"/>
@@ -1036,13 +1036,43 @@
     <parent link="base_link"/>
     <child link="imu_link"/>
   </joint>
+  
   <joint name="Rigid 40" type="fixed">
-    <origin rpy="0 0 0" xyz="0.331142 0.000425 0.054538"/>
+    <origin rpy="0 0 0" xyz="0.331142 0.0 0.054538"/>
     <parent link="base_link"/>
-    <child link="Camera_1"/>
+    <child link="camera_link"/>
   </joint>
+  
+  <link name="camera_depth_frame"></link>
+  <joint name="camera_depth_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_depth_frame"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="camera_depth_optical_frame"></link>
+  <joint name="camera_depth_optical_joint" type="fixed">
+    <parent link="camera_depth_frame" />
+    <child link="camera_depth_optical_frame" />
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57" />
+  </joint>
+
+  <link name="camera_color_frame"></link>
+  <joint name="camera_color_joint" type="fixed">
+    <parent link="camera_link" />
+    <child link="camera_color_frame" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+
+  <link name="camera_color_optical_frame"></link>
+  <joint name="camera_color_optical_joint" type="fixed">
+    <parent link="camera_color_frame" />
+    <child link="camera_color_optical_frame" />
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57" />
+  </joint>
+
   <joint name="Rigid 42" type="fixed">
-    <origin rpy="0 0 0" xyz="-0.024557 -0.000233 0.12"/>
+    <origin rpy="0 0 0" xyz="-0.0475 0.0 0.125"/>
     <parent link="base_link"/>
     <child link="Intel_Realsense_RPLIDAR_1"/>
   </joint>

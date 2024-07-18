@@ -1,0 +1,26 @@
+# all dimensions/parameters in SI-Units
+bot_mass: 10 #[kg]
+bot_ixx: 0.198344 #[kg-m]
+bot_iyy: 0.258519 #[kg-m]
+bot_izz: 0.440587 #[kg-m]
+bot_ixy: 0.0
+bot_ixz: 0.0
+bot_iyx: 0.0
+bot_iyz: 0.0
+bot_izx: 0.0
+bot_izy: 0.0
+
+chassis_length: #[m]
+chassis_width:
+chassis_height: 0.075 #[m]
+chassis_grd_clearance: 0.039 #[m]
+
+wheel_mass: 1.0 #[kg]
+wheel_inertia: [0.000439, 0.000283, 0.000439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]  # xx, yy, zz, xy, xz, yx, yy, yz, zx, zy, zz
+wheel_diameter: 0.15 #[m]
+wheel_thickness: 0.05 #[m]
+wheel_chassis_offsetX: 0.225 #[m]
+wheel_chassis_offsetY: 0.036 #[m]
+wheel_chassis_offsetZ: 0.036 #[m]
+
+
