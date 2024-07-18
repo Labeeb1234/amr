@@ -8,12 +8,17 @@ from launch.conditions import IfCondition, UnlessCondition
 
 
 def generate_launch_description():
-    # description_launch_path = PathJoinSubstitution(
-    #     [FindPackageShare('mecanum_bot_description'), 'launch', 'display.launch.py']
-    # )
 
     ekf_config_path = PathJoinSubstitution(
-        [FindPackageShare("mecanum_bot_ekf"), "config", "ekf_params.yaml"]
+        [FindPackageShare("mecanum_bot_ekf"), "config", "alt_ekf_params.yaml"]
+    )
+
+    lidar_launch_path = PathJoinSubstitution(
+        [FindPackageShare('mecanum_bot_bringup'), 'launch', 'laser.launch.py']
+    )
+
+    cam_or_depth_launch_path = PathJoinSubstitution(
+        [FindPackageShare('mecanum_bot_bringup'), 'launch', 'cam_or_depth.launch.py'] 
     )
 
     micro_ros_launch_path = PathJoinSubstitution(
@@ -31,17 +36,24 @@ def generate_launch_description():
         ]
     )
 
+    lidar_launcher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(lidar_launch_path)
+    )
+
     micro_ros_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(micro_ros_launch_path)
+    )
+
+    realsense_cam_launcher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(cam_or_depth_launch_path)
     )
 
 
 
     ld = LaunchDescription()
     ld.add_action(robot_localization_node)
+    ld.add_action(lidar_launcher)
+    ld.add_action(realsense_cam_launcher)
     ld.add_action(micro_ros_launcher)
-
-
-    
 
     return ld

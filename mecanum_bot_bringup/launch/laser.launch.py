@@ -8,12 +8,59 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-
-
     
+    lidar_frame_id_arg = DeclareLaunchArgument(
+        'laser_frame_id',
+        default_value='Intel_Realsense_RPLIDAR_1',
+        description='to specify the lidar frame id name'
+    )
+
+    lidar_serial_port_arg = DeclareLaunchArgument(
+        'lidar_serial_port',
+        default_value='/dev/ttyUSB0',
+        description='specify lidar serial port id'
+    )
+
+    use_laser_filter = DeclareLaunchArgument(
+        'use_laser_filter',
+        default_value='true',
+        description='whether to use laser filter or not'
+    )
+
+    rplidar_a1_launch_path = PathJoinSubstitution(
+        [FindPackageShare('rplidar_ros'), 'launch', 'rplidar_a1_launch.py']
+    )
+    
+
+    A1rplidar_launcher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(rplidar_a1_launch_path),
+        launch_arguments={
+            'serial_port': LaunchConfiguration('lidar_serial_port'), 
+            'frame_id': LaunchConfiguration('laser_frame_id')
+        }.items()
+    )
+
+    # laser filter
+    laser_filter_config_path = PathJoinSubstitution(
+        [FindPackageShare('mecanum_bot_bringup'), 'config', 'box_laser_filter.yaml']
+    )
+
+    scan_to_scan_filter_node = Node(
+        package="laser_filters",
+        executable="scan_to_scan_filter_chain",
+        parameters=[
+            laser_filter_config_path
+        ]
+    )
 
 
 
     ld = LaunchDescription()
+
+    ld.add_action(lidar_frame_id_arg)
+    ld.add_action(lidar_serial_port_arg)
+    ld.add_action(A1rplidar_launcher)
+    ld.add_action(scan_to_scan_filter_node)
+
 
     return ld

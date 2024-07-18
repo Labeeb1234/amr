@@ -15,7 +15,7 @@ def generate_launch_description():
 
     serial_port_id_arg = DeclareLaunchArgument(
         'serial_port_id',
-        default_value='/dev/tty/USB0',
+        default_value='/dev/ttyUSB0',
         description='the serial port id for serial mirco-ros connection'
     )
 
@@ -29,7 +29,13 @@ def generate_launch_description():
         'micro_ros_port',
         default_value='8888',
         description='micro-ROS udp/tcp port number'
-    ),
+    )
+
+    uros_baudate_arg = DeclareLaunchArgument(
+        'uros_baudrate',
+        default_value='921600',
+        description='baudrate of uros'
+    )
 
 
     micro_ros_agent_node_serial = Node(
@@ -38,8 +44,8 @@ def generate_launch_description():
         executable='micro_ros_agent',
         name='micro_ros_agent',
         output='screen',
-        arguments=['serial', '--dev', LaunchConfiguration("serial_port_id")]
-    ),
+        arguments=['serial', '--dev', LaunchConfiguration("serial_port_id"), '--baudrate', LaunchConfiguration('uros_baudrate')]
+    )
 
     mirco_ros_agent_node_wireless = Node(
         condition=LaunchConfigurationEquals('micro_ros_transport', 'udp4'),
@@ -48,7 +54,7 @@ def generate_launch_description():
         name='micro_ros_agent',
         output='screen',
         arguments=[LaunchConfiguration('micro_ros_transport'), '--port', LaunchConfiguration('micro_ros_port')]
-    ),
+    )
 
     robot_desc_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(robot_description_launch_path)
@@ -58,6 +64,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     ld.add_action(serial_port_id_arg)
+    ld.add_action(uros_baudate_arg)
     ld.add_action(micro_ros_transport_arg)
     ld.add_action(micro_ros_udp_port_arg)
     ld.add_action(micro_ros_agent_node_serial)
