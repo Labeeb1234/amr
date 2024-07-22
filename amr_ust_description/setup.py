@@ -17,7 +17,8 @@ setup(
         (os.path.join('share', package_name, 'urdf'), glob('urdf/*')),
         (os.path.join('share', package_name, 'meshes'), glob('meshes/*')),
         (os.path.join('share', package_name, 'config'), glob('config/*')),
-        # (os.path.join('share', package_name, 'scripts','omni_pub_joint_vel.py'))
+        (os.path.join('share', package_name, 'worlds'), glob('worlds/*')),
+        (os.path.join('share', package_name, 'ignition_world_sdf'), glob('ignition_world_sdf/*'))
 
     ],
     install_requires=['setuptools'],

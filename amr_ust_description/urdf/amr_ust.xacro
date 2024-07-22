@@ -2,13 +2,16 @@
 <robot name="amr_ust" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <xacro:include filename="$(find amr_ust_description)/urdf/materials.xacro" />
-<xacro:include filename="$(find amr_ust_description)/urdf/amr_ust.trans" />
-<xacro:include filename="$(find amr_ust_description)/urdf/amr_ust.gazebo" />
+<!-- <xacro:include filename="$(find amr_ust_description)/urdf/amr_ust.trans" />  -->
+<xacro:include filename="$(find amr_ust_description)/urdf/amr_ust.gazebo" /> 
+<!-- <xacro:include filename="$(find amr_ust_description)/urdf/ign_material.xacro" /> -->
+
+<link name="base_footprint"/>
 <link name="base_link">
   <inertial>
     <origin xyz="-0.00634522824548986 -0.00013537462402944816 0.06199171397610347" rpy="0 0 0"/>
-    <mass value="${100*5.451942477570936}"/>
-    <inertia ixx="${100*0.198344}" iyy="${100*0.258519}" izz="${100*0.440587}" ixy="${100*-0.000126}" iyz="${100*3e-06}" ixz="${100*9.8e-05}"/>
+    <mass value="${1*5.451942477570936}"/>
+    <inertia ixx="${1*0.198344}" iyy="${1*0.258519}" izz="${1*0.440587}" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -18,7 +21,7 @@
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/> 
     <geometry>
       <mesh filename="file://$(find amr_ust_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -28,8 +31,8 @@
 <link name="wheel_hub_1">
   <inertial>
     <origin xyz="-2.639485790456586e-05 0.020563742043534228 -3.311900293296449e-05" rpy="0 0 0"/>
-    <mass value="${100*0.7547170756703072}"/>
-    <inertia ixx="${100*0.000439}" iyy="${100*0.000283}" izz="${100*0.000439}" ixy="${100*-1e-06}" iyz="${100*-1e-06}" ixz="${100*0.0}"/>
+    <mass value="${1*0.7547170756703072}"/>
+    <inertia ixx="${1*0.000439}" iyy="${1*0.000283}" izz="${1*0.000439}" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="-0.244627 -0.278967 -0.032976" rpy="0 0 0"/>
@@ -49,8 +52,8 @@
 <link name="wheel_hub_2_1">
   <inertial>
     <origin xyz="-2.6216982503601827e-05 -0.020564086928370973 -3.3116504283184356e-05" rpy="0 0 0"/>
-    <mass value="${100*0.7547170756701437}"/>
-    <inertia ixx="${100*0.000439}" iyy="${100*0.000283}" izz="${100*0.000439}" ixy="${100*1e-06}" iyz="${100*1e-06}" ixz="${100*0.0}"/>
+    <mass value="${1*0.7547170756701437}"/>
+    <inertia ixx="${1*0.000439}" iyy="${1*0.000283}" izz="${1*0.000439}" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="-0.244627 0.279033 -0.032976" rpy="0 0 0"/>
@@ -69,9 +72,9 @@
 
 <link name="wheel_hub_3_1">
   <inertial>
-    <origin xyz="-3.318509563710048e-05 0.020563634860040703 -2.6215654236647068e-05" rpy="0 0 0"/>
-    <mass value="${100*0.7547170756701448}"/>
-    <inertia ixx="${100*0.000439}" iyy="${100*0.000283}" izz="${100*0.000439}" ixy="${100*-1e-06}" iyz="${100*-1e-06}" ixz="${100*0.0}"/>
+    <origin xyz="-3.3185095637148e-05 0.020563634860040703 -2.6215654236647068e-05" rpy="0 0 0"/>
+    <mass value="${1*0.7547170756701448}"/>
+    <inertia ixx="${1*0.000439}" iyy="${1*0.000283}" izz="${1*0.000439}" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="0.268017 -0.278467 -0.032976" rpy="0 0 0"/>
@@ -91,8 +94,8 @@
 <link name="wheel_hub_4_1">
   <inertial>
     <origin xyz="-2.6265710571016232e-05 -0.020564051680927398 3.311435024339754e-05" rpy="0 0 0"/>
-    <mass value="${100*0.7547170756759828}"/>
-    <inertia ixx="${100*0.000439}" iyy="${100*0.000283}" izz="${100*0.000439}" ixy="${100*1e-06}" iyz="${100*-1e-06}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.7547170756759828}"/>
+    <inertia ixx="${1*0.000439}" iyy="${1*0.000283}" izz="${1*0.000439}" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="0.268017 0.279533 -0.032976" rpy="0 0 0"/>
@@ -112,8 +115,8 @@
 <link name="roller_1_1">
   <inertial>
     <origin xyz="0.017543151467361517 -0.01754284500297798 -1.0594511379302674e-11" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701390915}"/>
-    <inertia ixx="${100*1.3e-05}" iyy="${100*1.3e-05}" izz="${100*2.1e-05}" ixy="${100*8e-06}" iyz="${100*-0.0}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701390915}"/>
+    <inertia ixx="${1*1.3e-05}" iyy="${1*1.3e-05}" izz="${1*2.1e-05}" ixy="${1*8e-06}" iyz="${1*-0.0}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="-0.227018 -0.323284 -0.070476" rpy="0 0 0"/>
@@ -133,8 +136,8 @@
 <link name="roller_1_2">
   <inertial>
     <origin xyz="0.012404932084268683 -0.01754284500057013 -0.012404958556342202" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701390915}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*6e-06}" iyz="${100*-6e-06}" ixz="${100*4e-06}"/>
+    <mass value="${1*0.10437828701390915}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*6e-06}" iyz="${1*-6e-06}" ixz="${1*4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="-0.258692 -0.323284 -0.071944" rpy="0 0 0"/>
@@ -154,8 +157,8 @@
 <link name="roller_1_3">
   <inertial>
     <origin xyz="-3.50492340150943e-08 -0.017542844997298468 -0.017543186524848743" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701390915}"/>
-    <inertia ixx="${100*2.1e-05}" iyy="${100*1.3e-05}" izz="${100*1.3e-05}" ixy="${100*0.0}" iyz="${100*-8e-06}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701390915}"/>
+    <inertia ixx="${1*2.1e-05}" iyy="${1*1.3e-05}" izz="${1*1.3e-05}" ixy="${1*0.0}" iyz="${1*-8e-06}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="-0.282127 -0.323284 -0.050585" rpy="0 0 0"/>
@@ -175,8 +178,8 @@
 <link name="roller_1_4">
   <inertial>
     <origin xyz="-0.012404993591602409 -0.017542844994042683 -0.012404967140717836" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701390915}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*-6e-06}" iyz="${100*-6e-06}" ixz="${100*-4e-06}"/>
+    <mass value="${1*0.10437828701390915}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*-6e-06}" iyz="${1*-6e-06}" ixz="${1*-4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="-0.283595 -0.323284 -0.018911" rpy="0 0 0"/>
@@ -196,8 +199,8 @@
 <link name="roller_1_5">
   <inertial>
     <origin xyz="-0.017543221561155925 -0.017542844991662976 -1.0594235558269993e-11" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701390915}"/>
-    <inertia ixx="${100*1.3e-05}" iyy="${100*1.3e-05}" izz="${100*2.1e-05}" ixy="${100*-8e-06}" iyz="${100*0.0}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701390915}"/>
+    <inertia ixx="${1*1.3e-05}" iyy="${1*1.3e-05}" izz="${1*2.1e-05}" ixy="${1*-8e-06}" iyz="${1*0.0}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="-0.262236 -0.323284 0.004524" rpy="0 0 0"/>
@@ -217,8 +220,8 @@
 <link name="roller_1_6">
   <inertial>
     <origin xyz="-0.012405002180593483 -0.017542844994079543 0.012404958530537124" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701390915}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*-6e-06}" iyz="${100*6e-06}" ixz="${100*4e-06}"/>
+    <mass value="${1*0.10437828701390915}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*-6e-06}" iyz="${1*6e-06}" ixz="${1*4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="-0.230562 -0.323284 0.005992" rpy="0 0 0"/>
@@ -238,8 +241,8 @@
 <link name="roller_1_7">
   <inertial>
     <origin xyz="-3.5049233293449333e-08 -0.01754284499735176 0.017543186503658992" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701390915}"/>
-    <inertia ixx="${100*2.1e-05}" iyy="${100*1.3e-05}" izz="${100*1.3e-05}" ixy="${100*-0.0}" iyz="${100*8e-06}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701390915}"/>
+    <inertia ixx="${1*2.1e-05}" iyy="${1*1.3e-05}" izz="${1*1.3e-05}" ixy="${1*-0.0}" iyz="${1*8e-06}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="-0.207127 -0.323284 -0.015367" rpy="0 0 0"/>
@@ -259,8 +262,8 @@
 <link name="roller_1_8">
   <inertial>
     <origin xyz="0.01240492349527686 -0.017542845000608598 0.012404967124144517" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701390915}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*6e-06}" iyz="${100*6e-06}" ixz="${100*-4e-06}"/>
+    <mass value="${1*0.10437828701390915}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*6e-06}" iyz="${1*6e-06}" ixz="${1*-4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="-0.205659 -0.323284 -0.047041" rpy="0 0 0"/>
@@ -280,8 +283,8 @@
 <link name="roller_2_1">
   <inertial>
     <origin xyz="0.01262866495368864 0.017859997380744397 -0.01262869142546618" rpy="0 0 0"/>
-    <mass value="${100*0.1043782870139091}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*-6e-06}" iyz="${100*6e-06}" ixz="${100*4e-06}"/>
+    <mass value="${1*0.1043782870139091}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*-6e-06}" iyz="${1*6e-06}" ixz="${1*4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="-0.258692 0.323351 -0.071944" rpy="0 0 0"/>
@@ -301,8 +304,8 @@
 <link name="roller_2_2">
   <inertial>
     <origin xyz="0.017859557525525316 0.017859997383116 -1.0596287736142074e-11" rpy="0 0 0"/>
-    <mass value="${100*0.1043782870139091}"/>
-    <inertia ixx="${100*1.3e-05}" iyy="${100*1.3e-05}" izz="${100*2.1e-05}" ixy="${100*-8e-06}" iyz="${100*0.0}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.1043782870139091}"/>
+    <inertia ixx="${1*1.3e-05}" iyy="${1*1.3e-05}" izz="${1*2.1e-05}" ixy="${1*-8e-06}" iyz="${1*0.0}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="-0.227018 0.323351 -0.070476" rpy="0 0 0"/>
@@ -322,8 +325,8 @@
 <link name="roller_2_3">
   <inertial>
     <origin xyz="-3.504893653083485e-08 0.017859997377485448 -0.017859592582711817" rpy="0 0 0"/>
-    <mass value="${100*0.1043782870139091}"/>
-    <inertia ixx="${100*2.1e-05}" iyy="${100*1.3e-05}" izz="${100*1.3e-05}" ixy="${100*-0.0}" iyz="${100*8e-06}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.1043782870139091}"/>
+    <inertia ixx="${1*2.1e-05}" iyy="${1*1.3e-05}" izz="${1*1.3e-05}" ixy="${1*-0.0}" iyz="${1*8e-06}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="-0.282127 0.323351 -0.050585" rpy="0 0 0"/>
@@ -343,8 +346,8 @@
 <link name="roller_2_4">
   <inertial>
     <origin xyz="-0.012628726460427897 0.017859997374215952 -0.012628700009841565" rpy="0 0 0"/>
-    <mass value="${100*0.1043782870139091}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*6e-06}" iyz="${100*6e-06}" ixz="${100*-4e-06}"/>
+    <mass value="${1*0.1043782870139091}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*6e-06}" iyz="${1*6e-06}" ixz="${1*-4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="-0.283595 0.323351 -0.018911" rpy="0 0 0"/>
@@ -364,8 +367,8 @@
 <link name="roller_2_5">
   <inertial>
     <origin xyz="-0.017859627618709933 0.017859997371814595 -1.0596117733241428e-11" rpy="0 0 0"/>
-    <mass value="${100*0.1043782870139091}"/>
-    <inertia ixx="${100*1.3e-05}" iyy="${100*1.3e-05}" izz="${100*2.1e-05}" ixy="${100*8e-06}" iyz="${100*-0.0}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.1043782870139091}"/>
+    <inertia ixx="${1*1.3e-05}" iyy="${1*1.3e-05}" izz="${1*2.1e-05}" ixy="${1*8e-06}" iyz="${1*-0.0}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="-0.262236 0.323351 0.004524" rpy="0 0 0"/>
@@ -385,8 +388,8 @@
 <link name="roller_2_6">
   <inertial>
     <origin xyz="-0.012628735049418499 0.017859997374192915 0.012628691399658758" rpy="0 0 0"/>
-    <mass value="${100*0.1043782870139091}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*6e-06}" iyz="${100*-6e-06}" ixz="${100*4e-06}"/>
+    <mass value="${1*0.1043782870139091}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*6e-06}" iyz="${1*-6e-06}" ixz="${1*4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="-0.230562 0.323351 0.005992" rpy="0 0 0"/>
@@ -406,8 +409,8 @@
 <link name="roller_2_7">
   <inertial>
     <origin xyz="-3.5048936197767944e-08 0.017859997377449754 0.01785959256151852" rpy="0 0 0"/>
-    <mass value="${100*0.1043782870139091}"/>
-    <inertia ixx="${100*2.1e-05}" iyy="${100*1.3e-05}" izz="${100*1.3e-05}" ixy="${100*0.0}" iyz="${100*-8e-06}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.1043782870139091}"/>
+    <inertia ixx="${1*2.1e-05}" iyy="${1*1.3e-05}" izz="${1*1.3e-05}" ixy="${1*0.0}" iyz="${1*-8e-06}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="-0.207127 0.323351 -0.015367" rpy="0 0 0"/>
@@ -427,8 +430,8 @@
 <link name="roller_2_8">
   <inertial>
     <origin xyz="0.012628656364696678 0.01785999738071853 0.012628699993264443" rpy="0 0 0"/>
-    <mass value="${100*0.1043782870139091}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*-6e-06}" iyz="${100*-6e-06}" ixz="${100*-4e-06}"/>
+    <mass value="${1*0.1043782870139091}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*-6e-06}" iyz="${1*-6e-06}" ixz="${1*-4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="-0.205659 0.323351 -0.047041" rpy="0 0 0"/>
@@ -448,8 +451,8 @@
 <link name="roller_3_1">
   <inertial>
     <origin xyz="-0.01754322156300464 -0.01754284498951264 -1.538191796157662e-10" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391214}"/>
-    <inertia ixx="${100*1.3e-05}" iyy="${100*1.3e-05}" izz="${100*2.1e-05}" ixy="${100*-8e-06}" iyz="${100*0.0}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701391214}"/>
+    <inertia ixx="${1*1.3e-05}" iyy="${1*1.3e-05}" izz="${1*2.1e-05}" ixy="${1*-8e-06}" iyz="${1*0.0}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="0.250408 -0.322784 -0.070476" rpy="0 0 0"/>
@@ -469,8 +472,8 @@
 <link name="roller_3_2">
   <inertial>
     <origin xyz="-0.012405002182447389 -0.017542844991918383 -0.012404958694950195" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391214}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*-6e-06}" iyz="${100*-6e-06}" ixz="${100*-4e-06}"/>
+    <mass value="${1*0.10437828701391214}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*-6e-06}" iyz="${1*-6e-06}" ixz="${1*-4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="0.282082 -0.322784 -0.071944" rpy="0 0 0"/>
@@ -490,8 +493,8 @@
 <link name="roller_3_3">
   <inertial>
     <origin xyz="-3.5051090030435716e-08 -0.017542844995186935 -0.017543186668072128" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391214}"/>
-    <inertia ixx="${100*2.1e-05}" iyy="${100*1.3e-05}" izz="${100*1.3e-05}" ixy="${100*0.0}" iyz="${100*-8e-06}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701391214}"/>
+    <inertia ixx="${1*2.1e-05}" iyy="${1*1.3e-05}" izz="${1*1.3e-05}" ixy="${1*0.0}" iyz="${1*-8e-06}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="0.305517 -0.322784 -0.050585" rpy="0 0 0"/>
@@ -511,8 +514,8 @@
 <link name="roller_3_4">
   <inertial>
     <origin xyz="0.012404923493422093 -0.01754284499844483 -0.012404967288556236" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391214}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*6e-06}" iyz="-${100*6e-06}" ixz="${100*4e-06}"/>
+    <mass value="${1*0.10437828701391214}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*6e-06}" iyz="-${1*6e-06}" ixz="${1*4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="0.306985 -0.322784 -0.018911" rpy="0 0 0"/>
@@ -532,8 +535,8 @@
 <link name="roller_3_5">
   <inertial>
     <origin xyz="0.017543151465506057 -0.01754284500082315 -1.5381812143444584e-10" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391214}"/>
-    <inertia ixx="${100*1.3e-05}" iyy="${100*1.3e-05}" izz="${100*2.1e-05}" ixy="${100*8e-06}" iyz="${100*-0.0}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701391214}"/>
+    <inertia ixx="${1*1.3e-05}" iyy="${1*1.3e-05}" izz="${1*2.1e-05}" ixy="${1*8e-06}" iyz="${1*-0.0}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="0.285626 -0.322784 0.004524" rpy="0 0 0"/>
@@ -553,8 +556,8 @@
 <link name="roller_3_6">
   <inertial>
     <origin xyz="0.01240493208241214 -0.017542844998421847 0.012404958391928143" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391214}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*6e-06}" iyz="${100*6e-06}" ixz="${100*-4e-06}"/>
+    <mass value="${1*0.10437828701391214}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*6e-06}" iyz="${1*6e-06}" ixz="${1*-4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="0.253952 -0.322784 0.005992" rpy="0 0 0"/>
@@ -574,8 +577,8 @@
 <link name="roller_3_7">
   <inertial>
     <origin xyz="-0.012404993593458591 -0.017542844991894402 0.012404966976303597" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391214}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*-6e-06}" iyz="${100*6e-06}" ixz="${100*4e-06}"/>
+    <mass value="${1*0.10437828701391214}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*-6e-06}" iyz="${1*6e-06}" ixz="${1*4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="0.229049 -0.322784 -0.047041" rpy="0 0 0"/>
@@ -595,8 +598,8 @@
 <link name="roller_3_8">
   <inertial>
     <origin xyz="-3.505108961410208e-08 -0.01754284499515346 0.017543186360434393" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391214}"/>
-    <inertia ixx="${100*2.1e-05}" iyy="${100*1.3e-05}" izz="${100*1.3e-05}" ixy="${100*-0.0}" iyz="${100*8e-06}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701391214}"/>
+    <inertia ixx="${1*2.1e-05}" iyy="${1*1.3e-05}" izz="${1*1.3e-05}" ixy="${1*-0.0}" iyz="${1*8e-06}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="0.230517 -0.322784 -0.015367" rpy="0 0 0"/>
@@ -616,8 +619,8 @@
 <link name="roller_4_1">
   <inertial>
     <origin xyz="-0.01785962762313098 0.017859997371392433 -1.4103307410806565e-10" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391043}"/>
-    <inertia ixx="${100*1.3e-05}" iyy="${100*1.3e-05}" izz="${100*2.1e-05}" ixy="${100*8e-06}" iyz="${100*-0.0}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701391043}"/>
+    <inertia ixx="${1*1.3e-05}" iyy="${1*1.3e-05}" izz="${1*2.1e-05}" ixy="${1*8e-06}" iyz="${1*-0.0}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="0.250408 0.323851 -0.070476" rpy="0 0 0"/>
@@ -637,8 +640,8 @@
 <link name="roller_4_2">
   <inertial>
     <origin xyz="-0.012628735053839935 0.01785999737376276 -0.012628691551287312" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391043}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*6e-06}" iyz="${100*6e-06}" ixz="${100*-4e-06}"/>
+    <mass value="${1*0.10437828701391043}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*6e-06}" iyz="${1*6e-06}" ixz="${1*-4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="0.282082 0.323851 -0.071944" rpy="0 0 0"/>
@@ -658,8 +661,8 @@
 <link name="roller_4_3">
   <inertial>
     <origin xyz="-3.5053357272385455e-08 0.017859997376992898 -0.017859592713148985" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391043}"/>
-    <inertia ixx="${100*2.1e-05}" iyy="${100*1.3e-05}" izz="${100*1.3e-05}" ixy="${100*-0.0}" iyz="${100*8e-06}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701391043}"/>
+    <inertia ixx="${1*2.1e-05}" iyy="${1*1.3e-05}" izz="${1*1.3e-05}" ixy="${1*-0.0}" iyz="${1*8e-06}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="0.305517 0.323851 -0.050585" rpy="0 0 0"/>
@@ -679,8 +682,8 @@
 <link name="roller_4_4">
   <inertial>
     <origin xyz="0.012628656360274326 0.017859997380225867 -0.012628700144894174" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391043}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*-6e-06}" iyz="${100*6e-06}" ixz="${100*4e-06}"/>
+    <mass value="${1*0.10437828701391043}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*-6e-06}" iyz="${1*6e-06}" ixz="${1*4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="0.306985 0.323851 -0.018911" rpy="0 0 0"/>
@@ -700,8 +703,8 @@
 <link name="roller_4_5">
   <inertial>
     <origin xyz="0.01785955752109908 0.01785999738260663 -1.410332553866689e-10" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391043}"/>
-    <inertia ixx="${100*1.3e-05}" iyy="${100*1.3e-05}" izz="${100*2.1e-05}" ixy="${100*-8e-06}" iyz="${100*0.0}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701391043}"/>
+    <inertia ixx="${1*1.3e-05}" iyy="${1*1.3e-05}" izz="${1*2.1e-05}" ixy="${1*-8e-06}" iyz="${1*0.0}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="0.285626 0.323851 0.004524" rpy="0 0 0"/>
@@ -721,8 +724,8 @@
 <link name="roller_4_6">
   <inertial>
     <origin xyz="0.01262866494926565 0.017859997380236026 0.01262869127383642" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391043}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*-6e-06}" iyz="${100*-6e-06}" ixz="${100*-4e-06}"/>
+    <mass value="${1*0.10437828701391043}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*-6e-06}" iyz="${1*-6e-06}" ixz="${1*-4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="0.253952 0.323851 0.005992" rpy="0 0 0"/>
@@ -742,8 +745,8 @@
 <link name="roller_4_7">
   <inertial>
     <origin xyz="-3.505335779974139e-08 0.01785999737700683 0.017859592431082198" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391043}"/>
-    <inertia ixx="${100*2.1e-05}" iyy="${100*1.3e-05}" izz="${100*1.3e-05}" ixy="${100*0.0}" iyz="${100*-8e-06}" ixz="${100*-0.0}"/>
+    <mass value="${1*0.10437828701391043}"/>
+    <inertia ixx="${1*2.1e-05}" iyy="${1*1.3e-05}" izz="${1*1.3e-05}" ixy="${1*0.0}" iyz="${1*-8e-06}" ixz="${1*-0.0}"/>
   </inertial>
   <visual>
     <origin xyz="0.230517 0.323851 -0.015367" rpy="0 0 0"/>
@@ -763,8 +766,8 @@
 <link name="roller_4_8">
   <inertial>
     <origin xyz="-0.012628726464847917 0.01785999737377375 0.01262869985821194" rpy="0 0 0"/>
-    <mass value="${100*0.10437828701391043}"/>
-    <inertia ixx="${100*1.7e-05}" iyy="${100*1.3e-05}" izz="${100*1.7e-05}" ixy="${100*6e-06}" iyz="${100*-6e-06}" ixz="${100*4e-06}"/>
+    <mass value="${1*0.10437828701391043}"/>
+    <inertia ixx="${1*1.7e-05}" iyy="${1*1.3e-05}" izz="${1*1.7e-05}" ixy="${1*6e-06}" iyz="${1*-6e-06}" ixz="${1*4e-06}"/>
   </inertial>
   <visual>
     <origin xyz="0.229049 0.323851 -0.047041" rpy="0 0 0"/>
@@ -784,8 +787,8 @@
 <link name="imu_link">
   <inertial>
     <origin xyz="-0.0037135131762633944 0.00015074437785556966 -7.192465925183467e-06" rpy="0 0 0"/>
-    <mass value="${100*0.027981306586696276}"/>
-    <inertia ixx="${100*4e-06}" iyy="${100*2e-06}" izz="${2e-06}" ixy="${100*-0.0}" iyz="${100*0.0}" ixz="${100*0.0}"/>
+    <mass value="${1*0.027981306586696276}"/>
+    <inertia ixx="${1*4e-06}" iyy="${1*2e-06}" izz="${2e-06}" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="0.331142 0.000425 -0.054538" rpy="0 0 0"/>
@@ -805,8 +808,8 @@
 <link name="Camera_1">
   <inertial>
     <origin xyz="0.017956856789517806 2.2171102201271888e-05 0.00015529819733451494" rpy="0 0 0"/>
-    <mass value="${100*0.378261563112952}"/>
-    <inertia ixx="${100*7.7e-05}" iyy="${100*9.5e-05}" izz="${100*9.3e-05}" ixy="${100*-0.0}" iyz="${100*0.0}" ixz="${100*1e-06}"/>
+    <mass value="${1*0.378261563112952}"/>
+    <inertia ixx="${1*7.7e-05}" iyy="${1*9.5e-05}" izz="${1*9.3e-05}" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="-0.331142 -0.000425 -0.054538" rpy="0 0 0"/>
@@ -822,12 +825,22 @@
     </geometry>
   </collision>
 </link>
+<link name="camera_link_depth"/>
+<link name="camera_bottom_screw_frame"/>
+<link name="camera_depth_frame"/>
+<link name="camera_depth_optical_frame"/>
+<link name="camera_color_frame"/>
+<link name="camera_color_optical_frame"/>
+<link name="camera_left_ir_frame"/>
+<link name="camera_left_ir_optical_frame"/>
+<link name="camera_right_ir_frame"/>
+<link name="camera_right_ir_optical_frame"/>
 
 <link name="Intel_Realsense_RPLIDAR_1">
   <inertial>
     <origin xyz="0.024168716871690317 0.00016153042204601072 0.023318927009167684" rpy="0 0 0"/>
-    <mass value="${100*1.5656994294737245}"/>
-    <inertia ixx="${100*0.000799}" iyy="${100*0.000843}" izz="${100*0.001052}" ixy="${100*-0.0}" iyz="${100*-2.9e-05}" ixz="${100*0.0}"/>
+    <mass value="${1*1.5656994294737245}"/>
+    <inertia ixx="${1*0.000799}" iyy="${1*0.000843}" izz="${1*0.001052}" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="0.024557 0.000233 -0.105076" rpy="0 0 0"/>
@@ -843,6 +856,14 @@
     </geometry>
   </collision>
 </link>
+
+
+<!-- BaseFootprint Joint -->
+<joint name="Fixed" type="fixed">
+  <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+</joint>
 
 <joint name="Revolute 1" type="continuous">
   <origin xyz="0.244627 0.278967 0.032976" rpy="0 0 0"/>
@@ -1103,10 +1124,62 @@
 </joint>
 
 <joint name="Rigid 40" type="fixed">
-  <origin xyz="0.331142 0.000425 0.054538" rpy="0 0 0"/>
-  <parent link="base_link"/>
+  <origin xyz="0.331142 -0.000425 0.05" rpy="0 0 0"/>
+  <parent link="base_footprint"/>
   <child link="Camera_1"/>
 </joint>
+<joint name="camera_joint" type="fixed">
+  <parent link="Camera_1" />
+  <child link="camera_bottom_screw_frame" />
+  <origin xyz="0 0.0 0" rpy="0 0 0" />
+</joint>
+<joint name="camera_link_joint" type="fixed">
+  <parent link="camera_bottom_screw_frame" />
+  <child link="camera_link_depth" />
+  <origin xyz="0 0.0 0.0 " rpy="0 0 0" />
+</joint>
+<joint name="camera_depth_joint" type="fixed">
+  <parent link="camera_link_depth" />
+  <child link="camera_depth_frame" />
+  <origin xyz="0 0 0" rpy="0 0 0" />
+</joint>
+<joint name="camera_depth_optical_joint" type="fixed">
+  <parent link="camera_depth_frame" />
+  <child link="camera_depth_optical_frame" />
+  <origin xyz="0 0 0 " rpy="-1.57 0 -1.57" />
+</joint>
+<joint name="camera_color_joint" type="fixed">
+  <parent link="camera_depth_frame" />
+  <child link="camera_color_frame" />
+  <origin xyz="0 0 0" rpy="0 0 0" />
+</joint>
+<joint name="camera_color_optical_joint" type="fixed">
+  <parent link="camera_color_frame" />
+  <child link="camera_color_optical_frame" />
+  <origin xyz="0 0 0 " rpy="-1.57 0 -1.57" />
+</joint>
+<joint name="camera_left_ir_joint" type="fixed">
+  <parent link="camera_depth_frame" />
+  <child link="camera_left_ir_frame" />
+  <origin xyz="0 0 0 " rpy="0 0 0 " />
+</joint>
+<joint name="camera_left_ir_optical_joint" type="fixed">
+  <parent link="camera_left_ir_frame" />
+  <child link="camera_left_ir_optical_frame" />
+  <origin xyz="0 0 0 " rpy="-1.57 0 -1.57" />
+</joint>
+<joint name="camera_right_ir_joint" type="fixed">
+  <parent link="camera_depth_frame" />
+  <child link="camera_right_ir_frame" />
+  <origin xyz="0 -0.050 0 " rpy="0 0 0" />
+</joint>
+<joint name="camera_right_ir_optical_joint" type="fixed">
+  <parent link="camera_right_ir_frame" />
+  <child link="camera_right_ir_optical_frame" />
+  <origin xyz="0 0 0 " rpy="-1.57 0 -1.57" />
+</joint>
+
+
 
 <joint name="Rigid 42" type="fixed">
   <origin xyz="-0.024557 -0.000233 0.12" rpy="0 0 0"/>
@@ -1115,211 +1188,124 @@
 </joint>
 
 
-<!--  **********************************************************Gazebo Plugin SETUP********************************************************** -->
 
-<!--  SENSOR SETUP -->
-<gazebo reference="imu_link">
-  <gravity>true</gravity>
-  <sensor name="imu_sensor" type="imu">
-    <always_on>true</always_on>
-    <update_rate>100</update_rate>
-    <visualize>true</visualize>
-    <topic>__default_topic__</topic>
-    <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-      <ros>
-          <remapping>~/out:=imu_data</remapping>
-      </ros>
-      <topicName>imu</topicName>
-      <bodyName>imu_link</bodyName>
-      <updateRateHZ>10.0</updateRateHZ>
-      <gaussianNoise>0.0</gaussianNoise>
-      <xyzOffset>0 0 0</xyzOffset>
-      <rpyOffset>0 0 0</rpyOffset>
-      <frameName>imu_link</frameName>
-      <initialOrientationAsReference>false</initialOrientationAsReference>
-    </plugin>
-    <pose>0 0 0 0 0 0</pose>
-  </sensor>
+
+
+<!--  **********************************************************Gazebo Plugin Realsense Camera setup********************************************************** -->
+<gazebo reference="camera_bottom_screw_frame"> 
+  <sensor name="cameradepth" type="depth">
+          <camera name="camera">
+              <horizontal_fov>1.2043</horizontal_fov>
+              <image>
+                  <width>1280</width>
+                  <height>720</height>
+                  <format>R8G8B8</format>
+              </image>
+              <clip>
+                  <near>0.1</near>
+                  <far>100</far>
+              </clip>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <visualize>0</visualize>
+      </sensor>
+      <sensor name="cameracolor" type="camera">
+          <camera name="camera">
+              <horizontal_fov>1.2043</horizontal_fov>
+              <image>
+                  <width>1280</width>
+                  <height>720</height>
+                  <format>RGB_INT8</format>
+              </image>
+              <clip>
+                  <near>0.1</near>
+                  <far>100</far>
+              </clip>
+              <noise>
+                  <type>gaussian</type>
+                  <mean>0.0</mean>
+                  <stddev>0.007</stddev> 
+              </noise>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <visualize>0</visualize>
+      </sensor>
+      <sensor name="cameraired1" type="camera">
+          <camera name="camera">
+              <horizontal_fov>1.2043</horizontal_fov>
+              <image>
+                  <width>1280</width>
+                  <height>720</height>
+                  <format>L_INT8</format>
+              </image>
+              <clip>
+                  <near>0.1</near>
+                  <far>100</far>
+              </clip>
+              <noise>
+                  <type>gaussian</type>
+                  <mean>0.0</mean>
+                  <stddev>0.05</stddev>
+              </noise>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>1</update_rate>
+          <visualize>0</visualize>
+      </sensor>
+      <sensor name="cameraired2" type="camera">
+          <camera name="camera">
+              <horizontal_fov>1.2043</horizontal_fov>
+              <image>
+                  <width>1280</width>
+                  <height>720</height>
+                  <format>L_INT8</format> 
+              </image>
+              <clip>
+                  <near>0.1</near>
+                  <far>100</far>
+              </clip>
+              <noise>
+                  <type>gaussian</type>
+                  <mean>0.0</mean>
+                  <stddev>0.05</stddev>
+              </noise>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>1</update_rate>
+          <visualize>0</visualize>
+      </sensor>
 </gazebo>
 
-<!-- LIDAR SETUP -->
-<gazebo reference="Intel_Realsense_RPLIDAR_1">
-    <sensor name="laser" type="ray">
-        <pose> 0 0 0 0 0 0 </pose>
-        <visualize>false</visualize>
-        <update_rate>30</update_rate>
-        <ray>
-            <scan>
-                <horizontal>
-                    <samples>720</samples>
-                    <min_angle>-3.14</min_angle>
-                    <max_angle>3.14</max_angle>
-                </horizontal>
-            </scan>
-            <range>
-                <min>0.2</min>
-                <max>8</max>
-            </range>
-        </ray>
-        <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
-            <ros>
-                <remapping>~/out:=scan</remapping>
-            </ros>
-            <output_type>sensor_msgs/LaserScan</output_type>
-            <frame_name>Intel_Realsense_RPLIDAR_1</frame_name>
-        </plugin>
-    </sensor>
-</gazebo>
-
-<!-- CAMERA SETUP -->
-<gazebo reference="Camera_1">
-  <sensor type="camera" name="camera1">
-    <update_rate>30.0</update_rate>
-    <camera name="head">
-      <horizontal_fov>1.3962634</horizontal_fov>
-      <!-- <horizontal_fov>2.0</horizontal_fov> -->
-      <image>
-        <width>800</width>
-        <height>800</height>
-        <format>R8G8B8</format>
-      </image>
-      <clip>
-        <near>0.05</near>
-        <far>300</far>
-      </clip>
-      <noise>
-        <type>gaussian</type>
-        <mean>0.0</mean>
-        <stddev>0.007</stddev>
-      </noise>
-    </camera>
-    <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-      <alwaysOn>true</alwaysOn>
-      <updateRate>30.0</updateRate>
-      <cameraName>Camera_1</cameraName>
-      <imageTopicName>image_raw</imageTopicName>
-      <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-      <frameName>Camera_1</frameName>
-      <hackBaseline>0.07</hackBaseline>
-      <distortionK1>0.0</distortionK1>
-      <distortionK2>0.0</distortionK2>
-      <distortionK3>0.0</distortionK3>
-      <distortionT1>0.0</distortionT1>
-      <distortionT2>0.0</distortionT2>
-    </plugin>
-  </sensor>
-</gazebo>
-
-<!-- Controller  SETUP -->
-
-<!-- Wheel control setup -->
-<!-- <gazebo>
-  <plugin name="wheel_hub_1_motion" filename="libgazebo_ros_force.so" >
-      <ros>
-          <namespace>/amr_ust</namespace>
-          <remapping>gazebo_ros_force:=wheel_hub_1</remapping>
-      </ros>
-      <link_name>wheel_hub_1</link_name> 
-      <force_frame>link</force_frame> 
-  </plugin>
-</gazebo>
-<gazebo>
-  <plugin name="wheel_hub_2_motion" filename="libgazebo_ros_force.so" >
-      <ros>
-          <namespace>/amr_ust</namespace>
-          <remapping>gazebo_ros_force:=wheel_hub_2</remapping>
-      </ros>
-      <link_name>wheel_hub_2_1</link_name> 
-      <force_frame>link</force_frame> 
-  </plugin>
-</gazebo>
-<gazebo>
-  <plugin name="wheel_hub_3_motion" filename="libgazebo_ros_force.so" >
-      <ros>
-          <namespace>/amr_ust</namespace>
-          <remapping>gazebo_ros_force:=wheel_hub_3</remapping>
-      </ros>
-      <link_name>wheel_hub_3_1</link_name> 
-      <force_frame>link</force_frame> 
-  </plugin>
-</gazebo>
-<gazebo>
-  <plugin name="wheel_hub_4_motion" filename="libgazebo_ros_force.so" >
-      <ros>
-          <namespace>/amr_ust</namespace>
-          <remapping>gazebo_ros_force:=wheel_hub_4</remapping>
-      </ros>
-      <link_name>wheel_hub_4_1</link_name> 
-
-      <force_frame>link</force_frame> 
-  </plugin>
-</gazebo> -->
-
-<!-- ROS2 Controller -->
-<!--  mecanumbot controller setup -->
-<ros2_control name="GazeboSystem" type="system">
-  <hardware>
-    <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-  </hardware>
-  <joint name="Revolute 1">
-    <command_interface name="velocity"/>
-    <state_interface name="velocity"/>
-    <state_interface name="position"/>
-  </joint>
-  <joint name="Revolute 2">
-    <command_interface name="velocity"/>
-    <state_interface name="velocity"/>
-    <state_interface name="position"/>
-  </joint>
-  <joint name="Revolute 3">
-    <command_interface name="velocity"/>
-    <state_interface name="velocity"/>
-    <state_interface name="position"/>
-  </joint>
-  <joint name="Revolute 4">
-    <command_interface name="velocity"/>
-    <state_interface name="velocity"/>
-    <state_interface name="position"/>
-  </joint>
-</ros2_control>
 
 <gazebo>
-  <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-    <parameters>$(find amr_ust_description)/config/robot_controller.yaml</parameters>
-  </plugin>
+<plugin name="camera" filename="librealsense_gazebo_plugin.so">
+      <prefix>camera</prefix>
+      <depthUpdateRate>15.0</depthUpdateRate>
+      <colorUpdateRate>15.0</colorUpdateRate>
+      <infraredUpdateRate>15.0</infraredUpdateRate>
+      <depthTopicName>camera/aligned_depth_to_color/image_raw</depthTopicName>
+      <depthCameraInfoTopicName>camera/depth/camera_info</depthCameraInfoTopicName>
+      <colorTopicName>camera/color/image_raw</colorTopicName>
+      <colorCameraInfoTopicName>camera/color/camera_info</colorCameraInfoTopicName>
+      <infrared1TopicName>camera/infra1/image_raw</infrared1TopicName>
+      <infrared1CameraInfoTopicName>camera/infra1/camera_info</infrared1CameraInfoTopicName>
+      <infrared2TopicName>camera/infra2/image_raw</infrared2TopicName>
+      <infrared2CameraInfoTopicName>camera/infra2/camera_info</infrared2CameraInfoTopicName>
+      <colorOpticalframeName>camera_color_optical_frame</colorOpticalframeName>
+      <depthOpticalframeName>camera_depth_optical_frame</depthOpticalframeName>
+      <infrared1OpticalframeName>camera_left_ir_optical_frame</infrared1OpticalframeName>
+      <infrared2OpticalframeName>camera_right_ir_optical_frame</infrared2OpticalframeName>
+      <rangeMinDepth>0.1</rangeMinDepth>
+      <rangeMaxDepth>2.0</rangeMaxDepth>
+      <pointCloud>true</pointCloud>
+      <pointCloudTopicName>camera/depth/color/points</pointCloudTopicName>
+      <pointCloudCutoff>0.1</pointCloudCutoff>
+      <pointCloudCutoffMax>2.0</pointCloudCutoffMax>
+</plugin>
+
 </gazebo>
-
-
-<!-- body interia control setup-->
-<gazebo>
-    <plugin name="body_controller" filename="libgazebo_ros_planar_move.so">
-        <ros>
-            <namespace>/amr_ust</namespace>
-            <remapping>cmd_vel:=cmd_vel</remapping>
-            <remapping>odom:=odom</remapping>
-        </ros>
-        <robotBaseFrame>base_link</robotBaseFrame>
-    </plugin>
-</gazebo>
-
-<!--  POSE plugin -->
-<gazebo>
-    <plugin name="base_link_pose" filename="libgazebo_ros_p3d.so">
-      <topic_name>odom</topic_name>
-      <ros>
-          <namespace>/amr_ust</namespace>
-          <remapping>odom:=odom_pose</remapping>
-      </ros>
-      <always_on>true</always_on>
-      <update_rate>100.0</update_rate>
-      <body_name>base_link</body_name>
-      <gaussian_noise>0.00001</gaussian_noise>
-      <frame_name>world</frame_name>
-    </plugin>
-</gazebo>
-
-
-
 
 
 </robot>
