@@ -452,7 +452,7 @@ void MecanumDriveControllerPrivate::OnUpdate(const gazebo::common::UpdateInfo & 
     }
     else{
       if(desired_wheel_speed_[i]-current_wheel_speed[i]>=0){
-        wheel_speed_instr_[i]+=fmin(desired_wheel_speed_[i]-current_wheel_speed[i], max_wheel_accel_*dt);
+        wheel_speed_instr_[i]+=fmin(desired_wheel_speed_[i]-current_wheel_speed[i], max_wheel_accel_*dt); // based on controller update rate in tag <update_rate>
       }
       else{
         wheel_speed_instr_[i]+=fmax(desired_wheel_speed_[i]-current_wheel_speed[i], -max_wheel_accel_*dt);
