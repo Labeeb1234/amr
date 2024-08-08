@@ -5,10 +5,9 @@
 <xacro:include filename="$(find mecanum_bot_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find mecanum_bot_description)/urdf/amr_ust.gazebo" />
 
-
-<xacro:property name="dimensions" value="mecanum_bot_params"/>
-<xacro:arg name="param_file_path" default="$(find mecanum_bot_description)/bot_config/${dimensions}.yaml" />
-<xacro:property name="bp" value="${xacro.load_yaml(param_file_path)}"/>
+<xacro:arg name="param_file_path" default="$(find mecanum_bot_description)/bot_config/mecanum_bot_params.yaml" />
+<xacro:property name="params_file" value="$(arg param_file_path)"/>
+<xacro:property name="bp" value="${xacro.load_yaml(params_file)}"/>
 
 <xacro:property name="mass" value="${bp['bot_mass']}"/>
 <xacro:property name="ixx" value="${bp['bot_ixx']}"/>
@@ -39,19 +38,19 @@
 <link name="base_footprint"/>
 <link name="base_link">
   <inertial>
-    <origin xyz="0.0 0.0 ${ground_clearance+height}" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0 ${height+ground_clearance}" rpy="0 0 0"/>
     <mass value="${mass}"/>
     <inertia ixx="${ixx}" iyy="${iyy}" izz="${izz}" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0 ${height+ground_clearance}" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find mecanum_bot_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0 ${height+ground_clearance}" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find mecanum_bot_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -876,6 +875,13 @@
     </geometry>
   </collision>
 </link>
+
+
+<joint name="fixed" type="fixed">
+  <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+  <parent link="base_footprint" />
+  <child link="base_link" />
+</joint>
 
 <joint name="Revolute 1" type="continuous">
   <origin xyz="0.244627 0.278967 0.032976" rpy="0 0 0"/>

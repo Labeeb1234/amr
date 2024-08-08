@@ -17,7 +17,7 @@ def generate_launch_description():
 
     rviz_config_file = os.path.join(share_dir, 'rviz', 'nice_display.rviz')
 
-    gui_arg = DeclareLaunchArgument(
+    gui_arg = DeclareLaunchArgument( 
         name='gui',
         default_value='false'
     )
@@ -30,7 +30,7 @@ def generate_launch_description():
 
     show_display_rviz = DeclareLaunchArgument(
         'show_display_rviz',
-        default_value='false',
+        default_value='true',
         description='whether to show robot description rviz view'
     )
 
@@ -84,5 +84,5 @@ def generate_launch_description():
         robot_state_publisher_node,
         joint_state_publisher_node,
         joint_state_publisher_gui_node,
-        rviz_node
+        rviz_node,
     ])

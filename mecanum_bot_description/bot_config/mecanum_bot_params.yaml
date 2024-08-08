@@ -1,5 +1,5 @@
 # all dimensions/parameters in SI-Units
-bot_mass: 10 #[kg]
+bot_mass: 10.0 #[kg]
 bot_ixx: 0.198344 #[kg-m]
 bot_iyy: 0.258519 #[kg-m]
 bot_izz: 0.440587 #[kg-m]
