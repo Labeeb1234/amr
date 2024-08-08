@@ -64,14 +64,14 @@
     <inertia ixx="${wheel_ixx}" iyy="${wheel_iyy}" izz="${wheel_izz}" ixy="${wheel_ixy}" iyz="${wheel_iyz}" ixz="${wheel_ixz}"/>
   </inertial>
   <visual>
-    <origin xyz="-0.244627 -0.278967 -0.032976" rpy="0 0 0"/>
+    <origin xyz="${wheel_offsetX} ${wheel_offsetY} ${wheel_offsetZ}" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find mecanum_bot_description)/meshes/wheel_hub_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.244627 -0.278967 -0.032976" rpy="0 0 0"/>
+    <origin xyz="${wheel_offsetX} ${wheel_offsetY} ${wheel_offsetZ}" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find mecanum_bot_description)/meshes/wheel_hub_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>

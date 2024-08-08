@@ -19,8 +19,8 @@ wheel_mass: 1.0 #[kg]
 wheel_inertia: [0.000439, 0.000283, 0.000439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]  # xx, yy, zz, xy, xz, yx, yy, yz, zx, zy, zz
 wheel_diameter: 0.15 #[m]
 wheel_thickness: 0.05 #[m]
-wheel_chassis_offsetX: 0.225 #[m]
-wheel_chassis_offsetY: 0.036 #[m]
-wheel_chassis_offsetZ: 0.036 #[m]
+wheel_chassis_offsetX: 0.0175 #[m]
+wheel_chassis_offsetY: 0.02325 #[m]
+wheel_chassis_offsetZ: 0.075 #[m]
 
 
