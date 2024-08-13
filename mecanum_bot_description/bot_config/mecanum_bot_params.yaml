@@ -10,17 +10,17 @@ bot_iyz: 0.0
 bot_izx: 0.0
 bot_izy: 0.0
 
-chassis_length: #[m]
-chassis_width:
-chassis_height: 0.075 #[m]
-chassis_grd_clearance: 0.039 #[m]
+chassis_length: 0.58 #[m] y-->68cm x-->59.5cm 
+chassis_width: 0.50 #[m]
+chassis_height: 0.12 #[m]
+chassis_grd_height: 0.125 #[m]
 
 wheel_mass: 1.0 #[kg]
 wheel_inertia: [0.000439, 0.000283, 0.000439, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]  # xx, yy, zz, xy, xz, yx, yy, yz, zx, zy, zz
-wheel_diameter: 0.15 #[m]
-wheel_thickness: 0.05 #[m]
-wheel_chassis_offsetX: 0.0175 #[m]
-wheel_chassis_offsetY: 0.02325 #[m]
-wheel_chassis_offsetZ: 0.075 #[m]
+wheel_diameter: 0.1 #[m]
+wheel_thickness: 0.055 #[m]
+wheel_to_wheel_length: 0.595 #[m]
+wheel_to_wheel_width: 0.68 #[m]
+wheel_offsetZ: 0.08 #[m]
 
 
