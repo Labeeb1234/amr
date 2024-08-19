@@ -1,9 +1,9 @@
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import PathJoinSubstitution
+from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 import os
 import xacro
 from ament_index_python.packages import get_package_share_directory
@@ -12,14 +12,14 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
     share_dir = get_package_share_directory('mecanum_bot_description')
 
-    xacro_file = os.path.join(share_dir, 'urdf', 'amr_ust.xacro')
+    xacro_file = os.path.join(share_dir, 'urdf', 'amr_ust_gen.xacro')
     robot_description_config = xacro.process_file(xacro_file)
     robot_urdf = robot_description_config.toxml()
     
     
     use_sim_time_arg = DeclareLaunchArgument(
         'use_sim_time',
-        default_value='false',
+        default_value='true',
         description='whether to use simulation time or real-sys time'
     )
     
@@ -32,11 +32,15 @@ def generate_launch_description():
         ]
     )
 
-    # joint_state_publisher_node = Node(
-    #     package='joint_state_publisher',
-    #     executable='joint_state_publisher',
-    #     name='joint_state_publisher'
-    # )
+    joint_state_publisher_node = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+        parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time')
+        }]
+    )
+
 
     gazebo_server = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -71,26 +75,14 @@ def generate_launch_description():
         output='screen'
     )
 
-    # controller manager nodes
-    # mecanumbot_controller_spawner = Node(
-    #     package='controller_manager',
-    #     executable='spawner',
-    #     arguments=['mecanumbot_controller', '--controller-manager', '/controller_manager']
-    # )
 
-    # joint_broad_spawner = Node(
-    #     package='controller_manager',
-    #     executable='spawner',
-    #     arguments=['joint_broad', '--controller-manager', '/controller_manager']
-    # )
+    ld  = LaunchDescription()
 
+    ld.add_action(use_sim_time_arg)
+    ld.add_action(robot_state_publisher_node)
+    #ld.add_action(joint_state_publisher_node)
+    ld.add_action(gazebo_server)
+    ld.add_action(gazebo_client)
+    ld.add_action(urdf_spawn_node)
 
-    return LaunchDescription([
-        robot_state_publisher_node,
-        # joint_state_publisher_node,
-        gazebo_server,
-        gazebo_client,
-        urdf_spawn_node,
-        # joint_broad_spawner,
-        # mecanumbot_controller_spawner
-    ])
+    return ld

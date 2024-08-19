@@ -3,7 +3,7 @@
 
 
 <xacro:include filename="$(find mecanum_bot_description)/urdf/materials.xacro" />
-<xacro:include filename="$(find mecanum_bot_description)/urdf/amr_ust.gazebo" />
+<xacro:include filename="$(find mecanum_bot_description)/urdf/amr_ust_gen.gazebo" />
 
 <xacro:arg name="param_file_path" default="$(find mecanum_bot_description)/bot_config/mecanum_bot_params.yaml" />
 <xacro:property name="params_file" value="$(arg param_file_path)"/>
@@ -153,42 +153,42 @@
 
 <link name="imu_link" />
 
-<link name="Camera_1">
+<link name="camera_link">
   <inertial>
-    <origin xyz="0.017956856789517806 2.2171102201271888e-05 0.00015529819733451494" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
     <mass value="0.378261563112952"/>
-    <inertia ixx="${1*7.7e-05}" iyy="${1*9.5e-05}" izz="${1*9.3e-05}" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    <inertia ixx="7.7e-05" iyy="9.5e-05" izz="9.3e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
-    <origin xyz="${-(length*0.65)} ${-(width/2)} ${-(height*0.55)}" rpy="0 0 0"/>
+    <origin xyz="${-(length*0.6)} 0 ${-(height*0.45)}" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find mecanum_bot_description)/meshes/Camera_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="${-(length*0.65)} ${-(width/2)} ${-(height*0.55)}" rpy="0 0 0"/>
+    <origin xyz="${-(length*0.6)} 0 ${-(height*0.45)}" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find mecanum_bot_description)/meshes/Camera_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
 
-<link name="Intel_Realsense_RPLIDAR_1">
+<link name="lidar_link">
   <inertial>
-    <origin xyz="0.024168716871690317 0.00016153042204601072 0.023318927009167684" rpy="0 0 0"/>
-    <mass value="${1*1.5656994294737245}"/>
-    <inertia ixx="${1*0.000799}" iyy="${1*0.000843}" izz="${1*0.001052}" ixy="${1*-0.0}" iyz="${1*-2.9e-05}" ixz="${1*0.0}"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <mass value="1.5656994294737245"/>
+    <inertia ixx="0.000799" iyy="0.000843" izz="0.001052" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
-    <origin xyz="0.024557 0.000233 -0.105076" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0 ${-(height*0.9)}" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find mecanum_bot_description)/meshes/Intel_Realsense_RPLIDAR_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="0.024557 0.000233 -0.105076" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0 ${-(height*0.9)}" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find mecanum_bot_description)/meshes/Intel_Realsense_RPLIDAR_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -238,15 +238,15 @@
 </joint>
 
 <joint name="Rigid 40" type="fixed">
-  <origin xyz="0.331142 0.000425 0.054538" rpy="0 0 0"/>
+  <origin xyz="${length*0.52} 0.0 ${height/4}" rpy="0 0 0"/>
   <parent link="base_link"/>
-  <child link="Camera_1"/>
+  <child link="camera_link"/>
 </joint>
 
 <joint name="Rigid 42" type="fixed">
-  <origin xyz="-0.024557 -0.000233 0.12" rpy="0 0 0"/>
+  <origin xyz="0 0 ${(grd_height-height)+(height/2)+0.01}" rpy="0 0 0"/>
   <parent link="base_link"/>
-  <child link="Intel_Realsense_RPLIDAR_1"/>
+  <child link="lidar_link"/>
 </joint>
 
 </robot>
