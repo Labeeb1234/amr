@@ -167,6 +167,17 @@ def generate_launch_description():
                               'container_name': 'nav2_container'}.items()),
     ])
 
+
+    rqt_reconfigure = Node(
+        package='rqt_reconfigure',
+        executable='rqt_reconfigure',
+        name='rqt_reconfigure',
+        output='screen',
+        parameters=[{
+            'target_nodes': ['controller_server']
+        }]
+    )
+
     ld = LaunchDescription()
     ld.add_action(stdout_linebuf_envvar)
     ld.add_action(declare_namespace_cmd)
@@ -185,5 +196,6 @@ def generate_launch_description():
 
     ld.add_action(declare_mapper_online_async_param_cmd)
     ld.add_action(mapper_online_async_param_launch)
+    ld.add_action(rqt_reconfigure)
 
     return ld

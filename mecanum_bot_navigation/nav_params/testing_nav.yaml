@@ -5,7 +5,7 @@ amcl:
     alpha2: 0.0005
     alpha3: 0.0005
     alpha4: 0.0005
-    alpha5: 0.0005
+    alpha5: 0.0005 
     base_frame_id: "base_footprint"
     beam_skip_distance: 0.5
     beam_skip_error_threshold: 0.9
@@ -43,10 +43,10 @@ amcl:
     always_reset_initial_pose: true
     first_map_only: False
     initial_pose:
-      x: 0.297  
-      y: 0.739  
+      x: 0.0  
+      y: 0.0  
       z: 0.0
-      yaw: 0.490
+      yaw: 0.0
 
 amcl_map_client:
   ros__parameters:
