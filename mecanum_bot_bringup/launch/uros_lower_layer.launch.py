@@ -21,7 +21,7 @@ def generate_launch_description():
 
     micro_ros_transport_arg = DeclareLaunchArgument(
         'micro_ros_transport',
-        default_value='serial',
+        default_value='udp4',
         description='micro-ROS transport protocol to use'
     )
 
@@ -37,14 +37,13 @@ def generate_launch_description():
         description='baudrate of uros'
     )
 
-
     micro_ros_agent_node_serial = Node(
         condition=LaunchConfigurationEquals('micro_ros_transport', 'serial'),
         package='micro_ros_agent',
         executable='micro_ros_agent',
         name='micro_ros_agent',
         output='screen',
-        arguments=['serial', '--dev', LaunchConfiguration("serial_port_id"), '--baudrate', LaunchConfiguration('uros_baudrate')]
+        arguments=[LaunchConfiguration('micro_ros_transport'), '--dev', LaunchConfiguration("serial_port_id"), '--baudrate', LaunchConfiguration('uros_baudrate')]
     )
 
     mirco_ros_agent_node_wireless = Node(
@@ -63,12 +62,12 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
+    ld.add_action(micro_ros_transport_arg)
     ld.add_action(serial_port_id_arg)
     ld.add_action(uros_baudate_arg)
-    ld.add_action(micro_ros_transport_arg)
     ld.add_action(micro_ros_udp_port_arg)
     ld.add_action(micro_ros_agent_node_serial)
     ld.add_action(mirco_ros_agent_node_wireless)
-    ld.add_action(robot_desc_launcher)
+    # ld.add_action(robot_desc_launcher)
 
     return ld

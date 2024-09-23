@@ -17,25 +17,36 @@ def generate_launch_description():
 
     lidar_serial_port_arg = DeclareLaunchArgument(
         'lidar_serial_port',
-        default_value='/dev/ttyUSB0',
+        default_value='/dev/ttyUSB1',
         description='specify lidar serial port id'
     )
 
     use_laser_filter = DeclareLaunchArgument(
         'use_laser_filter',
-        default_value='true',
+        default_value='false',
         description='whether to use laser filter or not'
     )
 
     rplidar_a1_launch_path = PathJoinSubstitution(
         [FindPackageShare('rplidar_ros'), 'launch', 'rplidar_a1_launch.py']
     )
-    
+
+    rplidar_a2m8_launch_path = PathJoinSubstitution(
+        [FindPackageShare('rplidar_ros'), 'launch', 'rplidar_a2m8_launch.py']
+    )
 
     A1rplidar_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(rplidar_a1_launch_path),
         launch_arguments={
             'serial_port': LaunchConfiguration('lidar_serial_port'), 
+            'frame_id': LaunchConfiguration('laser_frame_id')
+        }.items()
+    )
+
+    A2rplidar_launcher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(rplidar_a2m8_launch_path),
+        launch_arguments={
+            'serial_port': LaunchConfiguration('lidar_serial_port'),
             'frame_id': LaunchConfiguration('laser_frame_id')
         }.items()
     )
@@ -59,8 +70,9 @@ def generate_launch_description():
 
     ld.add_action(lidar_frame_id_arg)
     ld.add_action(lidar_serial_port_arg)
-    ld.add_action(A1rplidar_launcher)
-    ld.add_action(scan_to_scan_filter_node)
+    # ld.add_action(A1rplidar_launcher)
+    # ld.add_action(scan_to_scan_filter_node)
+    ld.add_action(A2rplidar_launcher)
 
 
     return ld

@@ -25,6 +25,10 @@ def generate_launch_description():
         [FindPackageShare('mecanum_bot_bringup'), 'launch', 'uros_lower_layer.launch.py']
     )
 
+    mecanum_bot_description_launch_path = PathJoinSubstitution(
+        [FindPackageShare('mecanum_bot_description'), 'launch', 'display.launch.py']
+    )
+
 
     robot_localization_node = Node(
         package='robot_localization',
@@ -34,6 +38,13 @@ def generate_launch_description():
         parameters=[
             ekf_config_path
         ]
+    )
+
+    mecanum_bot_description_launcher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(mecanum_bot_description_launch_path),
+        launch_arguments={
+            'show_display_rviz': 'false',
+        }.items()
     )
 
     lidar_launcher = IncludeLaunchDescription(
@@ -51,9 +62,10 @@ def generate_launch_description():
 
 
     ld = LaunchDescription()
+    ld.add_action(mecanum_bot_description_launcher)
     ld.add_action(robot_localization_node)
     ld.add_action(lidar_launcher)
-    ld.add_action(realsense_cam_launcher)
+    # ld.add_action(realsense_cam_launcher)
     ld.add_action(micro_ros_launcher)
 
     return ld
