@@ -11,7 +11,7 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
     share_dir = get_package_share_directory('mecanum_bot_description')
 
-    xacro_file = os.path.join(share_dir, 'urdf', 'amr_ust_gen.xacro')
+    xacro_file = os.path.join(share_dir, 'urdf', 'amr_ust.urdf')
     robot_description_config = xacro.process_file(xacro_file)
     robot_urdf = robot_description_config.toxml()
 
@@ -30,7 +30,7 @@ def generate_launch_description():
 
     show_display_rviz = DeclareLaunchArgument(
         'show_display_rviz',
-        default_value='true',
+        default_value='false',
         description='whether to show robot description rviz view'
     )
 

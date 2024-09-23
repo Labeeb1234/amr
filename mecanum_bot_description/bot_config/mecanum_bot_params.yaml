@@ -22,5 +22,3 @@ wheel_thickness: 0.055 #[m]
 wheel_to_wheel_length: 0.595 #[m]
 wheel_to_wheel_width: 0.68 #[m]
 wheel_offsetZ: 0.08 #[m]
-
-

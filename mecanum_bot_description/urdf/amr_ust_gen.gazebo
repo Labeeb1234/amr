@@ -11,9 +11,10 @@
 <gazebo>
   <plugin name="control" filename="libgazebo_ros_control.so"/>
 </gazebo>
+
 <gazebo reference="base_link">
   <material name="body_color" value="Gazebo/Gold"/>
-  <mu1>0.2</mu1>
+  <mu>0.2</mu>
   <mu2>0.2</mu2>
   <self_collide>true</self_collide>
   <gravity>true</gravity>
@@ -21,64 +22,64 @@
 
 <gazebo reference="wheel_hub_1">
   <material name="body_color" value="Gazebo/Silver"/>
-  <mu1>100000.0</mu1>
-  <mu2>100000.0</mu2>
-  <fdir1>0 0 0</fdir1>
-  <slip1>0.0</slip1>
-  <slip2>0.0</slip2>
+  <!-- <kp>1e15</kp>
+  <kd>1e14</kd> -->
+  <mu1>0.3</mu1>
+  <mu2>0.3</mu2>
+  <fdir1>0 0 1</fdir1>
 </gazebo>
 
 <gazebo reference="wheel_hub_2_1">
   <material name="body_color" value="Gazebo/Silver"/>
-  <mu1>100000</mu1>
-  <mu2>100000</mu2>
-  <fdir1>0 0 0</fdir1>
-  <slip1>0.0</slip1>
-  <slip2>0.0</slip2>
+  <!-- <kp>1e15</kp>
+  <kd>1e14</kd> -->
+  <mu1>0.3</mu1>
+  <mu2>0.3</mu2>
+  <fdir1>0 0 1</fdir1>
 </gazebo>
 
 <gazebo reference="wheel_hub_3_1">
   <material name="body_color" value="Gazebo/Silver"/>
-  <mu1>100000</mu1>
-  <mu2>100000</mu2>
-  <fdir1>0 0 0</fdir1>
-  <slip1>0.0</slip1>
-  <slip2>0.0</slip2>
+  <!-- <kp>1e15</kp>
+  <kd>1e14</kd> -->
+  <mu1>0.3</mu1>
+  <mu2>0.3</mu2>
+  <fdir1>0 0 1</fdir1>
 </gazebo>
 
 <gazebo reference="wheel_hub_4_1">
   <material name="body_color" value="Gazebo/Silver"/>
-  <mu1>100000</mu1>
-  <mu2>100000</mu2>
-  <fdir1>0 0 0</fdir1>
-  <slip1>0.0</slip1>
-  <slip2>0.0</slip2>
+  <!-- <kp>1e15</kp>
+  <kd>1e14</kd> -->
+  <mu1>0.3</mu1>
+  <mu2>0.3</mu2>
+  <fdir1>0 0 1</fdir1>
 </gazebo>
 
 
 <gazebo reference="imu_link">
   <material name="body_color" value="Gazebo/Grass"/>
-  <mu1>0.2</mu1>
+  <mu>0.2</mu>
   <mu2>0.2</mu2>
   <self_collide>true</self_collide>
 </gazebo>
 
 <gazebo reference="camera_link">
   <material name="body_color" value="Gazebo/Wood"/>
-  <mu1>0.2</mu1>
+  <mu>0.2</mu>
   <mu2>0.2</mu2>
   <self_collide>true</self_collide>
 </gazebo>
 
 <gazebo reference="lidar_link">
   <material>${body_color}</material>
-  <mu1>0.2</mu1>
+  <mu>0.2</mu>
   <mu2>0.2</mu2>
   <self_collide>true</self_collide>
 </gazebo>
 
 <!-- Kinematic Controller -->
-<!-- <gazebo>
+<gazebo>
   <plugin name="mecanum_controller" filename="libmecanum_drive_controller.so">
     <number_of_wheels>4</number_of_wheels>
     <joint>Revolute 1</joint>
@@ -94,8 +95,8 @@
     <wheel_diameter>${bp['wheel_diameter']}</wheel_diameter>
     <wheel_diameter>${bp['wheel_diameter']}</wheel_diameter>
     <wheel_diameter>${bp['wheel_diameter']}</wheel_diameter>
-    <max_torque>30.0</max_torque>
-    <max_acceleration>200.0</max_acceleration>
+    <max_torque>100.0</max_torque>
+    <max_acceleration>10.0</max_acceleration>
 
     <odometry_source>1</odometry_source>
     <odometry_frame>odom</odometry_frame>
@@ -103,7 +104,7 @@
 
     <publish_odom>true</publish_odom>
     <publish_wheel_tf>true</publish_wheel_tf>
-    <publish_odom_tf>false</publish_odom_tf>
+    <publish_odom_tf>true</publish_odom_tf>
     <update_rate>100.0</update_rate>
 
     <covariance_x>0.00001</covariance_x>
@@ -111,30 +112,30 @@
     <covariance_yaw>0.00001</covariance_yaw>
 
   </plugin>
-</gazebo> -->
+</gazebo>
 
-<gazebo>
+<!-- <gazebo>
   <plugin name="wheel_drive_controller" filename="libgazebo_ros_diff_drive.so">
 
-    <!-- wheels -->
+  
     <num_wheel_pairs>2</num_wheel_pairs>
     <left_joint>Revolute 1</left_joint>
     <left_joint>Revolute 3</left_joint>
     <right_joint>Revolute 2</right_joint>
     <right_joint>Revolute 4</right_joint>
 
-    <!-- kinematics -->
+   
     <wheel_separation>${bp['wheel_to_wheel_length']}</wheel_separation>
     <wheel_diameter>${bp['wheel_diameter']}</wheel_diameter>
     <max_wheel_torque>100.0</max_wheel_torque>
     <max_wheel_acceleration>10.0</max_wheel_acceleration>
 
-    <!-- odometry  --> 
+    
     <odometry_source>1</odometry_source>
     <odometry_frame>odom</odometry_frame>
     <robot_base_frame>base_footprint</robot_base_frame>
 
-    <!-- topic & re remappings -->
+  
     <ros>
       <remapping>/cmd_vel:=cmd_vel</remapping>
       <remapping>/odom:=odom</remapping>
@@ -146,7 +147,7 @@
     <update_rate>100.0</update_rate>
  
   </plugin>
-</gazebo>
+</gazebo> -->
 
 
 <!-- Joint sensors -->
