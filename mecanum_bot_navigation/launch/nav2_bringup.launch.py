@@ -16,14 +16,18 @@ from nav2_common.launch import RewrittenYaml
 def generate_launch_description():
     bringup_dir = get_package_share_directory('nav2_bringup')
     launch_dir = os.path.join(bringup_dir, 'launch')
-    ebot_nav2_dir = get_package_share_directory('mecanum_bot_navigation')
+    mecanum_nav2_dir = get_package_share_directory('mecanum_bot_navigation')
 
     namespace = LaunchConfiguration('namespace')
     use_namespace = LaunchConfiguration('use_namespace')
+
     slam = LaunchConfiguration('slam')
     map_yaml_file = LaunchConfiguration('map')
+    
     use_sim_time = LaunchConfiguration('use_sim_time')
+    
     params_file = LaunchConfiguration('params_file')
+    
     autostart = LaunchConfiguration('autostart')
     use_composition = LaunchConfiguration('use_composition')
     use_respawn = LaunchConfiguration('use_respawn')
@@ -63,17 +67,17 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(ebot_nav2_dir, 'maps', 'new_map.yaml'),
+        default_value=os.path.join(mecanum_nav2_dir, 'maps', 'new_map.yaml'),
         description='Full path to map yaml file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time',
         default_value='false',
-        description='Use simulation (Gazebo) clock if true')
+        description='Use simulation clock if true')
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(ebot_nav2_dir, 'nav_params', 'auto_slam.yaml'),
+        default_value=os.path.join(mecanum_nav2_dir, 'nav_params', 'auto_slam.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_autostart_cmd = DeclareLaunchArgument(
@@ -85,7 +89,7 @@ def generate_launch_description():
         description='Whether to use composed bringup')
 
     declare_use_respawn_cmd = DeclareLaunchArgument(
-        'use_respawn', default_value='False',
+        'use_respawn', default_value='false',
         description='Whether to respawn if a node crashes. Applied when composition is disabled.')
 
     declare_log_level_cmd = DeclareLaunchArgument(
@@ -94,7 +98,7 @@ def generate_launch_description():
 
     declare_mapper_online_async_param_cmd = DeclareLaunchArgument(
         'async_param',
-        default_value=os.path.join(ebot_nav2_dir, 'config', 'mapper_params_online_async.yaml'),
+        default_value=os.path.join(mecanum_nav2_dir, 'config', 'mapper_params_online_async.yaml'),
         description='Set mappers online async param file')
 
     mapper_online_async_param_launch = IncludeLaunchDescription(
@@ -106,7 +110,7 @@ def generate_launch_description():
     
     declare_rviz_config_file_cmd = DeclareLaunchArgument(
         'rviz_config',
-        default_value=os.path.join(ebot_nav2_dir, 'rviz', 'n_display.rviz'),
+        default_value=os.path.join(mecanum_nav2_dir, 'rviz', 'n_display.rviz'),
         description='Full path to the RVIZ config file to use')
 
 
@@ -168,15 +172,7 @@ def generate_launch_description():
     ])
 
 
-    rqt_reconfigure = Node(
-        package='rqt_reconfigure',
-        executable='rqt_reconfigure',
-        name='rqt_reconfigure',
-        output='screen',
-        parameters=[{
-            'target_nodes': ['controller_server']
-        }]
-    )
+
 
     ld = LaunchDescription()
     ld.add_action(stdout_linebuf_envvar)
@@ -196,6 +192,5 @@ def generate_launch_description():
 
     ld.add_action(declare_mapper_online_async_param_cmd)
     ld.add_action(mapper_online_async_param_launch)
-    ld.add_action(rqt_reconfigure)
 
     return ld

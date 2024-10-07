@@ -87,6 +87,12 @@ def generate_launch_description():
         ),
 
         Node(
+            package='robot_pose_publisher',
+            executable='robot_pose_pub',
+            output='screen'
+        ),
+
+        Node(
             package='rviz2',
             executable='rviz2',
             name='rviz2',
@@ -95,4 +101,6 @@ def generate_launch_description():
             condition=IfCondition(LaunchConfiguration("rviz")),
             parameters=[{'use_sim_time': LaunchConfiguration("sim")}]
         )
+
+
     ])
