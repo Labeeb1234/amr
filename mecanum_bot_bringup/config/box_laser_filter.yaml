@@ -5,11 +5,11 @@ scan_to_scan_filter_chain:
       type: laser_filters/LaserScanBoxFilter
       params:
         box_frame: base_link # need to check frame name 
-        max_x: 0.30
-        max_y: 0.30
+        max_x: 0.325
+        max_y: 0.295
         max_z: 0.34
-        min_x: -0.30
-        min_y: -0.30
+        min_x: -0.325
+        min_y: -0.295
         min_z: -0.12
         
         invert: false # activate to remove all points outside of the box

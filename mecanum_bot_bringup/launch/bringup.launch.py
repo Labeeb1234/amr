@@ -40,6 +40,27 @@ def generate_launch_description():
         ]
     )
 
+    rqt_reconfigure = Node(
+        package='rqt_reconfigure',
+        executable='rqt_reconfigure',
+        name='rqt_reconfigure',
+        output='screen',
+    )
+
+    reset_handler_node = Node(
+        package='gui_tools',
+        executable='mcu_reset_handler.py',
+        name='reset_handler',
+        output='screen'
+    )
+
+    imu_handler_node = Node(
+        package='imu_handler',
+        executable='imu_handler',
+        name='imu_handler',
+        output='screen'
+    )
+
     mecanum_bot_description_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(mecanum_bot_description_launch_path),
         launch_arguments={
@@ -67,5 +88,9 @@ def generate_launch_description():
     ld.add_action(lidar_launcher)
     # ld.add_action(realsense_cam_launcher)
     ld.add_action(micro_ros_launcher)
+    ld.add_action(reset_handler_node)
+    ld.add_action(imu_handler_node)
+    ld.add_action(rqt_reconfigure)
+    
 
     return ld

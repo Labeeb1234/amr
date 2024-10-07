@@ -11,7 +11,7 @@ def generate_launch_description():
     
     lidar_frame_id_arg = DeclareLaunchArgument(
         'laser_frame_id',
-        default_value='Intel_Realsense_RPLIDAR_1',
+        default_value='laser',
         description='to specify the lidar frame id name'
     )
 
@@ -57,6 +57,7 @@ def generate_launch_description():
     )
 
     scan_to_scan_filter_node = Node(
+        condition=LaunchConfigurationEquals('use_laser_filter', 'true'),
         package="laser_filters",
         executable="scan_to_scan_filter_chain",
         parameters=[
@@ -70,8 +71,9 @@ def generate_launch_description():
 
     ld.add_action(lidar_frame_id_arg)
     ld.add_action(lidar_serial_port_arg)
+    ld.add_action(use_laser_filter)
     # ld.add_action(A1rplidar_launcher)
-    # ld.add_action(scan_to_scan_filter_node)
+    ld.add_action(scan_to_scan_filter_node)
     ld.add_action(A2rplidar_launcher)
 
 
