@@ -789,7 +789,7 @@
       </geometry>
     </collision>
   </link>
-  <link name="Intel_Realsense_RPLIDAR_1">
+  <link name="laser">
     <inertial>
       <origin rpy="0 0 0" xyz="0.024168716871690317 0.00016153042204601072 0.023318927009167684"/>
       <mass value="156.56994294737245"/>
@@ -1072,9 +1072,9 @@
   </joint>
 
   <joint name="Rigid 42" type="fixed">
-    <origin rpy="0 0 0" xyz="-0.0475 0.0 0.125"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
     <parent link="base_link"/>
-    <child link="Intel_Realsense_RPLIDAR_1"/>
+    <child link="laser"/>
   </joint>
 
 
