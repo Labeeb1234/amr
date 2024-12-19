@@ -8,7 +8,6 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
 from rclpy.callback_groups import ReentrantCallbackGroup
 from std_srvs.srv import Empty
-from tf_transformations import euler_from_quaternion
 import ql_pathplanner.obs_randomizer as obsp
 import matplotlib.pyplot as plt
 
@@ -16,6 +15,38 @@ import time
 import threading
 import numpy as np
 import os
+
+def quaternion_to_euler(w, x, y, z):
+    """
+    Convert quaternion [w,x,y,z] to Euler angles [roll, pitch, yaw].
+    Uses ZYX rotation order (yaw -> pitch -> roll).
+    
+    Args:
+        quaternion (list): Quaternion in [w, x, y, z] format
+        
+    Returns:
+        tuple: (roll, pitch, yaw) in radians
+    """
+    
+    # Roll (x-axis rotation)
+    sinr_cosp = 2.0 * (w * x + y * z)
+    cosr_cosp = 1.0 - 2.0 * (x * x + y * y)
+    roll = np.arctan2(sinr_cosp, cosr_cosp)
+    
+    # Pitch (y-axis rotation)
+    sinp = 2.0 * (w * y - z * x)
+    if abs(sinp) >= 1:
+        # Use 90 degrees if out of range
+        pitch = np.copysign(np.pi/2, sinp)
+    else:
+        pitch = np.arcsin(sinp)
+    
+    # Yaw (z-axis rotation)
+    siny_cosp = 2.0 * (w * z + x * y)
+    cosy_cosp = 1.0 - 2.0 * (y * y + z * z)
+    yaw = np.arctan2(siny_cosp, cosy_cosp)
+    
+    return roll, pitch, yaw
 
 # here the scan data is considered and encoded as the state of this Model,  scan gives the instanteous 2D data of the current setup of the environment 
 class QLearningNode(Node):
@@ -39,20 +70,22 @@ class QLearningNode(Node):
         self.goal_tolerance = 0.01
         self.goal_reached = False
         # Q-Learning Params
-        self.DISCOUNT_FACTOR = 0.7
-        self.EPISODES = 20000
+        self.DISCOUNT_FACTOR = 0.85
+        self.EPISODES = 600
         self.LEARNING_RATE = 0.01
         self.STATE_SPACE_SIZE = 9
         self.ACTION_SPACE_SIZE = 3
         # params for random exploration for action selection
-        self.min_exploration_rate = 0.1
-        self.exploration_decay = 0.999
+        self.min_exploration_rate = 0.01
+        self.exploration_decay = 0.995
         self.exploration_rate = 1.0 # epsilon
         # intializing Q-Table
         self.q_table = np.zeros((self.STATE_SPACE_SIZE, self.ACTION_SPACE_SIZE))
 
         self.reset_simulation_client = self.create_client(Empty, 'reset_simulation')
         self.episode_counter=0
+        # self.step_counter=0
+        self.current_steps=0
 
         # reward tracking params
         self.epi_rewards = []
@@ -62,7 +95,6 @@ class QLearningNode(Node):
             'min': [],
             'max': []
         }
-
 
     def discretize_lidar_data(self, laser_data):
         discrete_ranges = []
@@ -91,33 +123,44 @@ class QLearningNode(Node):
     
     def calculate_reward(self, action):
         reward = 0
-        if self.current_pose:
-            self.get_logger().info(f"{self.current_pose.x}, {self.current_pose.y}, {self.current_yaw}")
+        
+        if not self.current_pose:
+            return reward
+        
+        self.get_logger().info(f"{self.current_pose.x:.2f}, {self.current_pose.y:.2f}, {self.current_yaw:.2f}")
+        err_x = self.goal_position[0]-self.current_pose.x
+        err_y = self.goal_position[1]-self.current_pose.y
+        err_yaw = self.goal_position[2]-self.current_yaw
+        self.get_logger().info(f"errors: [{err_x:.2f}, {err_y:.2f}, {err_yaw:.2f}]")
 
-            if self.discrete_laser_range:
-                min_laser_range = min(self.discrete_laser_range)
-                self.get_logger().info(f"min laser range: {min_laser_range}")
-                if min_laser_range < 0.2:
-                    # Higher penalty for closer obstacles
-                    reward += -100 * (1 / min_laser_range)
-                
-                # Gradual reward for maintaining safe distance
-                if min_laser_range > 0.2:
-                    reward += 10 * min_laser_range
-                
-                if min_laser_range >= 0.25:
-                    reward += -1.0
- 
-                reward += -1.0                
-                # Action-specific rewards
-                if action == 0:  # Move forward 
-                    reward += 10
-                elif action == 1:  # Turn left
-                    reward += 1
-                elif action == 2:  # Turn right
-                    reward += 1
-            
-            self.get_logger().info(f"reward: {reward}")
+        # waypoint based reward (just to specify the general direction of motion of the bot)
+        dist_to_goal = np.sqrt(err_x**2 + err_y**2)
+
+        if dist_to_goal < self.goal_tolerance and np.abs(err_yaw) < 0.1:
+            reward = 200
+            self.goal_reached = True
+
+        if dist_to_goal >= 0.1 or (np.abs(err_x) >= 0.1 and np.abs(err_y) >= 0.1):
+            reward += -0.1*dist_to_goal
+        else:
+            reward += 0.5
+
+        if self.discrete_laser_range:
+            min_laser_range = min(self.discrete_laser_range)
+            self.get_logger().info(f"min laser range: {min_laser_range:.2f}")
+            if min_laser_range <= 0.15:
+                # penalty for collision
+                reward += -20.0
+            else:
+                reward += 5.0
+        
+        # action specific rewards
+        if action == 0:  # Moving forward
+            if np.abs(err_x) < 0.5 and np.abs(err_y) < 0.5: 
+                reward += 5.0
+
+        reward += 0.0
+        self.get_logger().info(f"reward: {reward:.2f}")
 
         return reward
 
@@ -148,17 +191,17 @@ class QLearningNode(Node):
 
     def odometry_callback(self, odom_msg):
         self.current_pose = odom_msg.pose.pose.position
-        _, _, self.current_yaw = euler_from_quaternion([
-            odom_msg.pose.pose.orientation.w, 
+        _, _, self.current_yaw = quaternion_to_euler(
+            odom_msg.pose.pose.orientation.w,
             odom_msg.pose.pose.orientation.x,
             odom_msg.pose.pose.orientation.y,
             odom_msg.pose.pose.orientation.z
-        ])
+        )
 
     def manoeuvre_bot(self, action):
         twist_msg = Twist()        
         if action == 0:
-            twist_msg.linear.x = 0.2
+            twist_msg.linear.x = 0.5
             twist_msg.angular.z = 0.0
             self.twist_pub_.publish(twist_msg)
         elif action == 1:
@@ -181,12 +224,10 @@ class QLearningNode(Node):
 
     def training_loop(self):
         if self.episode_counter <= self.EPISODES:
-            if self.episode_counter == 0 or self.state == 0 or self.goal_reached:
+            if self.episode_counter == 0 or self.goal_reached or self.current_steps >= 200:
                 self.reset_simulation()
-
-            if self.episode_counter % 300 == 0:
-                self.get_logger().info(f"EPISODE_NUMBER: {self.episode_counter}")
-                self.reset_simulation()
+                self.current_steps=0
+                self.episode_counter += 1
 
             if self.discrete_laser_range:
                 new_state = self.get_state(discrete_ranges=self.discrete_laser_range)
@@ -197,19 +238,19 @@ class QLearningNode(Node):
                 self.update_qtable(state=self.state, action=action, reward=reward, new_state=new_state)
                 self.get_logger().info(f"{self.q_table}\n")
 
-                if self.episode_counter % 300 == 0:
-                    self.epi_aggregate['epi'].append(self.episode_counter)
-                    self.epi_rewards.append(reward)
-                    
+                # if self.episode_counter % 400 == 0:
+                #     self.epi_aggregate['epi'].append(self.episode_counter)
+                #     self.epi_rewards.append(reward)
 
                 self.state = new_state
                 self.action = action
+                self.current_steps += 1
 
-
-            self.episode_counter += 1
+            self.get_logger().info(f"episode: {self.episode_counter}")
+            self.get_logger().info(f"steps counter: {self.current_steps}")
         else:
-            self.save_qtable()
-            self.plot_metrics()
+            # self.save_qtable()
+            # self.plot_metrics()
             self.get_logger().info(f"stopping training simulation; completed {self.EPISODES} episodes of training...")
             self.timer_.cancel()
 
@@ -231,9 +272,9 @@ class QLearningNode(Node):
     
     def plot_metrics(self):
         if self.epi_aggregate['epi']:
-            self.epi_aggregate['avg'] = sum(self.epi_rewards[300:])/len(self.epi_rewards[300:])
-            self.epi_aggregate['min'] = min(self.epi_rewards[300:])
-            self.epi_aggregate['max'] = max(self.epi_rewards[300:])
+            self.epi_aggregate['avg'] = sum(self.epi_rewards[400:])/len(self.epi_rewards[400:])
+            self.epi_aggregate['min'] = min(self.epi_rewards[400:])
+            self.epi_aggregate['max'] = max(self.epi_rewards[400:])
 
             plt.plot(self.epi_aggregate['epi'], self.epi_aggregate['avg'], label='avg')
             plt.plot(self.epi_aggregate['epi'], self.epi_aggregate['min'], label='min')
