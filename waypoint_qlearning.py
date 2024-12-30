@@ -21,10 +21,10 @@ class QLearningNode(Node):
         self.timer_period = 0.1 # 10Hz controller frequency
         self.timer_ = self.create_timer(self.timer_period, self.training_loop)
 
-        self.reset_simulation_client = self.create_client(Empty, 'reset_simulation')
+        self.reset_simulation_client = self.create_client(Empty, 'reset_simulation') 
 
         # STATE and ACTION PARAMS
-        self.state = (0,0)
+        self.state = (0,0) # (dist_to_goal, orient_to_goal)
         self.action = 0
         self.DISTANCE_BINS = 32
         self.ORIENTATION_BINS = 32
@@ -41,12 +41,14 @@ class QLearningNode(Node):
         self.steps_per_episode = 300
         self.steps_counter = 0
         self.LEARNING_RATE = 0.01
-        self.DISCOUNT_FACTOR = 0.9
+        self.DISCOUNT_FACTOR = 0.95
+
         # initializing q-table
         self.q_table = np.random.uniform(low=-2, high=0, size=(self.DISTANCE_BINS, self.ORIENTATION_BINS, self.ACTION_SPACE))
+        self.start_q_table = None
 
         # goal params
-        self.goal_position = [2.0, 1.0, 0.0]
+        self.goal_position = [3.0, 0.0, 0.0]
         self.goal_tolerance = 0.2
         self.goal_reached = False
 
@@ -109,6 +111,12 @@ class QLearningNode(Node):
     def compute_reward(self, action):
         reward = 0.0
 
+        # if self.angle_diff < 0.01 and self.angle_diff > -0.01:
+        #     reward += 10.0
+        #     angle_
+        # else:
+        #     reward += -1.0
+
         if self.distance_to_goal < self.goal_tolerance:
             reward = 100
             self.goal_reached = True
@@ -116,12 +124,14 @@ class QLearningNode(Node):
             if self.distance_to_goal < self.previous_distance:
                 reward += 10.0
             elif self.distance_to_goal >= self.previous_distance:
-                reward += -1.0
+                reward += -5.0
+
+
             
         self.previous_distance = self.distance_to_goal
+
         if action == 1 or action == 2:  # Rotational actions (turning left or right)
             reward -= 0.1  # Small penalty for rotational movement to encourage forward motion
-
 
         return reward
 
@@ -150,7 +160,8 @@ class QLearningNode(Node):
             twist_msg.linear.y = 0.0
             twist_msg.angular.z = -1.0
             self.twist_pub_.publish(twist_msg)
-        self.twist_pub_.publish(twist_msg)
+
+        # self.twist_pub_.publish(twist_msg)
 
     def get_bot_pose(self, odom_msg):
         self.current_position = odom_msg.pose.pose.position
@@ -183,16 +194,18 @@ class QLearningNode(Node):
                 self.distance_to_goal = self.dist_to_goal(self.goal_position, self.current_position)
                 self.angle_diff = self.angle_goal_diff(self.goal_position, self.current_yaw)
                 new_state = self.get_discretize_state(self.DISTANCE_BINS, self.ORIENTATION_BINS)
-
+                
+                self.get_logger().info(f"distance to goal: [{self.distance_to_goal:.2f}]")
+                self.get_logger().info(f"Angular Difference to goal: [{self.angle_diff:.2f}]")
+                self.get_logger().info(f"state: {self.state}")
+              
                 self.action = self.choose_action(self.state)
                 self.move_bot(self.action)
                 reward = self.compute_reward(action=self.action)
                 self.update_qtable(state=self.state, action=self.action, reward=reward, new_state=new_state)
-                self.get_logger().info(f"QTable: {self.q_table}\n")
+
+                # self.get_logger().info(f"QTable: {self.q_table}\n")
                 self.get_logger().info(f"Optimized Action: {self.action}")
-                self.get_logger().info(f"distance to goal: [{self.distance_to_goal:.2f}]")
-                self.get_logger().info(f"Angular Difference to goal: [{self.angle_diff:.2f}]")
-                self.get_logger().info(f"state: {self.state}")
                 self.get_logger().info(f"reward: {reward}")
                 
                 self.state = new_state
@@ -206,6 +219,12 @@ class QLearningNode(Node):
             self.timer_.cancel()
     
     def save_qtable(self):
+        pass
+
+    def load_qtable(self):
+        pass
+
+    def inference(self):
         pass
 
 
