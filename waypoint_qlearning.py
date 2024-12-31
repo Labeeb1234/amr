@@ -6,7 +6,9 @@ from rclpy.callback_groups import ReentrantCallbackGroup
 from geometry_msgs.msg import Twist, Pose
 from nav_msgs.msg import Odometry
 from std_srvs.srv import Empty
+from std_msgs.msg import Float32
 
+import os
 import math
 import numpy as np
 
@@ -20,6 +22,7 @@ class QLearningNode(Node):
         
         self.timer_period = 0.1 # 10Hz controller frequency
         self.timer_ = self.create_timer(self.timer_period, self.training_loop)
+        # self.inference_timer_ = self.create_timer(self.timer_period, self.inference_loop)
 
         self.reset_simulation_client = self.create_client(Empty, 'reset_simulation') 
 
@@ -28,12 +31,12 @@ class QLearningNode(Node):
         self.action = 0
         self.DISTANCE_BINS = 32
         self.ORIENTATION_BINS = 32
-        self.ACTION_SPACE = 3
+        self.ACTION_SPACE = 4
 
         # Random Exploration PARAMS
         self.epsilon = 1.0
         self.min_epsilon = 0.1
-        self.epsilon_decay_rate = 0.995
+        self.epsilon_decay_rate = 0.9
 
         # Q-learning PARAMS
         self.EPISODES = 600
@@ -42,6 +45,7 @@ class QLearningNode(Node):
         self.steps_counter = 0
         self.LEARNING_RATE = 0.01
         self.DISCOUNT_FACTOR = 0.95
+        self.episode_reward = 0.0
 
         # initializing q-table
         self.q_table = np.random.uniform(low=-2, high=0, size=(self.DISTANCE_BINS, self.ORIENTATION_BINS, self.ACTION_SPACE))
@@ -49,7 +53,7 @@ class QLearningNode(Node):
 
         # goal params
         self.goal_position = [3.0, 0.0, 0.0]
-        self.goal_tolerance = 0.2
+        self.goal_tolerance = 0.9
         self.goal_reached = False
 
         # bot info/sensor feedback params
@@ -58,6 +62,9 @@ class QLearningNode(Node):
         self.distance_to_goal = 0.0
         self.previous_distance = 0.0
         self.angle_diff = 0.0
+
+        # inference params
+        self.inference_mode = False
 
     def quaternion_to_euler(self, w, x, y, z):
         # Roll (x-axis rotation)
@@ -111,27 +118,31 @@ class QLearningNode(Node):
     def compute_reward(self, action):
         reward = 0.0
 
-        # if self.angle_diff < 0.01 and self.angle_diff > -0.01:
-        #     reward += 10.0
-        #     angle_
-        # else:
-        #     reward += -1.0
+        if self.angle_diff < 0.1 and self.angle_diff > -0.1:
+            reward += 2500.0
+        else:
+            reward += -2000.0
 
         if self.distance_to_goal < self.goal_tolerance:
-            reward = 100
+            reward = 1000000
             self.goal_reached = True
         else:
             if self.distance_to_goal < self.previous_distance:
-                reward += 10.0
+                reward += 2500.0
             elif self.distance_to_goal >= self.previous_distance:
-                reward += -5.0
+                reward += -2000.0
 
 
-            
         self.previous_distance = self.distance_to_goal
 
         if action == 1 or action == 2:  # Rotational actions (turning left or right)
-            reward -= 0.1  # Small penalty for rotational movement to encourage forward motion
+            reward -= 100  # Small penalty for rotational movement to encourage forward motion
+
+        # Penalize for stopping in an incorrect position
+        if action == 3 and self.distance_to_goal >= self.goal_tolerance:
+            reward = -5000  # Large penalty for stopping when not at the goal
+        elif action == 3 and self.distance_to_goal < self.goal_tolerance:
+            reward += 10000
 
         return reward
 
@@ -142,6 +153,12 @@ class QLearningNode(Node):
         self.q_table[state+(action,)] = new_qvalue
 
         self.epsilon = max(self.min_epsilon, self.epsilon*self.epsilon_decay_rate)
+
+    ###################### (custom training goals) ###########################
+    def randomize_straight_goal(self):
+        pass
+
+    ###########################################################################
 
     def move_bot(self, action):
         twist_msg = Twist()
@@ -159,6 +176,11 @@ class QLearningNode(Node):
             twist_msg.linear.x = 0.0
             twist_msg.linear.y = 0.0
             twist_msg.angular.z = -1.0
+            self.twist_pub_.publish(twist_msg)
+        elif action == 3:
+            twist_msg.linear.x = 0.0
+            twist_msg.linear.y = 0.0
+            twist_msg.angular.z = 0.0
             self.twist_pub_.publish(twist_msg)
 
         # self.twist_pub_.publish(twist_msg)
@@ -188,6 +210,9 @@ class QLearningNode(Node):
                 self.reset_simulation()
                 self.steps_counter = 0
                 self.episode_counter += 1
+                 
+                # Reset the episode reward accumulator
+                self.episode_reward = 0.0
                 
             if self.current_position:
                 # main training logic here
@@ -202,6 +227,8 @@ class QLearningNode(Node):
                 self.action = self.choose_action(self.state)
                 self.move_bot(self.action)
                 reward = self.compute_reward(action=self.action)
+                self.episode_reward += reward
+                self.episode_reward = self.episode_reward/self.steps_per_episode
                 self.update_qtable(state=self.state, action=self.action, reward=reward, new_state=new_state)
 
                 # self.get_logger().info(f"QTable: {self.q_table}\n")
@@ -211,6 +238,8 @@ class QLearningNode(Node):
                 self.state = new_state
                 self.steps_counter += 1
 
+            self.save_qtable(self.episode_counter, self.q_table)
+            self.get_logger().info(f"Average-{self.episode_counter}-episode reward: {self.episode_reward}")
             self.get_logger().info(f"episode: {self.episode_counter}")
             self.get_logger().info(f"steps: {self.steps_counter}")
 
@@ -218,14 +247,33 @@ class QLearningNode(Node):
             self.get_logger().info(f"Training Finished after {self.episode_counter} episodes..!")
             self.timer_.cancel()
     
-    def save_qtable(self):
+    def save_qtable(self, episode, q_table):
+        os.makedirs(name="q_tables", exist_ok=True)
+        filename = f"q_tables/q_table_{episode}.npy"
+        np.save(filename, q_table)
+
+    def load_qtable(self, saved_q_table):
+        self.start_q_table = np.load(f'qtables/{saved_q_table}.npy')
+        self.get_logger().info(f"Initial Q-Table:\n{self.start_q_table}")
+    
+    def plot_metrics(self):
         pass
 
-    def load_qtable(self):
-        pass
 
-    def inference(self):
-        pass
+
+    def inference_loop(self):
+        if self.inference_mode:
+            # Get the current state
+            state = self.get_discretize_state(self.DISTANCE_BINS, self.ORIENTATION_BINS)
+            # Choose the best action based on the learned Q-table
+            best_action = np.argmax(self.q_table[state])
+            # Move the robot based on the best action
+            self.move_bot(best_action)
+            # Optionally, you can compute a reward here, though this is usually not necessary during inference
+            reward = self.compute_reward(action=best_action)
+            # Log the current state and action for debugging purposes
+            self.get_logger().info(f"Inference: state={state}, action={best_action}, reward={reward}")
+
 
 
 def main(args=None):
