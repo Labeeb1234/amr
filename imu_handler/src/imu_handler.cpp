@@ -23,7 +23,7 @@ class ImuHandler: public rclcpp::Node{
     rclcpp::TimerBase::SharedPtr timer_;
 
     float freq=10.0;
-    geometry_msgs::msg::Vector3 angular_vel_;
+    geometry_msgs::msg::Vector3 angular_vel_, linear_accel_;
     float roll=0, pitch=0, yaw=0;
     int i=0;
 
@@ -44,6 +44,7 @@ class ImuHandler: public rclcpp::Node{
 
     void get_raw_imu_data(const sensor_msgs::msg::Imu::SharedPtr msg){
         this->angular_vel_ = msg->angular_velocity;
+        this->linear_accel_ = msg->linear_acceleration;
 
     }
 
