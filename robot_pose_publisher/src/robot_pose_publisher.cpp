@@ -7,6 +7,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/qos.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
+#include "geometry_msgs/msg/pose_with_covariance_stamped.hpp"
 #include "geometry_msgs/msg/transform_stamped.hpp"
 #include "tf2_ros/transform_listener.h"
 #include "tf2_ros/buffer.h"
@@ -18,7 +19,7 @@
 class RobotPosePublisher: public rclcpp::Node{
 
 private:
-rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr pose_pub_;
+rclcpp::Publisher<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr pose_pub_;
 std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
 std::string to_frame_rel_ = "base_footprint";
@@ -29,10 +30,9 @@ rclcpp::TimerBase::SharedPtr timer_;
 public:
 
 RobotPosePublisher(): Node("robot_pose_publisher"){
-    this->pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/robot_pose", 10);
+    this->pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("/robot_pose", 10);
     this->tf_buffer_ = std::make_unique<tf2_ros::Buffer>(this->get_clock());
     this->tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*this->tf_buffer_);
-
     this->timer_ = this->create_wall_timer(std::chrono::milliseconds(50), std::bind(&RobotPosePublisher::pose_publisher, this)); // 50ms --> 1000/50 = 20Hz 
 
 }
@@ -51,12 +51,14 @@ void pose_publisher(){
         RCLCPP_INFO( this->get_logger(), "Could not find transform from %s to %s: %s", to_frame_rel_.c_str(), from_frame_rel_.c_str(), ex.what());
         return;
     }
-    geometry_msgs::msg::PoseStamped msg;
+    geometry_msgs::msg::PoseWithCovarianceStamped msg;
     // translational tf of the bot
-    msg.pose.position.x = tr.transform.translation.x;
-    msg.pose.position.y = tr.transform.translation.y;
-    msg.pose.position.z = 0.0;
-    msg.pose.orientation = tr.transform.rotation;
+    msg.header.stamp = this->get_clock()->now();
+    msg.header.frame_id = "map";
+    msg.pose.pose.position.x = tr.transform.translation.x;
+    msg.pose.pose.position.y = tr.transform.translation.y;
+    msg.pose.pose.position.z = 0.0;
+    msg.pose.pose.orientation = tr.transform.rotation;
 
     // orientation of the bot in roll, pitch and yaw
     // double roll, pitch, yaw;
