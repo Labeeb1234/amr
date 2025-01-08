@@ -27,6 +27,7 @@ def generate_launch_description():
             'camera_namespace': '',
             'rgb_camera.color_profile': '640,480,30',
             'enable_sync': 'true',
+            'enable_rgbd': 'true',
             'enable_depth': 'true',
             'enable_gyro': 'true',
             'enable_accel': 'true',
@@ -34,7 +35,8 @@ def generate_launch_description():
             'depth_module.depth_profile': '640,480,30',
             'pointcloud.enable': 'true',
             'ordered_pc': 'true', 
-            'initial_reset': 'true',
+            'align_depth.enable': 'true',
+            'initial_reset': 'false',
         }.items()   
     )
 
@@ -56,6 +58,6 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     ld.add_action(realsense_camera_launcher)
-    ld.add_action(fake_lase_node)
+    # ld.add_action(fake_lase_node)
 
     return ld

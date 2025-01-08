@@ -3,7 +3,7 @@ from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, Opaq
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
-from launch.conditions import LaunchConfigurationEquals
+from launch.conditions import LaunchConfigurationEquals, IfCondition
 from launch_ros.actions import Node
 
 
@@ -53,11 +53,11 @@ def generate_launch_description():
 
     # laser filter
     laser_filter_config_path = PathJoinSubstitution(
-        [FindPackageShare('mecanum_bot_bringup'), 'config', 'box_laser_filter.yaml']
+        [FindPackageShare('mecanum_bot_bringup'), 'config', 'laser_filters.yaml']
     )
 
     scan_to_scan_filter_node = Node(
-        condition=LaunchConfigurationEquals('use_laser_filter', 'true'),
+        condition=IfCondition(LaunchConfiguration('use_laser_filter')),
         package="laser_filters",
         executable="scan_to_scan_filter_chain",
         parameters=[

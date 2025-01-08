@@ -9,6 +9,18 @@ from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
 
+    plotter_arg = DeclareLaunchArgument(
+        'show_graph',
+        default_value='false',
+        description='whether to launch plotjuggler or not'
+    )
+
+    rviz_arg = DeclareLaunchArgument(
+        'show_display_rviz',
+        default_value='false',
+        description='whether to launch rviz or not'
+    )
+
     ekf_config_path = PathJoinSubstitution(
         [FindPackageShare("mecanum_bot_ekf"), "config", "alt_ekf_params.yaml"]
     )
@@ -46,14 +58,7 @@ def generate_launch_description():
         name='rqt_reconfigure',
         output='screen',
     )
-
-    reset_handler_node = Node(
-        package='gui_tools',
-        executable='mcu_reset_handler.py',
-        name='reset_handler',
-        output='screen'
-    )
-
+    
     imu_handler_node = Node(
         package='imu_handler',
         executable='imu_handler',
@@ -61,10 +66,17 @@ def generate_launch_description():
         output='screen'
     )
 
+    plot_juggler_node = Node(
+        package='plotjuggler',
+        executable='plotjuggler',
+        name='plotjuggler',
+        condition=IfCondition(LaunchConfiguration('show_graph'))
+    )
+
     mecanum_bot_description_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(mecanum_bot_description_launch_path),
         launch_arguments={
-            'show_display_rviz': 'false',
+            'show_display_rviz': LaunchConfiguration('show_display_rviz'),
         }.items()
     )
 
@@ -83,14 +95,17 @@ def generate_launch_description():
 
 
     ld = LaunchDescription()
+    ld.add_action(plotter_arg)
+    ld.add_action(rviz_arg)
     ld.add_action(mecanum_bot_description_launcher)
     ld.add_action(robot_localization_node)
     ld.add_action(lidar_launcher)
     # ld.add_action(realsense_cam_launcher)
     ld.add_action(micro_ros_launcher)
-    ld.add_action(reset_handler_node)
     ld.add_action(imu_handler_node)
     ld.add_action(rqt_reconfigure)
+    ld.add_action(plot_juggler_node)
+
     
 
     return ld
