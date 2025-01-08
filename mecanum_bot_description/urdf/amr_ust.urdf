@@ -1036,48 +1036,15 @@
     <parent link="base_link"/>
     <child link="imu_link"/>
   </joint>
-  
   <joint name="Rigid 40" type="fixed">
     <origin rpy="0 0 0" xyz="0.331142 0.0 0.054538"/>
     <parent link="base_link"/>
     <child link="camera_link"/>
   </joint>
-  
-  <link name="camera_depth_frame"></link>
-  <joint name="camera_depth_joint" type="fixed">
-    <parent link="camera_link"/>
-    <child link="camera_depth_frame"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint>
-
-  <link name="camera_depth_optical_frame"></link>
-  <joint name="camera_depth_optical_joint" type="fixed">
-    <parent link="camera_depth_frame" />
-    <child link="camera_depth_optical_frame" />
-    <origin xyz="0 0 0" rpy="-1.57 0 -1.57" />
-  </joint>
-
-  <link name="camera_color_frame"></link>
-  <joint name="camera_color_joint" type="fixed">
-    <parent link="camera_link" />
-    <child link="camera_color_frame" />
-    <origin xyz="0 0 0" rpy="0 0 0" />
-  </joint>
-
-  <link name="camera_color_optical_frame"></link>
-  <joint name="camera_color_optical_joint" type="fixed">
-    <parent link="camera_color_frame" />
-    <child link="camera_color_optical_frame" />
-    <origin xyz="0 0 0" rpy="-1.57 0 -1.57" />
-  </joint>
-
   <joint name="Rigid 42" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <origin rpy="0 0 0" xyz="0 0 0.208"/>
     <parent link="base_link"/>
     <child link="laser"/>
   </joint>
-
-
-
 
 </robot>
