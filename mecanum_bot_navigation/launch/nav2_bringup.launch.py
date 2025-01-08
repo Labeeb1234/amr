@@ -14,14 +14,19 @@ from nav2_common.launch import RewrittenYaml
 
 
 def generate_launch_description():
+    nav_params_env = os.getenv('NAV_PARAMS_FILE_NAME', 'auto_slam')
+    
     bringup_dir = get_package_share_directory('nav2_bringup')
     launch_dir = os.path.join(bringup_dir, 'launch')
     mecanum_nav2_dir = get_package_share_directory('mecanum_bot_navigation')
+    wave_frontier_dir = get_package_share_directory('explore_lite')
+    exploration_params = os.path.join(mecanum_nav2_dir, 'config/', 'auto_slam_params.yaml')
 
     namespace = LaunchConfiguration('namespace')
     use_namespace = LaunchConfiguration('use_namespace')
 
     slam = LaunchConfiguration('slam')
+    auto_slam = LaunchConfiguration('auto_slam')
     map_yaml_file = LaunchConfiguration('map')
     
     use_sim_time = LaunchConfiguration('use_sim_time')
@@ -59,7 +64,7 @@ def generate_launch_description():
         'use_namespace',
         default_value='False',
         description='Whether to apply a namespace to the navigation stack')
-
+    
     declare_slam_cmd = DeclareLaunchArgument(
         'slam',
         default_value='False',
@@ -67,7 +72,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(mecanum_nav2_dir, 'maps', 'new_map.yaml'),
+        default_value=os.path.join(mecanum_nav2_dir, 'maps', 'out_map2.yaml'),
         description='Full path to map yaml file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -77,7 +82,7 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(mecanum_nav2_dir, 'nav_params', 'auto_slam.yaml'),
+        default_value=os.path.join(mecanum_nav2_dir, 'nav_params', f'{nav_params_env}.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_autostart_cmd = DeclareLaunchArgument(
@@ -110,7 +115,7 @@ def generate_launch_description():
     
     declare_rviz_config_file_cmd = DeclareLaunchArgument(
         'rviz_config',
-        default_value=os.path.join(mecanum_nav2_dir, 'rviz', 'n_display.rviz'),
+        default_value=os.path.join(mecanum_nav2_dir, 'rviz', 'lino_display.rviz'),
         description='Full path to the RVIZ config file to use')
 
 

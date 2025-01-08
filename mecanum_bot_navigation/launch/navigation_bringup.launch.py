@@ -23,7 +23,7 @@ from launch_ros.actions import Node
 from launch.conditions import IfCondition, UnlessCondition
 
 
-MAP_NAME='new_map' #change to the name of your own map here
+MAP_NAME='out_map2' #change to the name of your own map here
 
 def generate_launch_description():
     nav2_launch_path = PathJoinSubstitution(
@@ -39,7 +39,7 @@ def generate_launch_description():
     )
 
     nav2_config_path = PathJoinSubstitution(
-        [FindPackageShare('mecanum_bot_navigation'), 'nav_params', 'testing_nav.yaml']
+        [FindPackageShare('mecanum_bot_navigation'), 'nav_params', 'default_nav.yaml']
     )
 
     nav2_sim_config_path = PathJoinSubstitution(
@@ -62,7 +62,7 @@ def generate_launch_description():
 
        DeclareLaunchArgument(
             name='map', 
-            default_value=default_map_path,
+            default_value=default_map_path, 
             description='Navigation map path'
         ),
 
