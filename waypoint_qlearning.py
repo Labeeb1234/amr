@@ -10,6 +10,7 @@ from std_srvs.srv import Empty
 from std_msgs.msg import Float32
 
 import argparse
+import logging
 import os
 import math
 import time
@@ -26,7 +27,7 @@ class QLearningNode(Node):
         self.twist_pub_ = self.create_publisher(Twist, "cmd_vel", 10)
     
         # inference params
-        self.inference_mode = True
+        self.inference_mode = False
         self.timer_period = 0.1 # 10Hz controller frequency
 
         if not self.inference_mode:
@@ -40,15 +41,15 @@ class QLearningNode(Node):
         self.initial_pose_received = False
         self.state = None # (dist_to_goal, orient_to_goal)
         self.action = 0
-        self.DISTANCE_BINS = 32
-        self.ORIENTATION_BINS = 32
-        self.LASER_BINS = 32
+        self.DISTANCE_BINS = 64
+        self.ORIENTATION_BINS = 64
+        self.LASER_BINS = 32 
         self.ACTION_SPACE = 4
 
         # Random Exploration PARAMS
-        self.epsilon = 1.0
-        self.min_epsilon = 0.1
-        self.epsilon_decay_rate = 0.9
+        self.epsilon = 0.5
+        self.min_epsilon = 0.01
+        self.epsilon_decay_rate = 0.99
 
         # Q-learning PARAMS
         self.EPISODES = 600
@@ -59,15 +60,16 @@ class QLearningNode(Node):
         self.DISCOUNT_FACTOR = 0.99
         self.episode_reward = 0.0
         self.avg_episode_reward = []
+        self.episode_rewards = []
 
         # initializing q-table
-        # self.start_q_table = np.random.uniform(low=-2, high=0, size=(self.DISTANCE_BINS, self.ORIENTATION_BINS, self.ACTION_SPACE))
-        self.start_q_table = self.load_qtable(f"q_table_17")
+        self.start_q_table = np.random.uniform(low=-2, high=0, size=(self.DISTANCE_BINS, self.ORIENTATION_BINS, self.ACTION_SPACE))
+        # self.start_q_table = self.load_qtable(f"q_table_116") # best for straight line
         self.q_table = self.start_q_table
         self.verify_qtable()
 
         # goal params
-        self.goal_position = [1.0, 0.0, 0.0]
+        self.goal_position = [4.0, 0.0, 0.0]
         self.goal_tolerance = 0.3 # in [m]
         self.orientation_tolerance = 0.2 # in [rad]
         self.goal_reached = False
@@ -79,8 +81,6 @@ class QLearningNode(Node):
         self.previous_distance = 0.0
         self.angle_diff = 0.0
         self.laser_data = None
-
-
 
     def quaternion_to_euler(self, w, x, y, z):
         # Roll (x-axis rotation)
@@ -113,14 +113,14 @@ class QLearningNode(Node):
             angle_diff = (goal_pose[2]-current_yaw)*(180.0/3.14)
         return angle_diff
 
-    def get_discretize_state(self, dist_bins_space, orient_bins_space):
+    def get_discretize_state(self, distance_to_goal, angle_diff, dist_bins_space, orient_bins_space):
         dist_bin_edges = np.linspace(0, 10, dist_bins_space+1)
-        dist_bins = np.digitize(self.distance_to_goal, dist_bin_edges)
+        dist_bins = np.digitize(distance_to_goal, dist_bin_edges)
 
         # Normalize angle to [-π, π] range and properly bin it
-        self.angle_diff = np.arctan2(np.sin(self.angle_diff), np.cos(self.angle_diff))
+        angle_diff = np.arctan2(np.sin(angle_diff), np.cos(angle_diff))
         orient_bin_edges = np.linspace(-np.pi, np.pi, orient_bins_space+1)
-        orient_bins = np.digitize(self.angle_diff, orient_bin_edges)
+        orient_bins = np.digitize(angle_diff, orient_bin_edges)
 
         dist_bins = min(dist_bins, dist_bins_space - 1)
         orient_bins = min(orient_bins, orient_bins_space - 1)
@@ -138,74 +138,93 @@ class QLearningNode(Node):
 
     def choose_action(self, discrete_state):
         if np.random.random() > self.epsilon:
+            self.get_logger().info(f"using the best action...")
             return np.argmax(self.q_table[discrete_state])
         else:
+            self.get_logger().info(f"Exploring....")
             return np.random.randint(0, self.ACTION_SPACE)
     
     def compute_reward(self, action):
-        reward = 0.0
-
+        # resetting the reward components (for each movement)
+        distance_reward = 0.0
+        alignment_reward = 0.0
+        progress_reward = 0.0
+        goal_achievment_reward = 0.0
+        action_specific_reward = 0.0
+        #####################################################
         # Distance-based reward with smoother scaling
+        # using inverse square law for distance_factor for smoothing the increment as well as the learning process
         distance_factor = 1.0 / (1.0 + self.distance_to_goal**2)  # Rewards more as robot gets closer
-        reward += 15.0 * distance_factor
-
-        # Improved alignment reward with smoother gradient
+        distance_reward = 15.0 * distance_factor
+        
+        # Alignment-Based reward with smoother gradient
         alignment_factor = np.exp(-2.0 * np.abs(self.angle_diff))  # Smoother decay
-        reward += 8.0 * alignment_factor
+        alignment_reward = 8.0 * alignment_factor
 
-        # Progress reward with momentum
+        # Progress reward towards goal
         progress = self.previous_distance - self.distance_to_goal
         if progress > 0.0:
             # Reward increases for consistent forward progress
-            reward += 50.0 * progress
+            progress_reward = 50.0 * progress
             # aligned progress bonus reward
             if abs(self.angle_diff) < 0.3:
-                reward += 20.0*progress
+                progress_reward += 20.0*progress
         else:
             # Small negative reward for moving away from goal
-            reward += -25.0 * abs(progress)
+            progress_reward = -25.0 * abs(progress)
 
         # Goal achievement reward with distance-based bonus
         if self.distance_to_goal < self.goal_tolerance and abs(self.angle_diff) < self.orientation_tolerance:
             if abs(self.angle_diff) < 0.2:
-                bonus = 100.0 + (50.0 * alignment_factor)  # Extra reward for aligned arrival
-                reward += bonus
+                goal_achievment_reward = 100.0 + (50.0 * alignment_factor)  # Extra reward for aligned arrival
             else:
-                reward += 100.0
-            self.get_logger().info(f"goal reached!")
+                goal_achievment_reward = 100.0
+            # what to do after reaching the goal
             self.goal_reached = True
             self.reset_simulation()
-            self.episode_reward = self.episode_reward/self.steps_counter
+            self.get_logger().info(f"goal reached!")
+            if self.steps_counter > 0:
+                self.episode_reward = self.episode_reward / self.steps_counter
+            else:
+                self.episode_reward = 0.0  
             self.avg_episode_reward.append(self.episode_reward)
+            self.get_logger().info(f"average episode reward: {self.avg_episode_reward}")
             self.episode_reward = 0.0
             self.steps_counter = 0
             self.episode_counter += 1
 
-        
         # Action-specific rewards with better behavior shaping
         if action == 0:  # Moving forward
-            if abs(self.angle_diff) > 0.5:  
-                reward -= 15.0 * abs(self.angle_diff)
+            if abs(self.angle_diff) > 0.2:  
+                action_specific_reward = -15.0 * abs(self.angle_diff)
             else:
-                reward += 10.0 * (1.0 - abs(self.angle_diff)) 
+                action_specific_reward = 10.0 * (1.0 - abs(self.angle_diff)) 
         elif action in [1, 2]:  # Turning actions
             if abs(self.angle_diff) > 0.2:
                 # Reward turning when misaligned
-                reward += 15.0 * (1.0 - abs(self.angle_diff)/np.pi)
+                action_specific_reward = 15.0 * (1.0 - abs(self.angle_diff)/np.pi)
             else:
                 # Penalize unnecessary turning when aligned
-                reward -= 20.0
+                action_specific_reward = -20.0
         elif action == 3:  # Stopping
                 # Only reward stopping when very close to goal AND well-aligned
                 if self.distance_to_goal < self.goal_tolerance and abs(self.angle_diff) < 0.2:
-                    reward += 20.0
+                    action_specific_reward = 20.0
                 else:
                     # Much stronger penalty for unnecessary stopping
-                    reward -= 50.0 + (50.0 * (1.0 - distance_factor))  # Penalty increases with distance from goal
+                    action_specific_reward = -(50.0 + (50.0 * (1.0 - distance_factor)))  # Penalty increases with distance from goal
+
+        total_reward = (
+            distance_reward+
+            alignment_reward+
+            progress_reward+
+            goal_achievment_reward+
+            action_specific_reward
+        )
 
         self.previous_distance = self.distance_to_goal
 
-        return reward
+        return total_reward
 
     def update_qtable(self, state, action, reward, new_state):
         next_best_action = np.argmax(self.q_table[new_state])
@@ -213,14 +232,12 @@ class QLearningNode(Node):
         new_qvalue = (1-self.LEARNING_RATE)*self.q_table[state+(action,)] + self.LEARNING_RATE*td_target
         self.q_table[state+(action,)] = new_qvalue
 
-        self.epsilon = max(self.min_epsilon, self.epsilon*self.epsilon_decay_rate)
-
     ###################### (custom training goals) ###########################
     def randomize_goal(self):
         # Randomly set x-coordinate between 0 and 5
         self.goal_position[0] = float(np.random.randint(2, 4))  # Random int x value in range [1, 3]
         self.goal_position[1] = 0.0  # Fixed y position
-        self.goal_position[2] = 0.0  # Fixed z position
+        self.goal_position[2] = 0.0  # Fixed yaw angle pose of the bot
         self.get_logger().info(f"[New goal: {self.goal_position}]")
     ###########################################################################
 
@@ -250,7 +267,6 @@ class QLearningNode(Node):
     def get_scan_data(self, scan_data):
         self.laser_data = scan_data
 
-
     def get_bot_pose(self, odom_msg):
         self.current_position = odom_msg.pose.pose.position
         _, _, self.current_yaw = self.quaternion_to_euler(
@@ -264,7 +280,7 @@ class QLearningNode(Node):
             self.get_logger().info(f"current_position: [{self.current_position.x:.2f},{self.current_position.y:.2f}], current_yaw: {self.current_yaw:.2f}")
             self.distance_to_goal = self.dist_to_goal(self.goal_position, self.current_position)
             self.angle_diff = self.angle_goal_diff(self.goal_position, self.current_yaw)
-            self.state = self.get_discretize_state(self.DISTANCE_BINS, self.ORIENTATION_BINS)
+            self.state = self.get_discretize_state(self.distance_to_goal, self.angle_diff, self.DISTANCE_BINS, self.ORIENTATION_BINS)
             self.previous_distance = self.distance_to_goal
             self.initial_pose_received = True
             self.get_logger().info(f"Initial state set to: {self.state}")
@@ -285,45 +301,53 @@ class QLearningNode(Node):
         
         if self.episode_counter <= self.EPISODES:
             if self.episode_counter == 0 or self.steps_counter >= self.steps_per_episode:
+                # Calculate average reward before reset
+                if self.steps_counter > 0:  # Prevent division by zero
+                    self.episode_rewards.append(self.episode_reward)
+                    self.episode_reward = self.episode_reward/self.steps_counter
+                    self.avg_episode_reward.append(self.episode_reward)
+                    self.episode_reward = 0.0        
                 self.reset_simulation()
-                # self.randomize_goal() # randomizing goal positions each episode for better training progression
+                time.sleep(0.5)  # Add small delay to ensure reset completes
                 self.steps_counter = 0
                 self.episode_counter += 1
-                # Reset the episode reward accumulator
-                self.episode_reward = self.episode_reward/self.steps_per_episode
-                self.avg_episode_reward.append(self.episode_reward)
-                if self.episode_counter % 20 == 0:
+                self.epsilon = max(self.min_epsilon, self.epsilon*self.epsilon_decay_rate)
+                self.get_logger().info(f"average episode reward: {self.avg_episode_reward}")
+                if self.episode_counter % 10 == 0:
+                    self.get_logger().info(f"{10} episodes rewards: {self.avg_episode_reward[-10:]}")
                     self.plot_metrics()
                     time.sleep(1.0)
-                self.episode_reward = 0.0
                    
-                
             if self.current_position:
-                # main training logic here
+                # main training logic here (fixed logic take action)
                 self.distance_to_goal = self.dist_to_goal(self.goal_position, self.current_position)
                 self.angle_diff = self.angle_goal_diff(self.goal_position, self.current_yaw)
-                new_state = self.get_discretize_state(self.DISTANCE_BINS, self.ORIENTATION_BINS)
-                
-                self.get_logger().info(f"distance to goal: [{self.distance_to_goal:.2f}]")
-                self.get_logger().info(f"Angular Difference to goal: [{self.angle_diff:.2f}]")
-                self.get_logger().info(f"state: {self.state}")
-              
+                self.state = self.get_discretize_state(self.distance_to_goal, self.angle_diff, self.DISTANCE_BINS, self.ORIENTATION_BINS)
+
+                # action step
                 self.action = self.choose_action(self.state)
                 self.move_bot(self.action)
                 reward = self.compute_reward(action=self.action)
-                self.episode_reward += reward
+                # new state after taking action
+                self.distance_to_goal = self.dist_to_goal(self.goal_position, self.current_position)
+                self.angle_diff = self.angle_goal_diff(self.goal_position, self.current_yaw)
+                new_state = self.get_discretize_state(self.distance_to_goal, self.angle_diff, self.DISTANCE_BINS, self.ORIENTATION_BINS)
+                # qtable update
                 self.update_qtable(state=self.state, action=self.action, reward=reward, new_state=new_state)
-
+                # some logs
+                self.get_logger().info(f"new state: [{new_state}]")
+                self.get_logger().info(f"new distance to goal: [{self.distance_to_goal:.2f}]")
+                self.get_logger().info(f"new angular difference to goal: [{self.angle_diff:.2f}]")
                 self.get_logger().info(f"Optimized Action: {self.action}")
                 self.get_logger().info(f"reward: {reward:.2f}")
-                
-                self.state = new_state
+                self.get_logger().info(f"updated q_value: [{self.q_table[self.state]}")
+                # cumulation of rewards each step
+                self.episode_reward += reward
+                self.get_logger().info(f"cumulative [{self.episode_counter}] episode reward: {self.episode_reward:.2f}")
                 self.steps_counter += 1
 
-
             self.save_qtable(self.episode_counter, self.q_table)
-            
-            self.get_logger().info(f"episode: {self.episode_counter}")
+            self.get_logger().info(f"episode: {self.episode_counter}, epsilon: {self.epsilon}")
             self.get_logger().info(f"steps: {self.steps_counter}")
 
         else:
@@ -331,8 +355,8 @@ class QLearningNode(Node):
             self.timer_.cancel()
     
     def save_qtable(self, episode, q_table):
-        os.makedirs(name="qtables", exist_ok=True)
-        filename = f"qtables/q_table_{episode}.npy"
+        os.makedirs(name="q_tables", exist_ok=True)
+        filename = f"q_tables/q_table_{episode}.npy"
         np.save(filename, q_table)
 
     def load_qtable(self, saved_q_table):
@@ -345,16 +369,13 @@ class QLearningNode(Node):
         if self.q_table is None:
             self.get_logger().error("Q-table is None!")
             return False
-        
         # Check for invalid values
         if np.isnan(self.q_table).any():
             self.get_logger().error("Q-table contains NaN values!")
             return False
-        
         if np.isinf(self.q_table).any():
             self.get_logger().error("Q-table contains infinite values!")
             return False
-        
         # Log some statistics
         self.get_logger().info(f"Q-table shape: {self.q_table.shape}")
         self.get_logger().info(f"Q-table min value: {np.min(self.q_table)}")
@@ -365,7 +386,6 @@ class QLearningNode(Node):
         
     def plot_metrics(self):
         fig, ax = plt.subplots()
-        
         if self.avg_episode_reward is None:
             self.get_logger("Waiting for episodic reward datas...")
             return
@@ -392,7 +412,7 @@ class QLearningNode(Node):
         self.distance_to_goal = self.dist_to_goal(self.goal_position, self.current_position)
         self.angle_diff = self.angle_goal_diff(self.goal_position, self.current_yaw)
         # Get the current state
-        state = self.get_discretize_state(self.DISTANCE_BINS, self.ORIENTATION_BINS)
+        state = self.get_discretize_state(self.distance_to_goal, self.angle_diff, self.DISTANCE_BINS, self.ORIENTATION_BINS)
         
         # Add debug logging
         self.get_logger().info(f"Current position: [{self.current_position.x:.2f}, {self.current_position.y:.2f}]")
