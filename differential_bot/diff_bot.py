@@ -13,6 +13,10 @@ DIFF_BOT_CFG = ArticulationCfg(
             max_depenetration_velocity=100.0,
             enable_gyroscopic_forces=True,
         ),
+        collision_props=sim_utils.CollisionPropertiesCfg(),
+        joint_drive_props=sim_utils.JointDrivePropertiesCfg(
+            drive_type="force"
+        ),
         articulation_props=sim_utils.ArticulationRootPropertiesCfg(
             articulation_enabled=True,
             solver_position_iteration_count=4,
