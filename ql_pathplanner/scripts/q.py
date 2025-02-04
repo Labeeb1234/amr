@@ -63,10 +63,11 @@ class QLearningNode(Node):
         self.action = 0
         self.current_pose = None
         self.current_yaw = 0.0
+        self.previous_dist_to_goal = 0.0
         self.discrete_laser_range = None
 
         # goal params
-        self.goal_position = [2.0, 1.0, 0.0]
+        self.goal_position = [3.0, 0.0, 0.0]
         self.goal_tolerance = 0.01
         self.goal_reached = False
         # Q-Learning Params
@@ -84,9 +85,7 @@ class QLearningNode(Node):
 
         self.reset_simulation_client = self.create_client(Empty, 'reset_simulation')
         self.episode_counter=0
-        # self.step_counter=0
         self.current_steps=0
-
         # reward tracking params
         self.epi_rewards = []
         self.epi_aggregate = {
@@ -119,6 +118,7 @@ class QLearningNode(Node):
     
     def get_state(self, discrete_ranges):
         binary_state = self.get_binary_state(discrete_ranges=discrete_ranges)
+        self.get_logger().info(f"Binary State: {binary_state}")
         return int(binary_state, 2) % self.STATE_SPACE_SIZE
     
     def calculate_reward(self, action):
@@ -132,32 +132,50 @@ class QLearningNode(Node):
         err_y = self.goal_position[1]-self.current_pose.y
         err_yaw = self.goal_position[2]-self.current_yaw
         self.get_logger().info(f"errors: [{err_x:.2f}, {err_y:.2f}, {err_yaw:.2f}]")
-
-        # waypoint based reward (just to specify the general direction of motion of the bot)
         dist_to_goal = np.sqrt(err_x**2 + err_y**2)
 
         if dist_to_goal < self.goal_tolerance and np.abs(err_yaw) < 0.1:
-            reward = 200
+            reward = 50
             self.goal_reached = True
 
-        if dist_to_goal >= 0.1 or (np.abs(err_x) >= 0.1 and np.abs(err_y) >= 0.1):
+        if dist_to_goal < self.previous_dist_to_goal:
+            reward += 10.0  # Reward for reducing distance to goal
+        elif dist_to_goal > self.previous_dist_to_goal:
+            reward -= 5  # Penalty for increasing distance to goal
+        self.previous_dist_to_goal = dist_to_goal
+
+        if dist_to_goal >= 0.1:
             reward += -0.1*dist_to_goal
         else:
-            reward += 0.5
+            reward += 0.5*(1.0/dist_to_goal)
 
         if self.discrete_laser_range:
             min_laser_range = min(self.discrete_laser_range)
             self.get_logger().info(f"min laser range: {min_laser_range:.2f}")
-            if min_laser_range <= 0.15:
+            if min_laser_range <= 0.22:
                 # penalty for collision
                 reward += -20.0
             else:
-                reward += 5.0
+                reward += 0.01*(1.0/min_laser_range)
         
         # action specific rewards
         if action == 0:  # Moving forward
-            if np.abs(err_x) < 0.5 and np.abs(err_y) < 0.5: 
-                reward += 5.0
+            if dist_to_goal < self.previous_dist_to_goal:  # Reward if moving closer to goal
+                reward += 2.0
+            else:  # Penalize if moving away from goal
+                reward -= 0.5 * (1.0 / dist_to_goal)
+
+        if action == 1:  # Turn right
+            if dist_to_goal < self.previous_dist_to_goal and np.abs(err_yaw) < 0.1:  # Reward if moving closer to goal after turning
+                reward += 1.0
+            elif np.abs(err_yaw) > 0.1:  # Penalize if moving away from goal after turning
+                reward -= 10
+
+        if action == 2:  # Turn left
+            if dist_to_goal < self.previous_dist_to_goal and np.abs(err_yaw) < 0.1:  # Reward if moving closer to goal after turning
+                reward += 1.0
+            elif np.abs(err_yaw) > 0.1:  # Penalize if moving away from goal after turning
+                reward -= 10
 
         reward += 0.0
         self.get_logger().info(f"reward: {reward:.2f}")
@@ -226,7 +244,7 @@ class QLearningNode(Node):
         if self.episode_counter <= self.EPISODES:
             if self.episode_counter == 0 or self.goal_reached or self.current_steps >= 200:
                 self.reset_simulation()
-                self.current_steps=0
+                self.current_steps = 0
                 self.episode_counter += 1
 
             if self.discrete_laser_range:
@@ -238,10 +256,6 @@ class QLearningNode(Node):
                 self.update_qtable(state=self.state, action=action, reward=reward, new_state=new_state)
                 self.get_logger().info(f"{self.q_table}\n")
 
-                # if self.episode_counter % 400 == 0:
-                #     self.epi_aggregate['epi'].append(self.episode_counter)
-                #     self.epi_rewards.append(reward)
-
                 self.state = new_state
                 self.action = action
                 self.current_steps += 1
@@ -249,7 +263,7 @@ class QLearningNode(Node):
             self.get_logger().info(f"episode: {self.episode_counter}")
             self.get_logger().info(f"steps counter: {self.current_steps}")
         else:
-            # self.save_qtable()
+            self.save_qtable()
             # self.plot_metrics()
             self.get_logger().info(f"stopping training simulation; completed {self.EPISODES} episodes of training...")
             self.timer_.cancel()
