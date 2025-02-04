@@ -7,3 +7,8 @@ For the initial implementation, the simulation was done using ROS2 and in Gazebo
 
 
 Note: Any improvement suggestions are welcome to make this better (First Dabble on robot learning)
+
+- Limitation in using standard q-learning for path planning, but was able to make a controller that can move to straight_line poses ---> for general waypoints ig the discretization and complexity of the problem make the Q-learning algo sub par in a 3D-simulated environment.
+
+# DQN Based Path Planner
+- Starting with the creation of a gym-based botenv 
