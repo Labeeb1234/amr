@@ -1,4 +1,6 @@
-# Creating a Path Planner using PPO alogrithm in the IsaacLab env
+# Creating a Path Planner using PPO alogrithm
+
+### Simulator ----> IsaacLab (
 
  > **Note**:  LIDAR scans are hard to get since the RTX-lidar sensor has not been ported over to the current(as of 2024) isaaclab version(4.2.0).
 
