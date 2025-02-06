@@ -121,9 +121,11 @@ class DifferentialController(ActionTerm):
         # Kinemtic Model
         # going simple for version 0.1
         joint_vel_targets = torch.matmul(W_pinv, command).transpose(1, 2)
+        joint_vel_targets = joint_vel_targets.squeeze(1)
         # setting joint velocity targets
-        self._asset.set_joint_velocity_target(joint_vel_targets, joint_ids=self.joint_idxs)
+        self._asset.set_joint_velocity_target(joint_vel_targets, self.joint_idxs)
 
 
     def reset(self, env_ids: Sequence[int] | None = None) -> None:
+        print(f"{env_ids}")
         self._raw_actions[env_ids] = 0.0

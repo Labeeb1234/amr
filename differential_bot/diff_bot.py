@@ -27,7 +27,7 @@ DIFF_BOT_CFG = ArticulationCfg(
         )
     ),
     init_state=ArticulationCfg.InitialStateCfg(
-        pos=(0.0, 0.0, 0.5), 
+        pos=(0.0, 0.0, 0.12), 
         joint_pos={"Revolute_1": 0.0, "Revolute_2": 0.0, "Revolute_3_01": 0.0, "Revolute_4_01": 0.0},
         joint_vel={"Revolute_1": 0.0, "Revolute_2": 0.0, "Revolute_3_01": 0.0, "Revolute_4_01": 0.0},
     ),
