@@ -3,6 +3,8 @@ A simple standard Q-Learning Algorithm was implemented on a mobile robot(4WD & m
 For the initial implementation, the simulation was done using ROS2 and in Gazebo-Classic simulator.
 ## Q Based Goal Pose Controller
 **state space**
+**action space**
+**reward model**
 
 
 
