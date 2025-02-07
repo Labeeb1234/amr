@@ -17,7 +17,7 @@ if TYPE_CHECKING:
 def relative_pose_to_goal(
     env: ManagerBasedEnv,
     robot_cfg: SceneEntityCfg=SceneEntityCfg("robot"),
-    target_pose_cfg: SceneEntityCfg=SceneEntityCfg("target")
+    target_pose_cfg: SceneEntityCfg=SceneEntityCfg("target") 
 ) -> torch.Tensor:
     
     robot = env.scene[robot_cfg.name]
