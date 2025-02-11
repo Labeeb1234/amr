@@ -3,16 +3,16 @@
 ## CAD Model
 - **4-Wheeled Mecanum Setup**:  
   - A chassis equipped with 4 Mecanum wheels allowing for omni-directional movement (forward, backward, sideways, and rotational movements).
-<div align="center">
-  <img src="" alt="NAV2-IsaacSim Demo">
-</div>
+
 ---
 
 ## Simulation
 - **Simulation Software**:  
   - The automated simulation was done on NVIDIA IsaacSim
   -  **add the GIF demo here**
-
+<div align="center">
+  <img src="" alt="NAV2-IsaacSim Demo">
+</div>
 ---
 
 ## Hardware Setup
