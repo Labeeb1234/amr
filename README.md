@@ -9,7 +9,7 @@
 ## Simulation
 - **Simulation Software**:  
   - The automated simulation was performed using **NVIDIA IsaacSim** to test the AMR's capabilities in a controlled virtual environment.
-  
+  - The simulation was done using ROS2-NAV2 stack using NavFn Global Planner and DWB local planner/controller for the path planning, the environment used was a standard warehouse environment found in the ISAAC_NUCLEUS_DIRECTORY 
   - **Demo**:
     - *Add the GIF demo here to showcase the simulation*:
       <div align="center">
@@ -19,6 +19,10 @@
 ---
 
 ## Hardware Setup
+- pic of hardware
+      <div align="center">
+        <img src="" alt="AMR-HARDWARE">
+      </div>
 
 ### Total System Weight
 - **12kg** (including payload)
