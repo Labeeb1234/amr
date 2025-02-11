@@ -3,12 +3,15 @@
 ## CAD Model
 - **4-Wheeled Mecanum Setup**:  
   - A chassis equipped with 4 Mecanum wheels allowing for omni-directional movement (forward, backward, sideways, and rotational movements).
-
+<div align="center">
+  <img src="" alt="NAV2-IsaacSim Demo">
+</div>
 ---
 
 ## Simulation
 - **Simulation Software**:  
-  - (Provide details of the simulation software or tools used for testing the AMR, e.g., Gazebo, V-REP, etc.)
+  - The automated simulation was done on NVIDIA IsaacSim
+  -  **add the GIF demo here**
 
 ---
 
@@ -75,10 +78,20 @@
 
 ### Sensor Calibration
 - **IMU Calibration**: 
-  - Calibration steps for the MPU6050/9050 to ensure accurate readings. [script here](#)
+  - Calibration process for the MPU6050/9050 to ensure accurate readings. [script here](#)
   
 - **Encoder Calibration**: 
   - Calibration process for the OE-775 Hall-Effect Quadrature Encoders. [script here](#)
+
+- **Note** 
+  For uploading the script use this cmd while inside the directory containing the correct calibration code
+    ```bash
+    pio run -e esp32 -t upload
+    ```
+  For viewing the serial monitor data on the terminal run the command below
+  ```bash
+  pio  device monitor -e esp32 -b 115200
+  ```
 
 ### Velocity PID Tuning
 - **PID Controller**: 
@@ -87,9 +100,10 @@
   - The default firmware package was taken and all unnecessary components of the code were removed and rewritten to suit our PID-tuning needs. [script here](#)
   - The PID tuning script itself has the main lower layer control code which connects with the ROS2 layer via serial (for now, as it was properly tested); it was a bad naming convention which needs to be fixed in the future.
   - The PID tuning script has the rcl_c based code running with publishers for the processed odometry data from the encoders, processed IMU data (yaw rate from gyro only), and a subscription on the `cmd_vel` topic to get the bot frame velocities from the ROS2 layer (for Nav2, teleop, etc.).
-
+  - For uploading use the command below
   - **Note**:
     The default `ini` file was used for our purpose with a custom environment for the ESP32 serial mode that we are using --> Check out the ini file [here](#).
+    
 
 - **Note**:
   The [Linorobot2 Hardware](https://github.com/linorobot/linorobot2_hardware/tree/humble) repo was modified to meet our requirements for this project; link to the same given here. This repo can even be used as a template for almost any robotics project as it has all the common component's integration into the embedded system, generalized as possible. Also, an important note: the encoder library in this repo is one of the best I have seen in open-source, with optimization done in assembly language.
