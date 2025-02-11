@@ -110,7 +110,7 @@
     ```
 
 - **Note on `platformio.ini`**:
-  - The **`platformio.ini`** file is customized for the ESP32 serial communication environment. For reference, [download the `ini` file here](#).
+  - The **`platformio.ini`** file is customized for the ESP32 serial communication environment. For reference, [check out the `ini` file here](#).
 
 ---
 
