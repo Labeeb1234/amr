@@ -106,7 +106,7 @@
   - The PID tuning script implements control logic that communicates with the **ROS2** layer via **serial communication** (for now, as it has been properly tested). It includes rcl_c-based code that publishes odometry data from the encoders, IMU data (yaw rate from the gyro), and subscribes to the `cmd_vel` topic for robot frame velocities.
   - To upload the PID tuning code, navigate to the PID tuning directory and run the following:
     ```bash
-    pio run
+    pio run -e esp32 -t upload
     ```
 
 - **Note on `platformio.ini`**:
