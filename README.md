@@ -112,11 +112,12 @@
     ```bash
     pio run -e esp32 -t upload
     ```
+- **Note**
+  - The name of the main lower layer codebase is same as the pid tuning codebase (need to change it). 
 
 - **Note on `platformio.ini`**:
   - The **`platformio.ini`** file is customized for the ESP32 serial communication environment. For reference, [check out the `ini` file here](#).
-  - The name of the main lower layer codebase is same as the pid tuning codebase.
-  - For the PID tuning we even created a web-based application for tuning online with the system (code not given here).
+  - More on this configuration file is given [here](https://docs.platformio.org/en/latest/projectconf/index.html)
 
 ---
 
@@ -157,7 +158,8 @@
 
 
 - **Note**
-  - packages like plotjuggler can be used to data visualization on-line and [rqt_reconfiguration_tool]() for dynamic tuning of the nav2 params(may not work for all the parameters)
+  - Packages like plotjuggler can be used to data visualization on-line and [rqt_reconfiguration_tool](https://github.com/ros-visualization/rqt_reconfigure) for dynamic tuning of the nav2 params(may not work for all the parameters)
+  - The rqt_reconfigure packages comes with the full desktop installation of the ROS2 packages (no separate installation required else use apt for the pkg installation).
   - use the following commands to install plotjuggler easily:
     ```bash
     sudo apt install ros-humble-plotjuggler
@@ -171,7 +173,8 @@
     ```
 
 ---
-  
+
+## ========================================================================================================================
 
 
 
