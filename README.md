@@ -21,8 +21,9 @@
 ## Hardware Setup
 - pic of hardware
       <div align="center">
-        <img src="" alt="AMR-HARDWARE">
+        <img src="https://github.com/user-attachments/assets/0ed413d9-5ac8-4bfc-a520-5cfcfab95e45" alt="AMR-HARDWARE">
       </div>
+
 
 ### Total System Weight
 - **12kg** (including payload)
