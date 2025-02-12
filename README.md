@@ -11,7 +11,6 @@
   - The automated simulation was performed using **NVIDIA IsaacSim** to test the AMR's capabilities in a controlled virtual environment.
   - The simulation was done using ROS2-NAV2 stack using NavFn Global Planner and DWB local planner/controller for the path planning, the environment used was a standard warehouse environment found in the ISAAC_NUCLEUS_DIRECTORY 
   - **Demo**:
-    - *Add the GIF demo here to showcase the simulation*:
       <div align="center">
         <img src="https://github.com/user-attachments/assets/74128058-e543-4375-81f6-d30da3b26e14" alt="NAV2-IsaacSim Demo">
       </div>
@@ -19,10 +18,10 @@
 ---
 
 ## Hardware Setup
-- **pic of hardware**
-      <div align="center">
-        <img src="https://github.com/user-attachments/assets/0ed413d9-5ac8-4bfc-a520-5cfcfab95e45" width="640" height="480" alt="AMR-HARDWARE">
-      </div>
+
+  <div align="center">
+    <img src="https://github.com/user-attachments/assets/0ed413d9-5ac8-4bfc-a520-5cfcfab95e45" width="640" height="480" alt="AMR-HARDWARE">
+  </div>
 
 
 ### Total System Weight
