@@ -108,15 +108,18 @@
   - The default firmware package was taken and stripped down to remove unnecessary components, focusing on our specific PID-tuning needs.  
     - [Link to PID tuning script](#)
   - The PID tuning script implements control logic that communicates with the **ROS2** layer via **serial communication** (for now, as it has been properly tested). It includes rcl_c-based code that publishes odometry data from the encoders, IMU data (yaw rate from the gyro), and subscribes to the `cmd_vel` topic for robot frame velocities.
-  - The **kinematic layer** is integrated into this codebase via the [kinematics library of the linorobot2 hardware](), the major bot configurations supported by this library are **diffrential drive(2WD,4WD)** and the **mecanum drive**(what we used here); the kinematics is based on the frame arrangement as show below
+  - The **kinematic layer** is integrated into this codebase via the [kinematics library of the linorobot2 hardware](), the major bot configurations supported by this library are **diffrential drive(2WD,4WD)** and the **mecanum drive**(what we used here); the kinematics is based on the frame arrangement as shown below:
+    
       <div align="center">
         <img src="https://github.com/user-attachments/assets/97281fa5-9d19-4549-b99b-0b16a3caefe6" alt="Frame Arrangement">
-      </div> 
+      </div>
+      
+      Make sure the hardware wheel configuration follows the same convention as in the picture above otherwise the motor signal signs may get inverted making the bot move in undesireable ways
   - To upload the PID tuning code, navigate to the PID tuning directory and run the following:
     ```bash
     pio run -e esp32 -t upload
     ```
-  - A custom [config.h]() file is created in order to consolidate all the PINOUT parameters of all the connections to the esp32 board. The default configs we used for our system is show below
+  - A custom [config.h]() file is created in order to consolidate all the PINOUT parameters of all the connections to the esp32 board. The default configs we used for our system is shown below:
   ```cpp
   
   ```
