@@ -19,9 +19,9 @@
 ---
 
 ## Hardware Setup
-- pic of hardware
+- **pic of hardware**
       <div align="center">
-        <img src="https://github.com/user-attachments/assets/0ed413d9-5ac8-4bfc-a520-5cfcfab95e45" alt="AMR-HARDWARE">
+        <img src="https://github.com/user-attachments/assets/0ed413d9-5ac8-4bfc-a520-5cfcfab95e45" width="640" height="480" alt="AMR-HARDWARE">
       </div>
 
 
