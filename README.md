@@ -107,7 +107,7 @@
   - The parameters for the PID controller are adjusted to fine-tune the movement accuracy and responsiveness of the AMR.
   - The default firmware package was taken and stripped down to remove unnecessary components, focusing on our specific PID-tuning needs.  
     - [Link to PID tuning script](#)
-  - The PID tuning script implements control logic that communicates with the **ROS2** layer via **serial communication** (for now, as it has been properly tested). It includes rcl_c-based code that publishes odometry data from the encoders, IMU data (yaw rate from the gyro), and subscribes to the `cmd_vel` topic for robot frame velocities.
+  - The PID tuning script implements control logic that communicates with the **ROS2** layer via **serial communication** (for now, as it has been properly tested). It includes rcl_c-based code that publishes odometry data from the encoders, IMU data (yaw rate from the gyro), and subscribes to the command topic for robot frame velocities.
   - The **kinematic layer** is integrated into this codebase via the [kinematics library of the linorobot2 hardware](), the major bot configurations supported by this library are **diffrential drive(2WD,4WD)** and the **mecanum drive**(what we used here); the kinematics is based on the frame arrangement as shown below:
     
       <div align="center">
