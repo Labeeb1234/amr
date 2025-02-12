@@ -163,12 +163,13 @@
   Due to the unreliability of pure dead reckoning-based localization, we used the [robot_localization](https://github.com/cra-ros-pkg/robot_localization) package to fuse the odometry and IMU data using an Extended Kalman Filter (EKF). The integration involved configuring the necessary parameters for sensor fusion, such as `(x, y, x_vel, y_vel, yaw_vel)`. We mostly used the default parameters with adjusted publishing frequencies.
 
 - **Navigation Setup**:  
-  For navigation, we set up the **ROS2-NAV2 stack** to automate path planning. We tested and tuned the hardware using the default local and global planners (dwb-navfn).  
+  For navigation, we set up the **ROS2-NAV2 stack** to automate path planning. We tested and tuned the hardware using the default local and global planners (dwb-navfn).
+   
   [Navigation parameters here]()
 
 
 - **Note**
-  - Packages like plotjuggler can be used to data visualization on-line and [rqt_reconfiguration_tool](https://github.com/ros-visualization/rqt_reconfigure) for dynamic tuning of the nav2 params(may not work for all the parameters)
+  - Packages like plotjuggler can be used to data visualization on-line and [rqt_reconfiguration_tool](https://github.com/ros-visualization/rqt_reconfigure) for dynamic tuning of the nav2 params(may not work for all the nav2 parameters)
   - The rqt_reconfigure packages comes with the full desktop installation of the ROS2 packages (no separate installation required else use apt for the pkg installation).
   - use the following commands to install plotjuggler easily:
     ```bash
