@@ -13,8 +13,7 @@
   - **Demo**:
     - *Add the GIF demo here to showcase the simulation*:
       <div align="center">
-        <img src![dwb_navfn_isaac](https://github.com/user-attachments/assets/74128058-e543-4375-81f6-d30da3b26e14)
-="" alt="NAV2-IsaacSim Demo">
+        <img src="https://github.com/user-attachments/assets/74128058-e543-4375-81f6-d30da3b26e14" alt="NAV2-IsaacSim Demo">
       </div>
 
 ---
