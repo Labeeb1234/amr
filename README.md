@@ -143,7 +143,8 @@
 
 - **RPLidar Integration**:  
   Unlike the encoders and IMU, the **RPLidar A2-M8** was directly integrated into the upper layer using [SLAMTech's RPLidar ROS2 package](https://github.com/Slamtec/rplidar_ros/tree/ros2).  
-  [Integrated launch files here]()
+  [launch files here]()
+  **Note on Lidar**- The [laser_filter](https://github.com/ros-perception/laser_filters) is an open-source package consisting different kinds of lidar data filter which helps in filtering out undesireable laser scan data, this packge is quite useful for many purposes that uses laser data so instead of wasting time reinventing the wheel please check this package out.
 
 - **IMU Data Handling**:  
   To process the IMU data from the base IMU topic, which publishes at 10Hz, I developed a helper node called **imu_handler**. This node extracts the yaw rate and integrates it to publish the yaw data at the same rate as the base IMU publisher. This was done because we weren’t using a magnetometer, so only the gyroscope's yaw rate was available in the base IMU topic. This made the sensor fusion output significantly better than when we were using just yaw_rate from gyroscope.
