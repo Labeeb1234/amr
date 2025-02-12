@@ -13,7 +13,8 @@
   - **Demo**:
     - *Add the GIF demo here to showcase the simulation*:
       <div align="center">
-        <img src="" alt="NAV2-IsaacSim Demo">
+        <img src![dwb_navfn_isaac](https://github.com/user-attachments/assets/74128058-e543-4375-81f6-d30da3b26e14)
+="" alt="NAV2-IsaacSim Demo">
       </div>
 
 ---
@@ -102,7 +103,7 @@
     pio device monitor -e esp32 -b 115200
     ```
 
-### Velocity PID Tuning
+### Velocity PID Tuning and Main Lower Layer Setup
 - **PID Controller**:
   - **PID tuning scripts** are used to optimize the velocity control of the robot.
   - The parameters for the PID controller are adjusted to fine-tune the movement accuracy and responsiveness of the AMR.
@@ -116,6 +117,8 @@
 
 - **Note on `platformio.ini`**:
   - The **`platformio.ini`** file is customized for the ESP32 serial communication environment. For reference, [check out the `ini` file here](#).
+  - The name of the main lower layer codebase is same as the pid tuning codebase.
+  - For the PID tuning we even created a web-based application for tuning online with the system (code not given here).
 
 ---
 
@@ -127,3 +130,66 @@
   - A particularly useful feature is the [**encoder library**](https://github.com/linorobot/linorobot2_hardware/tree/humble/firmware/lib/encoder), which is one of the best in the open-source community and is optimized in assembly language for performance.
 
 ---
+
+### Upper Layer ROS2 Stack Setup and Process
+
+- **Navigation Stack Setup**:  
+  As mentioned in the previous section, we utilized the template repository from **LinoRobot2** to set up the navigation stack for the hardware. This provided a solid foundation for our system's navigation capabilities.
+
+- **Support Packages**:  
+  The rest of the supporting packages were custom built, including:
+  - The **bringup package** 
+  - The **bot model description package** (model based on CAD)  
+  [Source code for these packages here]()
+
+- **RPLidar Integration**:  
+  Unlike the encoders and IMU, the **RPLidar A2-M8** was directly integrated into the upper layer using [SLAMTech's RPLidar ROS2 package](https://github.com/Slamtec/rplidar_ros/tree/ros2).  
+  [Integrated launch files here]()
+
+- **IMU Data Handling**:  
+  To process the IMU data from the base IMU topic, which publishes at 10Hz, I developed a helper node called **imu_handler**. This node extracts the yaw rate and integrates it to publish the yaw data at the same rate as the base IMU publisher. This was done because we weren’t using a magnetometer, so only the gyroscope's yaw rate was available in the base IMU topic. This made the sensor fusion output significantly better than when we were using just yaw_rate from gyroscope.
+  [Source code here](), [Integrated launch file here]()
+
+- **Localization with EKF**:  
+  Due to the unreliability of pure dead reckoning-based localization, we used the [robot_localization](https://github.com/cra-ros-pkg/robot_localization) package to fuse the odometry and IMU data using an Extended Kalman Filter (EKF). The integration involved configuring the necessary parameters for sensor fusion, such as `(x, y, x_vel, y_vel, yaw_vel)`. We mostly used the default parameters with adjusted publishing frequencies.
+
+- **Navigation Setup**:  
+  For navigation, we set up the **ROS2-NAV2 stack** to automate path planning. We tested and tuned the hardware using the default local and global planners (dwb-navfn).  
+  [Navigation parameters here]()
+
+
+- **Note**
+  - packages like plotjuggler can be used to data visualization on-line and [rqt_reconfiguration_tool]() for dynamic tuning of the nav2 params(may not work for all the parameters)
+  - use the following commands to install plotjuggler easily:
+    ```bash
+    sudo apt install ros-humble-plotjuggler
+    ```
+  - (Observed in humble and Iron distros): sometime(only SOMETIMES) during the plotjuggler node launch you may encounter a plotjuggler plugin error, if this happens use either of the command given below:
+    ```bash
+    sudo apt install ros-humble-plotjuggler-ros
+    ```
+    ```bash
+    sudo apt install ros-humble-plotjuggler-*
+    ```
+
+---
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
