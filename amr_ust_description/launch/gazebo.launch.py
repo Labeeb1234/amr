@@ -4,6 +4,7 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
+from launch.conditions import IfCondition
 import os
 import xacro
 from ament_index_python.packages import get_package_share_directory
@@ -19,8 +20,6 @@ def generate_launch_description():
     world_file = 'small_warehouse.world'
     world_file_path = os.path.join(share_dir, 'worlds', world_file)
 
-
-
     world = LaunchConfiguration('world')
 
     world_cmd = DeclareLaunchArgument(
@@ -31,14 +30,20 @@ def generate_launch_description():
 
     pause_sim_cmd = DeclareLaunchArgument(
         'pause_sim',
-        default_value='false',
+        default_value='true',
         description='whether to pause or play the simulation when gazebo env is launced'
     )
 
     use_sim_time_arg = DeclareLaunchArgument(
         'use_sim_time',
-        default_value='true',
+        default_value='True',
         description='whether to use simulation time or real-sys time'
+    )
+
+    rqt_configuration_arg = DeclareLaunchArgument(
+        'use_config_tool',
+        default_value='false',
+        description='whether to start the rqt configuration tool for dynamic param configuration'
     )
 
     robot_state_publisher_node = Node(
@@ -46,16 +51,9 @@ def generate_launch_description():
         executable='robot_state_publisher',
         name='robot_state_publisher',
         parameters=[
-            {'robot_description': robot_urdf, 'use_sim_time': LaunchConfiguration('use_sim_time')}
+            {'robot_description': robot_urdf, 'use_sim_time': LaunchConfiguration('use_sim_time')} # 'use_sim_time': LaunchConfiguration('use_sim_time')
         ]
     )
-
-    joint_state_publisher_node = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher'
-    )
-
 
     gazebo_server = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -86,52 +84,32 @@ def generate_launch_description():
         executable='spawn_entity.py',
         arguments=[
             '-entity', 'amr_ust',
-            '-topic', 'robot_description'
+            '-topic', 'robot_description',
+            '-z', '0.05'
         ],
         output='screen'
     )
 
-    rviz2_launcher = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution([FindPackageShare('amr_ust_description'), 'launch', 'display.launch.py'])
-        )
-    )
-
-    # controller manager nodes
-    # mecanumbot_controller_spawner = Node( 
-    #     package='controller_manager',
-    #     executable='spawner',
-    #     arguments=['mecanumbot_controller', '--controller-manager', '/controller_manager']
-    # )
-
-    # joint_broad_spawner = Node(
-    #     package='controller_manager',
-    #     executable='spawner',
-    #     arguments=['joint_broad', '--controller-manager', '/controller_manager']
-    # )
-
     rqt_reconfigure_node = Node(
+        condition=IfCondition(LaunchConfiguration('use_config_tool')),
         package='rqt_reconfigure',
         executable='rqt_reconfigure',
         name='rqt_reconfigure',
         output='screen',
         parameters=[{
             'use_sim_time': LaunchConfiguration('use_sim_time')
-        }]
+        }],     
     )
 
     return LaunchDescription([
         world_cmd,
         pause_sim_cmd,
         use_sim_time_arg,
+        rqt_configuration_arg,
         robot_state_publisher_node,
-        # joint_state_publisher_node,
         gazebo_server,
         gazebo_client,
         urdf_spawn_node,
         rqt_reconfigure_node
-        # rviz2_launcher
-        # joint_broad_spawner,
-        # mecanumbot_controller_spawner
     ])
  

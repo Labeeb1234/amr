@@ -1726,10 +1726,10 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <state world_name='default'>
-      <sim_time>62 613000000</sim_time>
-      <real_time>62 651409038</real_time>
-      <wall_time>1722073438 808791686</wall_time>
-      <iterations>62613</iterations>
+      <sim_time>86 420000000</sim_time>
+      <real_time>23 818647568</real_time>
+      <wall_time>1739956342 67495751</wall_time>
+      <iterations>23807</iterations>
       <model name='aws_robomaker_warehouse_Bucket_01_020'>
         <pose>0.433449 9.63171 0 0 0 -1.56316</pose>
         <scale>1 1 1</scale>
@@ -1811,7 +1811,7 @@
         </link>
       </model>
       <model name='aws_robomaker_warehouse_ClutteringC_01_029'>
-        <pose>5.38424 6.13715 0 0 -0 -3.13319</pose>
+        <pose>5.38424 6.13715 0 0 0 -3.13319</pose>
         <scale>1 1 1</scale>
         <link name='aws_robomaker_warehouse_ClutteringC_01::link'>
           <pose>5.38424 6.13715 0 0 -0 -3.13319</pose>
@@ -1821,7 +1821,7 @@
         </link>
       </model>
       <model name='aws_robomaker_warehouse_ClutteringC_01_030'>
-        <pose>3.236 6.13715 0 0 -0 -3.13319</pose>
+        <pose>3.236 6.13715 0 0 0 -3.13319</pose>
         <scale>1 1 1</scale>
         <link name='aws_robomaker_warehouse_ClutteringC_01::link'>
           <pose>3.236 6.13715 0 0 -0 -3.13319</pose>
@@ -1996,7 +1996,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>3.0227 1.83069 6.03556 -0 0.707643 -2.3598</pose>
+        <pose>1.60463 -8.34173 6.97034 0 0.715643 1.91539</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>

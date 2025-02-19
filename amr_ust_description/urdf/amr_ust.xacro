@@ -1178,18 +1178,11 @@
   <child link="camera_right_ir_optical_frame" />
   <origin xyz="0 0 0 " rpy="-1.57 0 -1.57" />
 </joint>
-
-
-
 <joint name="Rigid 42" type="fixed">
   <origin xyz="-0.024557 -0.000233 0.12" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="Intel_Realsense_RPLIDAR_1"/>
 </joint>
-
-
-
-
 
 <!--  **********************************************************Gazebo Plugin Realsense Camera setup********************************************************** -->
 <gazebo reference="camera_bottom_screw_frame"> 
