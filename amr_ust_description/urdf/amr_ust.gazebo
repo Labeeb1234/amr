@@ -11,258 +11,258 @@
   <material name="body_color" value="Gazebo/Gold"/>
   <mu1>0.2</mu1>
   <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
+  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="wheel_hub_1">
   <material name="body_color" value="Gazebo/Silver"/>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
   <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="wheel_hub_2_1">
   <material name="body_color" value="Gazebo/Silver"/>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
   <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="wheel_hub_3_1">
   <material name="body_color" value="Gazebo/Silver"/>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
   <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="wheel_hub_4_1">
   <material name="body_color" value="Gazebo/Silver"/>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
   <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_1_1">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
   <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_1_2">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
   <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_1_3">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_1_4">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_1_5">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_1_6">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_1_7">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_1_8">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_2_1">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_2_2">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_2_3">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_2_4">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_2_5">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_2_6">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_2_7">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_2_8">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_3_1">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_3_2">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_3_3">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_3_4">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_3_5">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_3_6">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_3_7">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_3_8">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_4_1">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_4_2">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_4_3">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_4_4">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_4_5">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_4_6">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_4_7">
   <material>${body_color}</material>
-  <mu1>10000.0</mu1>
-  <mu2>10000.0</mu2>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="roller_4_8">
   <material>${body_color}</material>
-  <mu1>10000.00</mu1>
-  <mu2>10000.00</mu2>
+  <mu1>0.20</mu1>
+  <mu2>0.20</mu2>
  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 

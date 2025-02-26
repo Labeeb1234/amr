@@ -17,7 +17,7 @@ def generate_launch_description():
     robot_description_config = xacro.process_file(xacro_file) 
     robot_urdf = robot_description_config.toxml()
 
-    world_file = 'small_warehouse.world'
+    world_file = 'small_warehouse2.world'
     world_file_path = os.path.join(share_dir, 'worlds', world_file)
 
     world = LaunchConfiguration('world')
@@ -101,6 +101,16 @@ def generate_launch_description():
         }],     
     )
 
+    dynamic_obstacles_actor = Node(
+        package='dynamic_obstacles',
+        executable='pallet_jack_actor',
+        name='pallet_jack_actor',
+        output='screen',
+        parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time')
+        }]
+    )
+
     return LaunchDescription([
         world_cmd,
         pause_sim_cmd,
@@ -110,6 +120,7 @@ def generate_launch_description():
         gazebo_server,
         gazebo_client,
         urdf_spawn_node,
+        # dynamic_obstacles_actor,
         rqt_reconfigure_node
     ])
  

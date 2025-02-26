@@ -1628,8 +1628,6 @@
       <static>1</static>
       <pose>-1.59244 7.71542 0 0 -0 0</pose>
     </model>
-
-    
     <model name='aws_robomaker_warehouse_PalletJackB_01_001'>
       <frame name='aws_robomaker_warehouse_PalletJackB_01::__model__' attached_to='aws_robomaker_warehouse_PalletJackB_01::link'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
@@ -1645,6 +1643,7 @@
             <iyz>0</iyz>
             <izz>0.268</izz>
           </inertia>
+          <pose>0 0 0 0 -0 0</pose>
         </inertial>
         <collision name='collision'>
           <geometry>
@@ -1690,18 +1689,17 @@
       </link>
       <static>0</static>
       <pose>-0.276098 -9.48194 0.023266 0 -0 0</pose>
-      <plugin name="pallet_jack_controller" filename="libgazebo_ros_planar_move.so">
+      <plugin name='pallet_jack_controller' filename='libgazebo_ros_planar_move.so'>
         <ros>
-            <remapping>cmd_vel:=/pallet_jack/cmd_vel</remapping>
-            <remapping>odom:=/pallet_jack/odom</remapping>
+          <remapping>cmd_vel:=/pallet_jack/cmd_vel</remapping>
+          <remapping>odom:=/pallet_jack/odom</remapping>
         </ros>
         <robot_base_frame>aws_robomaker_warehouse_PalletJackB_01::link</robot_base_frame>
-        <publish_odom_tf>false</publish_odom_tf>
-        <publish_odom>true</publish_odom>
+        <publish_odom_tf>0</publish_odom_tf>
+        <publish_odom>1</publish_odom>
         <update_rate>1000.0</update_rate>
       </plugin>
     </model>
-    
     <light name='Warehouse_CeilingLight_003' type='point'>
       <pose>0 0 9 0 -0 0</pose>
       <diffuse>0.5 0.5 0.5 1</diffuse>
@@ -1894,13 +1892,13 @@
         </link>
       </model>
       <model name='aws_robomaker_warehouse_PalletJackB_01_001'>
-        <pose>0.845282 -3.48865 0.023266 0 0 -1.57</pose>
+        <pose>1.16935 0.336462 0.021916 0 -0.00083 -1.57001</pose>
         <scale>1 1 1</scale>
         <link name='aws_robomaker_warehouse_PalletJackB_01::link'>
-          <pose>0.845282 -3.48865 0.023266 0 0 -1.57</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <pose>1.16935 0.336462 0.021916 0 -0.00083 -1.57001</pose>
+          <velocity>-0 -0 0.0098 0 -0 0</velocity>
+          <acceleration>-0 -1e-06 9.8 0 -1e-06 0</acceleration>
+          <wrench>-0 -2e-06 19.6 0 -0 0</wrench>
         </link>
       </model>
       <model name='aws_robomaker_warehouse_RoofB_01_001'>
@@ -2009,7 +2007,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-1.71813 -9.44429 6.853 0 0.675644 1.14257</pose>
+        <pose>-4.7525 -1.46056 9.22184 -0 0.959645 0.018568</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>

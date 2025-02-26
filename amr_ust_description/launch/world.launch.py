@@ -12,7 +12,7 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
     share_dir = get_package_share_directory('amr_ust_description')
 
-    world_file = 'cup.world'
+    world_file = 'small_warehouse.world'
     world_file_path = os.path.join(share_dir, 'worlds', world_file)
 
 
