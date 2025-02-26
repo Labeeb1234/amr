@@ -7,9 +7,27 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(rclcpp_action REQUIRED)
+find_package(nav2_msgs REQUIRED)
+find_package(lifecycle_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+
+add_executable(nav_commander_node src/pose_commander.cpp)
+ament_target_dependencies(nav_commander_node
+  rclcpp
+  geometry_msgs
+  rclcpp_action
+  nav2_msgs
+  lifecycle_msgs
+  tf2
+)
+install(
+  TARGETS
+    nav_commander_node
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -33,5 +51,12 @@ install(
   DESTINATION
     share/${PROJECT_NAME}
 )
+
+
+install(PROGRAMS
+  scripts/nav_commander.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 
 ament_package()
