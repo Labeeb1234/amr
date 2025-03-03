@@ -17,7 +17,7 @@ def generate_launch_description():
     robot_description_config = xacro.process_file(xacro_file) 
     robot_urdf = robot_description_config.toxml()
 
-    world_file = 'small_warehouse2.world'
+    world_file = 'small_warehouse3.world'
     world_file_path = os.path.join(share_dir, 'worlds', world_file)
 
     world = LaunchConfiguration('world')
