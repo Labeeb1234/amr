@@ -1,12 +1,14 @@
 # AMR Documentation
 
 ## CAD Model
+
 - **4-Wheeled Mecanum Setup**:  
   - The AMR is equipped with a chassis featuring four Mecanum wheels that allow for omnidirectional movement. This setup enables the robot to move forward, backward, sideways, and rotate with precision.
 
 ---
 
 ## Simulation
+
 - **Simulation Software**:  
   - The automated simulation was performed using **NVIDIA IsaacSim** to test the AMR's capabilities in a controlled virtual environment.
   - The simulation was done using ROS2-NAV2 stack using NavFn Global Planner and DWB local planner/controller for the path planning, the environment used was a standard warehouse environment found in the ISAAC_NUCLEUS_DIRECTORY (cloud asset)
@@ -25,9 +27,11 @@
 
 
 ### Total System Weight
+
 - **12kg** (including payload)
 
 ### Components:
+
 - **Chassis**:
   - Pre-assembled aluminum frame providing a sturdy structure for the robot.
 
@@ -61,9 +65,11 @@
 ---
 
 ## Lower Layer Setup  
+
 *Important Considerations Before Starting*
 
 ### Embedded Software Setup
+
 - **PlatformIO-C Framework**:
   - The development environment for the embedded part of the system (lower layer code). For installation and documentation, check the [PlatformIO docs](https://docs.platformio.org/en/latest/).
   - Install **micro_ros_platformIO** libraries for MicroROS integration.
@@ -83,6 +89,7 @@
 ## Motor and Sensor Setup
 
 ### Sensor Calibration
+
 - **IMU Calibration**:
   - Calibration process for the **MPU6050/9050 IMU** to ensure accurate acceleration and gyroscope readings.
   - [Link to calibration script](https://github.com/Labeeb1234/amr/tree/main/AMR_Hardware/test_sensors)
@@ -103,6 +110,7 @@
     ```
 
 ### Velocity PID Tuning and Main Lower Layer Setup
+
 - **PID Controller**:
   - **PID tuning scripts** are used to optimize the velocity control of the robot.
   - The parameters for the PID controller are adjusted to fine-tune the movement accuracy and responsiveness of the AMR.
@@ -243,7 +251,7 @@
   - The name of the main lower layer codebase is same as the pid tuning codebase (need to change it).
 
 - **Note on `platformio.ini`**:
-  - The **`platformio.ini`** file is customized for the ESP32 serial communication environment. For reference, [check out the `ini` file here](https://github.com/Labeeb1234/amr/blob/main/AMR_Hardware/firmware_template/platformio.ini).
+  - The **`platformio.ini`** file is customized for the ESP32 serial communication environment. For reference, [check out the `ini` file here](https://github.com/Labeeb1234/amr/blob/main/AMR_Hardware/firmware_template/platformio.ini), the environment we have used is under <em>env.esp32</em>.
   - More on this configuration file is given [here](https://docs.platformio.org/en/latest/projectconf/index.html)
 
 
@@ -306,6 +314,7 @@
 
 # ============================================================================================================
 ### DEMOS
+
 - The first test done on the system, to ensure connections between the lower layer and ROS layer are good enough, was a teleop test (shown below)
 -  **teleop video**
 
