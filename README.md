@@ -265,7 +265,7 @@
 - **Linorobot2 Hardware Repository**:
   - The [LinoRobot2 Hardware repo](https://github.com/linorobot/linorobot2_hardware/tree/humble) has been modified to meet the specific requirements of this project.
   - This repository serves as a template for various robotics projects as it integrates common components in an optimized and generalized manner.
-  - A particularly useful feature is the [**encoder library**](https://github.com/linorobot/linorobot2_hardware/tree/humble/firmware/lib/encoder), which is one of the best in the open-source community and is optimized in assembly language for performance.
+  - A particularly useful feature is the [**encoder library**](https://github.com/linorobot/linorobot2_hardware/tree/humble/firmware/lib/encoder), which is one of the best encoder library in the open-source community and is optimized using assembly language for performance.
 
 ---
 
