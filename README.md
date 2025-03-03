@@ -85,7 +85,7 @@
 ### Sensor Calibration
 - **IMU Calibration**:
   - Calibration process for the **MPU6050/9050 IMU** to ensure accurate acceleration and gyroscope readings.
-  - [Link to calibration script](#)
+  - [Link to calibration script](https://github.com/Labeeb1234/amr/tree/main/AMR_Hardware/test_sensors)
 
 - **Encoder Calibration**:
   - Calibration for the **OE-775 Hall-Effect Quadrature Encoders** to ensure accurate wheel rotation feedback.
