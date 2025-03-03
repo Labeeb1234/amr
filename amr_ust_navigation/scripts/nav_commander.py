@@ -12,6 +12,8 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 from collections import deque
+import pickle
+import datetime
 
 def euler_to_quaternion(roll, pitch, yaw):
     '''
@@ -71,7 +73,10 @@ def quaternion_to_euler(quaternion):
     cosy_cosp = 1.0 - 2.0 * (qy * qy + qz * qz)
     yaw = math.atan2(siny_cosp, cosy_cosp)
     
-    return (roll, pitch, yaw)    
+    return (roll, pitch, yaw)
+
+def save_data(data: dict):
+    pass    
 
 def plot_metrics(data: dict, target_path=None):
     fig, axes = plt.subplots(3, 2, figsize=(15, 12))
@@ -124,11 +129,11 @@ def plot_metrics(data: dict, target_path=None):
     axes[1, 0].set_title('Bot Orientation vs Time')
     axes[1, 0].grid(True)
     
-    # Plot distance over time
-    axes[1, 1].plot(time_stamp, data["current_distance"], 'm-')
+    # Plot displacement over time
+    axes[1, 1].plot(time_stamp, data["current_displacement"], 'm-')
     axes[1, 1].set_xlabel('Sim Time [s]')
-    axes[1, 1].set_ylabel('Distance [m]')
-    axes[1, 1].set_title('Bot Distance from Origin vs Time')
+    axes[1, 1].set_ylabel('Displacement [m]')
+    axes[1, 1].set_title('Bot Displacement from Origin vs Time')
     axes[1, 1].grid(True)
     
     # Plot position errors over time
@@ -136,7 +141,7 @@ def plot_metrics(data: dict, target_path=None):
     axes[2, 0].plot(time_stamp, np.abs(y_errors), 'b-', label='Y Error')
     axes[2, 0].plot(time_stamp, np.abs(yaw_errors), 'g-', label='Yaw Error')
     axes[2, 0].set_xlabel('Sim Time [s]')
-    axes[2, 0].set_ylabel('Error [m]')
+    axes[2, 0].set_ylabel('Errors')
     axes[2, 0].set_title('Bot Axis Errors vs Time')
     axes[2, 0].legend()
     axes[2, 0].grid(True)
@@ -146,7 +151,7 @@ def plot_metrics(data: dict, target_path=None):
     axes[2, 1].plot(time_stamp, error_magnitude, 'k-')
     axes[2, 1].set_xlabel('Sim Time [s]')
     axes[2, 1].set_ylabel('Error Magnitude [m]')
-    axes[2, 1].set_title('Total Bot Distance Error vs Time')
+    axes[2, 1].set_title('Total Bot Displacement Error vs Time')
     axes[2, 1].grid(True)
     
     plt.tight_layout(rect=[0, 0, 1, 0.95])  # Adjust for title
@@ -164,31 +169,18 @@ def main(args=None):
         # ================================================================================
         RTF = 0.06 # real time factor to convert sim time to real time
         goal_pose = [3.71, 2.0, 0.0]
+        previous_position = None
+        distance = 0.0
+        # goal_pose = [1.0, 0.0, 0.0]
         # initializing data dictionary
         data = {
             "real_time_s": deque(maxlen=50000),
             "time_stamp_s": deque(maxlen=50000),
             "pose": deque(maxlen=50000),
-            "current_distance": deque(maxlen=50000),
+            "current_displacement": deque(maxlen=50000),
             "error_axis": deque(maxlen=50000),
             "error": deque(maxlen=50000),
         }
-        # ================================================================================
-        # feedback subscriptions
-        odom_sub_ = nav_node.create_subscription(Odometry, "odometry/filtered", lambda msg: odometry_callback(msg), qos_profile=10, callback_group=callback_group)
-        def odometry_callback(msg):
-            time_stamp = msg.header.stamp.sec + msg.header.stamp.nanosec*1.0e-9
-            position = msg.pose.pose.position
-            orientation = msg.pose.pose.orientation
-            _, _, yaw = quaternion_to_euler(orientation)
-            # nav_node.get_logger().info(f"time: {time_stamp} -> position: [{position.x:.2f}, {position.y:.2f}], yaw: {yaw:.2f}")
-            # data collection
-            data["real_time_s"].append(time_stamp/RTF)
-            data["time_stamp_s"].append(time_stamp)
-            data["pose"].append((position.x, position.y, yaw))
-            data["current_distance"].append(np.sqrt(position.x**2+position.y**2))
-            data["error_axis"].append((goal_pose[0]-position.x, goal_pose[1]-position.y, goal_pose[2]-yaw))
-
         # ================================== setting initial position of the bot ==============================================
         init_pose = PoseStamped()
         init_pose.header.frame_id = "map"
@@ -200,6 +192,32 @@ def main(args=None):
         nav_node.setInitialPose(init_pose)
         # wait until all the essential nodes are started and active as well as the initial pose setup
         nav_node.waitUntilNav2Active()
+        # ================================================================================
+        # feedback subscriptions
+        odom_sub_ = nav_node.create_subscription(Odometry, "odometry/filtered", lambda msg: odometry_callback(msg), qos_profile=10, callback_group=callback_group)
+        def odometry_callback(msg):
+            nonlocal previous_position, distance
+            time_stamp = msg.header.stamp.sec + msg.header.stamp.nanosec*1.0e-9
+            position = msg.pose.pose.position
+            orientation = msg.pose.pose.orientation
+            _, _, yaw = quaternion_to_euler(orientation)
+            
+            # print(f"\n"+"-"*80)
+            nav_node.get_logger().info(f"time: {time_stamp} -> position: [{position.x:.2f}, {position.y:.2f}], yaw: {yaw:.2f}")
+            nav_node.get_logger().info(f"current distance covered: {distance}")
+            # print(f"-"*80+"\n")
+
+            # data collection
+            data["real_time_s"].append(time_stamp/RTF)
+            data["time_stamp_s"].append(time_stamp)
+            data["pose"].append((position.x, position.y, yaw))
+            data["current_displacement"].append(np.sqrt(position.x**2+position.y**2))
+            data["error_axis"].append((goal_pose[0]-position.x, goal_pose[1]-position.y, goal_pose[2]-yaw))
+            if previous_position is not None:
+                distance += np.sqrt((position.x-previous_position.x)**2+(position.y-previous_position.y)**2)
+            else:
+                distance = 0.0
+            previous_position = position
 
         # =================================== goal pose setup ================================================
         goal_pose1 = PoseStamped()
@@ -226,7 +244,7 @@ def main(args=None):
         count = 0
         while not nav_node.isTaskComplete():
             count += 1
-            print(f"{count}")
+            # print(f"{count}")
             feedback = nav_node.getFeedback()
             if feedback:
                 # nav_node.get_logger().info(f"Estimated Time of arrival: {rclpy.duration.Duration.from_msg(feedback.estimated_time_remaining).nanoseconds*1e-9:.2f} seconds.")
@@ -242,6 +260,26 @@ def main(args=None):
             print(f"="*40+"DATA"+"="*40)
             print(data)
             print(f"="*80)
+            # Save data to file
+            # Create a timestamp for the filename
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"navigation_data_{timestamp}.pickle"
+            
+            # Convert deques to lists for serialization
+            serializable_data = {
+                "real_time_s": list(data["real_time_s"]),
+                "time_stamp_s": list(data["time_stamp_s"]),
+                "pose": list(data["pose"]),
+                "current_displacement": list(data["current_displacement"]),
+                "error_axis": list(data["error_axis"]),
+                "error": list(data["error"]),
+            }
+            
+            # Save to file
+            with open(filename, 'wb') as f:
+                pickle.dump(serializable_data, f)
+            
+            print(f"\nData saved to {filename}")
 
             print(f"\n"+"="*40+"SHOWING DATA PLOTS"+"="*40)
             plot_metrics(data=data, target_path=target_global_path)
