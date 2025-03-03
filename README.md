@@ -9,7 +9,7 @@
 ## Simulation
 - **Simulation Software**:  
   - The automated simulation was performed using **NVIDIA IsaacSim** to test the AMR's capabilities in a controlled virtual environment.
-  - The simulation was done using ROS2-NAV2 stack using NavFn Global Planner and DWB local planner/controller for the path planning, the environment used was a standard warehouse environment found in the ISAAC_NUCLEUS_DIRECTORY 
+  - The simulation was done using ROS2-NAV2 stack using NavFn Global Planner and DWB local planner/controller for the path planning, the environment used was a standard warehouse environment found in the ISAAC_NUCLEUS_DIRECTORY (cloud asset)
   - **Demo**:
       <div align="center">
         <img src="https://github.com/user-attachments/assets/74128058-e543-4375-81f6-d30da3b26e14" alt="NAV2-IsaacSim Demo">
