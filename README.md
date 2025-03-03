@@ -251,7 +251,7 @@
   - The name of the main lower layer codebase is same as the pid tuning codebase (need to change it).
 
 - **Note on `platformio.ini`**:
-  - The **`platformio.ini`** file is customized for the ESP32 serial communication environment. For reference, [check out the `ini` file here](https://github.com/Labeeb1234/amr/blob/main/AMR_Hardware/firmware_template/platformio.ini), the environment we have used is under <em>env.esp32</em>.
+  - The **`platformio.ini`** file is customized for the ESP32 serial communication environment. For reference, [check out the `ini` file here](https://github.com/Labeeb1234/amr/blob/main/AMR_Hardware/firmware_template/platformio.ini), the environment we have used is under **<em>env.esp32</em>**.
   - More on this configuration file is given [here](https://docs.platformio.org/en/latest/projectconf/index.html)
 
 
