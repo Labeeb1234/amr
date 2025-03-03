@@ -126,15 +126,10 @@
     #define ESP32_CONFIG_H
   
     #define LED_PIN 2 //used for debugging status (using external LED)
-  
-    //uncomment the base you're building
-    //#define LINO_BASE DIFFERENTIAL_DRIVE       // 2WD and Tracked robot w/ 2 motors
-    // #define LINO_BASE SKID_STEER            // 4WD robot
+    
     #define LINO_BASE MECANUM                // Mecanum drive robot
     #define USE_GENERIC_1_IN_MOTOR_DRIVER   // Motor drivers with 1 Direction Pin(INA) and 1 PWM(ENABLE) pin.
-    //uncomment the IMU you're using
-    // #define USE_MPU6050_IMU
-    #define USE_MPU9250_IMU
+    #define USE_MPU6050_IMU
   
     // imu covariances
     #define ACCEL_COV { 0.01, 0.01, 0.01 } // 0.01
