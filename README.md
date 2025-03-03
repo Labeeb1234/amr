@@ -4,7 +4,7 @@
 
 - **4-Wheeled Mecanum Setup**:  
   - The AMR is equipped with a chassis featuring four Mecanum wheels that allow for omnidirectional movement. This setup enables the robot to move forward, backward, sideways, and rotate with precision.
-  - The model
+  - **The model**:
       <div align="center">
         <img src="https://github.com/user-attachments/assets/8dc21edd-334a-4aed-a621-587c5db2ec8e" alt="CAD-Model">
       </div>
