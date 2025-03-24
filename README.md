@@ -329,7 +329,7 @@ Next Demo on Automated-SLAM
 - simulation results using the wavefrontier methods were quite good but the hardware params for the same methods need some tuning, although an automated mapless navigation showed some good results for the same demo (not too reliable though)
 
 - Next Demo Automated Map Based Navigation
-**Map Based Automated Navigation video**
+**Map Based Automated Navigation video** (tuned for holonomic motion)
 
 
 
