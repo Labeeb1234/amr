@@ -67,7 +67,7 @@
 
 ---
 
-## Lower Layer Setup  
+## Lower Layer Setup
 
 *Important Considerations Before Starting*
 
@@ -266,6 +266,9 @@
   - The [LinoRobot2 Hardware repo](https://github.com/linorobot/linorobot2_hardware/tree/humble) has been modified to meet the specific requirements of this project.
   - This repository serves as a template for various robotics projects as it integrates common components in an optimized and generalized manner.
   - A particularly useful feature is the [**encoder library**](https://github.com/linorobot/linorobot2_hardware/tree/humble/firmware/lib/encoder), which is one of the best encoder library in the open-source community and is optimized using assembly language for performance.
+  - Part of the upper layer and lower layer (especially the microROS agent launching, realsense d435i and RPLidar-A2M8) was run on an offboard laptop placed and connected on top of the AMR chassis; we plan on replacing it with an offboard computer like NVIDIA Jetson or a Raspi 4B 8GB RAM model (one available to us as of now).
+
+- **Raspi 4B Setup and config**
 
 ---
 
