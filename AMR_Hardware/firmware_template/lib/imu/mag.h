@@ -29,6 +29,10 @@
     #define MAG AK8963MAG
 #endif
 
+#ifdef USE_MPU9250MAG_MAG
+    #define MAG MPU9250MAG
+#endif
+
 #ifdef USE_AK8975_MAG
     #define MAG AK8975MAG
 #endif

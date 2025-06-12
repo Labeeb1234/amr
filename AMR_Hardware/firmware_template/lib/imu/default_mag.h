@@ -26,6 +26,7 @@
 #include "AK8975.h"
 #include "AK09918.h"
 #include "QMC5883L.h"
+#include "MPU9250.h"
 
 class HMC5883LMAG: public MAGInterface
 {
@@ -115,6 +116,44 @@ class AK8963MAG: public MAGInterface
             return mag_;
         }
 };
+
+// driver for the  MPU9250 magnetometer same code as the AK8963_MAG driver
+class MPU9250MAG: public MAGInterface{
+    private:
+    MPU9250 magnetometer_;
+    geometry_msgs__msg__Vector3 mag_;
+
+    public:
+    MPU9250MAG(){}
+
+    bool startSensor() override{
+        bool ret;
+        magnetometer_.initialize();
+        ret = magnetometer_.testConnection();
+        if(!ret){
+            return false;
+        }
+        return true;
+    }
+
+    geometry_msgs__msg__Vector3 readMagnetometer() override
+    {
+        // here you can override readMagnetometer function and use the sensor's driver API
+        // to grab the data from magnetometer and return as a Vector3 object
+        int16_t ax, ay, az;
+
+        magnetometer_.getHeading(&ax, &ay, &az);
+
+        mag_.x = ax * 0.00000006;
+        mag_.y = ay * 0.00000006;
+        mag_.z = az * 0.00000006;
+
+        return mag_;
+    }
+
+};
+// ----------------------------------------------------------------------------------------
+
 
 class AK8975MAG: public MAGInterface
 {
@@ -247,6 +286,9 @@ class QMC5883LMAG: public MAGInterface
             return mag_;
         }
 };
+
+
+
 
 class FakeMAG: public MAGInterface
 {

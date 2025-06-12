@@ -74,23 +74,19 @@ Kinematics::rpm Kinematics::calculateRPM(float linear_x, float linear_y, float a
     Kinematics::rpm rpm;
 
     //calculate for the target motor RPM and direction
-    //front-left motor
-    // rpm.motor1 = x_rpm - y_rpm - tan_rpm;
+    //front-left motor -->M1
     rpm.motor1 = x_rpm - y_rpm - tan_rpm;
     rpm.motor1 = constrain(rpm.motor1, -max_rpm_, max_rpm_);
 
-    //front-right motor
-    // rpm.motor2 = x_rpm + y_rpm + tan_rpm;
+    //front-right motor -->M2
     rpm.motor2 = x_rpm + y_rpm + tan_rpm;
     rpm.motor2 = constrain(rpm.motor2, -max_rpm_, max_rpm_);
 
-    //rear-left motor
-    // rpm.motor3 = x_rpm + y_rpm - tan_rpm;
+    //rear-left motor -->M3
     rpm.motor3 = x_rpm + y_rpm - tan_rpm;
     rpm.motor3 = constrain(rpm.motor3, -max_rpm_, max_rpm_);
 
-    //rear-right motor
-    // rpm.motor4 = x_rpm - y_rpm + tan_rpm;
+    //rear-right motor -->M4
     rpm.motor4 = x_rpm - y_rpm + tan_rpm;
     rpm.motor4 = constrain(rpm.motor4, -max_rpm_, max_rpm_);
 

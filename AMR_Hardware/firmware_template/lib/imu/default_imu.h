@@ -17,6 +17,7 @@
 
 //include IMU base interface
 #include "imu_interface.h"
+#include "mag_interface.h"
 
 //include sensor API headers
 #include "I2Cdev.h"
@@ -161,8 +162,8 @@ class MPU6050IMU: public IMUInterface
 class MPU9250IMU: public IMUInterface
 {
     private:
-        const float accel_scale_ = 1 / 16384.0;
-        const float gyro_scale_ = 1 / 131.0;
+        const float accel_scale_ = 1 / 16384.0; // +-2g full scale readings
+        const float gyro_scale_ = 1 / 131.0; // 
 
         MPU9250 accelgyro_;
 
