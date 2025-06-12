@@ -44,52 +44,97 @@ Odometry odometry;
 IMU imu;
 MAG mag;
 
+
+
+// plotting using vs-code tele-plot extension
+void plot_imu_data(){
+    
+    // // in ms^-2
+    // Serial.print(">AccelX:");
+    // Serial.println(imu_msg.linear_acceleration.x);
+    // Serial.print(">AccelY:");
+    // Serial.println(imu_msg.linear_acceleration.y);
+    // Serial.print(">AccelZ:");
+    // Serial.println(imu_msg.linear_acceleration.z);
+
+    // // in rad/s
+    // Serial.print(">GyroX`:");
+    // Serial.println(imu_msg.angular_velocity.x);
+    // Serial.print(">GyroY`:");
+    // Serial.println(imu_msg.angular_velocity.y);
+    // Serial.print(">GyroZ`:");
+    // Serial.println(imu_msg.angular_velocity.z);
+
+    // in uT units
+    Serial.print(">MagFieldX:");
+    Serial.println(mag_msg.magnetic_field.x*1000000);
+    Serial.print(">MagFieldY:");
+    Serial.println(mag_msg.magnetic_field.y*1000000);
+    Serial.print(">MagFieldZ:");
+    Serial.println(mag_msg.magnetic_field.z*1000000);
+    
+}
+
 void setup()
 {
     Serial.begin(BAUDRATE);
 #ifdef BOARD_INIT // board specific setup
     BOARD_INIT;
+#else
+    Wire.begin(SDA_PIN, SCL_PIN);
 #endif
 
-    initWifis();
-    initOta();
+    // initWifis();
+    // initOta();
     i2cdetect();  // default range from 0x03 to 0x77
-    initPwm();
+    // initPwm();
     imu.init();
     mag.init();
-    initBattery();
-    initRange();
+    // initBattery();
+    // initRange();
 
 // #ifdef BOARD_INIT_LATE // board specific setup
 //     BOARD_INIT_LATE
 // #endif
-    syslog(LOG_INFO, "%s Ready %lu", __FUNCTION__, millis());
+    // syslog(LOG_INFO, "%s Ready %lu", __FUNCTION__, millis());
 }
 
 void loop() {
     delay(1000);
     imu_msg = imu.getData();
     mag_msg = mag.getData();
+
 #ifdef MAG_BIAS
     const float mag_bias[3] = MAG_BIAS;
     mag_msg.magnetic_field.x -= mag_bias[0];
     mag_msg.magnetic_field.y -= mag_bias[1];
     mag_msg.magnetic_field.z -= mag_bias[2];
 #endif
-    battery_msg = getBattery();
-    range_msg = getRange();
-    Serial.printf("ACC %5.2f %5.2f %5.2f GYR %5.2f %5.2f %5.2f MAG %5.2f %5.2f %5.2f\n"
-	   " BAT %5.2fV RANGE %5.2fm\n",
-	   imu_msg.linear_acceleration.x, imu_msg.linear_acceleration.y, imu_msg.linear_acceleration.z,
-	   imu_msg.angular_velocity.x, imu_msg.angular_velocity.y, imu_msg.angular_velocity.z,
-	   mag_msg.magnetic_field.x * 1000000, mag_msg.magnetic_field.y * 1000000,
-	   mag_msg.magnetic_field.z * 1000000, battery_msg.voltage, range_msg.range);
-    syslog(LOG_INFO, "ACC %5.2f %5.2f %5.2f GYR %5.2f %5.2f %5.2f MAG %5.2f %5.2f %5.2f"
-	   " BAT %5.2fV RANGE %5.2fm",
-	   imu_msg.linear_acceleration.x, imu_msg.linear_acceleration.y, imu_msg.linear_acceleration.z,
-	   imu_msg.angular_velocity.x, imu_msg.angular_velocity.y, imu_msg.angular_velocity.x,
-	   mag_msg.magnetic_field.x * 1000000, mag_msg.magnetic_field.y * 1000000,
-	   mag_msg.magnetic_field.z * 1000000, battery_msg.voltage, range_msg.range);
-    runWifis();
-    runOta();
+
+    //Serial.printf("ACC[x, y, z]: %f %f %f \n", imu_msg.linear_acceleration.x, imu_msg.linear_acceleration.y, imu_msg.linear_acceleration.z);
+    // Serial.printf("GYR[x`, y`, z`]: %f %f %f \n", imu_msg.angular_velocity.x, imu_msg.angular_velocity.y, imu_msg.angular_velocity.z);
+    // Serial.printf("MAG[x, y, z]: %f %f %f \n", mag_msg.magnetic_field.x*1000000, mag_msg.magnetic_field.y*1000000, mag_msg.magnetic_field.z*1000000);
+
+    plot_imu_data();
+
+    // battery_msg = getBattery();
+    // range_msg = getRange();
+    // Serial.printf("ACC %5.2f %5.2f %5.2f GYR %5.2f %5.2f %5.2f MAG %5.2f %5.2f %5.2f\n"
+	//    " BAT %5.2fV RANGE %5.2fm\n",
+	//    imu_msg.linear_acceleration.x, imu_msg.linear_acceleration.y, imu_msg.linear_acceleration.z,
+	//    imu_msg.angular_velocity.x, imu_msg.angular_velocity.y, imu_msg.angular_velocity.z,
+	//    mag_msg.magnetic_field.x * 1000000, mag_msg.magnetic_field.y * 1000000,
+	//    mag_msg.magnetic_field.z * 1000000, battery_msg.voltage, range_msg.range
+    // );
+
+    // syslog(LOG_INFO, "ACC %5.2f %5.2f %5.2f GYR %5.2f %5.2f %5.2f MAG %5.2f %5.2f %5.2f"
+	//    " BAT %5.2fV RANGE %5.2fm",
+	//    imu_msg.linear_acceleration.x, imu_msg.linear_acceleration.y, imu_msg.linear_acceleration.z,
+	//    imu_msg.angular_velocity.x, imu_msg.angular_velocity.y, imu_msg.angular_velocity.x,
+	//    mag_msg.magnetic_field.x * 1000000, mag_msg.magnetic_field.y * 1000000,
+	//    mag_msg.magnetic_field.z * 1000000, battery_msg.voltage, range_msg.range);
+    // runWifis();
+    // runOta();
+
+
 }
