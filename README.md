@@ -94,13 +94,17 @@
 ### Sensor Calibration
 
 - **IMU Calibration**:
-  - Calibration process for the **MPU6050/9050 IMU** to ensure accurate acceleration and gyroscope readings.
+  - Calibration process for the **MPU6050/9050 IMU** to ensure accurate acceleration and gyroscope readings. Note the current MPU9250 sensor driver code only includes calibration of gyro not accelerometer.
   - [Link to calibration script](https://github.com/Labeeb1234/amr/tree/main/AMR_Hardware/test_sensors)
 
 - **Encoder Calibration**:
   - Calibration for the **OE-775 Hall-Effect Quadrature Encoders** to ensure accurate wheel rotation feedback.
   - [Link to calibration script](#https://github.com/Labeeb1234/amr/tree/main/AMR_Hardware/calibration)
   - [For testing the encoder counts and rpm of the motor after calibration use this script](https://github.com/Labeeb1234/amr/tree/main/AMR_Hardware/test_motors)
+
+- **Magnetometer/Compass Setup**
+  - For the magnetometer sensor we are using the inbuilt AK8963 driver in the MPU9250. But there is a catch the current linorobot codebase does not initialize this magnetometer it just publishing the yaw values of odom as a fake mag. (as of 2025).
+  - To be honest there is a possibility we may be missing something for setting this up, but the current work around we did was to write a drive code in the **default_mag.h** header file to access the magnetometer with the i2c_bypass which is already enabled in the **MP9250.cpp** lib compiled and present in the lino codebase. The modified mag driver header file is [here]().
 
 - **Upload Instructions**:
   To upload the calibration scripts to the ESP32, navigate to the directory containing the appropriate calibration code and run the following command:
