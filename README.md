@@ -104,7 +104,7 @@
 
 - **Magnetometer/Compass Setup**
   - For the magnetometer sensor we are using the inbuilt AK8963 driver in the MPU9250. But there is a catch the current linorobot codebase does not initialize this magnetometer it just publishing the yaw values of odom as a fake mag. (as of 2025).
-  - To be honest there is a possibility we may be missing something for setting this up, but the current work around we did was to write a drive code in the **default_mag.h** header file to access the magnetometer with the i2c_bypass which is already enabled in the **MP9250.cpp** lib compiled and present in the lino codebase. The modified mag driver header file is [here]().
+  - To be honest there is a possibility we may be missing something for setting this up, but the current work around we did was to write a driver code in the **default_mag.h** header file to access the magnetometer with the i2c_bypass which is already enabled in the **MP9250.cpp** lib compiled and present in the lino codebase. The modified mag driver header file is [here]().
 
 - **Upload Instructions**:
   To upload the calibration scripts to the ESP32, navigate to the directory containing the appropriate calibration code and run the following command:
@@ -119,7 +119,7 @@
 ### Velocity PID Tuning and Main Lower Layer Setup
 
 - **PID Controller**:
-  - **PID tuning scripts** are used to optimize the velocity control of the robot.
+  - **PID tuning scripts** are used to optimize the velocity control of the PGDC-Motors used for the actuation.
   - The parameters for the PID controller are adjusted to fine-tune the movement accuracy and responsiveness of the AMR.
   - The default firmware package was taken and stripped down to remove unnecessary components, focusing on our specific PID-tuning needs.  
     - [Link to PID tuning script](https://github.com/Labeeb1234/amr/tree/main/AMR_Hardware/PID_tuning)
