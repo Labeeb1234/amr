@@ -63,10 +63,10 @@
 
 //*********************************************** define macros within this comment block ****************************************
 
-// PID Gains 
-float Kp = 4.0;
-float Ki = 0.0001;
-float Kd = 0.5;
+// PID Gains  (as of now tuned almost)
+float Kp = 5.0;
+float Ki = 0.05;
+float Kd = 1.0;
 
 
 const int total_motors = 4;
@@ -216,7 +216,13 @@ void twist_callback(const void * msgin){
 // ************************************* FILTERS IF ANY ***********************************
 float prev_motor_rpm1=0.0, pprev_motor_rpm1=0.0, prev_motor_rpm2=0.0, pprev_motor_rpm2=0.0;
 float prev_motor_rpm3=0.0, pprev_motor_rpm3=0.0, prev_motor_rpm4=0.0, pprev_motor_rpm4=0.0 ;
+float alpha = 0.2;
 
+float emea_filter(float& curr_val, float& prev_val){
+    curr_val = alpha*curr_val + (1-alpha)*prev_val;
+    prev_val = curr_val;
+    return curr_val;
+}
 float running_avg(float& curr_val, float& prev_val, float& prev_prev_val){
   curr_val = (curr_val + prev_val + prev_prev_val)/3;
   prev_val = curr_val;
@@ -244,13 +250,13 @@ void move_cmd(){
 
     // get the current speed of each motor
     float current_rpm1 = motor1_encoder.getRPM();
-    current_rpm1 = running_avg(current_rpm1, prev_motor_rpm1, pprev_motor_rpm1);
+    current_rpm1 = emea_filter(current_rpm1, prev_motor_rpm1);
     float current_rpm2 = motor2_encoder.getRPM();
-    current_rpm2 = running_avg(current_rpm2, prev_motor_rpm2, pprev_motor_rpm2);
+    current_rpm2 = emea_filter(current_rpm2, prev_motor_rpm2);
     float current_rpm3 = motor3_encoder.getRPM();
-    current_rpm3 = running_avg(current_rpm3, prev_motor_rpm3, pprev_motor_rpm3);
+    current_rpm3 = emea_filter(current_rpm3, prev_motor_rpm3);
     float current_rpm4 = motor4_encoder.getRPM();
-    current_rpm4 = running_avg(current_rpm4, prev_motor_rpm4, pprev_motor_rpm4);
+    current_rpm4 = emea_filter(current_rpm4, prev_motor_rpm4);
 
     // the required rpm is capped at -/+ MAX_RPM to prevent the PID from having too much error
     // the PWM value sent to the motor driver is the calculated PID based on required RPM vs measured RPM
