@@ -66,7 +66,7 @@
 // PID Gains  (as of now tuned almost)
 float Kp = 5.0;
 float Ki = 0.05;
-float Kd = 1.0;
+float Kd = 3.0;
 
 
 const int total_motors = 4;
