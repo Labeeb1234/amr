@@ -22,10 +22,10 @@
 #include "i2cdetect.h"
 #include "Wire.h"
 #include "pwm.h"
+#include "led.h"
 
-#ifndef BAUDRATE
+
 #define BAUDRATE 9600
-#endif
 #define SAMPLE_TIME 10 //s
 
 Encoder motor1_encoder(MOTOR1_ENCODER_A, MOTOR1_ENCODER_B, COUNTS_PER_REV1, MOTOR1_ENCODER_INV);
@@ -72,7 +72,7 @@ void printSummary()
     Serial.println(encoders[3]->read());
     Serial.println("");
 
-    Serial.println("================COUNTS PER REVOLUTION=================");
+    Serial.println("================COUNTS PER REVOLUTION(CPR)=================");
     Serial.print(labels[0]);
     Serial.print(counts_per_rev[0]);
     Serial.print(" ");
@@ -90,26 +90,33 @@ void printSummary()
 
     Serial.println("====================MAX VELOCITIES====================");
     float max_rpm = kinematics.getMaxRPM();
+    Serial.print("Max Motor RPM: ");
+    Serial.print(max_rpm);
+    Serial.println(" RPM");
 
     Kinematics::velocities max_linear = kinematics.getVelocities(max_rpm, max_rpm, max_rpm, max_rpm);
     Kinematics::velocities max_angular = kinematics.getVelocities(-max_rpm, max_rpm,-max_rpm, max_rpm);
 
-    Serial.print("Linear Velocity: +- ");
-    Serial.print(max_linear.linear_x);
+    Serial.print("Linear Velocity(BOT FRAME): +- ");
+    Serial.print(max_linear.linear_x); 
     Serial.println(" m/s");
 
-    Serial.print("Angular Velocity: +- ");
+    Serial.print("Lateral Velocity(BOT FRAME): +- ");
+    if(kinematics.base_platform_ == kinematics.MECANUM){Serial.print(max_linear.linear_y);}
+    Serial.println(" m/s");
+
+    Serial.print("Angular Velocity(BOT FRAME): +- ");
     Serial.print(max_angular.angular_z);
     Serial.println(" rad/s");
 }
 
-void sampleMotors(bool show_summary)
+void sampleMotors(bool show_summary, bool plot_data)
 {
     if(Kinematics::LINO_BASE == Kinematics::DIFFERENTIAL_DRIVE)
     {
         total_motors = 2;
     }
-
+ 
     float measured_voltage = constrain(MOTOR_POWER_MEASURED_VOLTAGE, 0, MOTOR_OPERATING_VOLTAGE);
     float scaled_max_rpm = ((measured_voltage / MOTOR_OPERATING_VOLTAGE) * MOTOR_MAX_RPM);
     float total_rev = scaled_max_rpm * (SAMPLE_TIME / 60.0);
@@ -139,40 +146,55 @@ void sampleMotors(bool show_summary)
             }
 
             motors[i]->spin(PWM_MAX);
+            if(plot_data){
+                Serial.print(">Encoder Counts:");
+                Serial.print(encoders[i]->read());
+                Serial.print(">Motor Velocity(RPM):");
+                Serial.println(encoders[i]->getRPM());
+            }
         }
 
         counts_per_rev[i] = encoders[i]->read() / total_rev;
     }
-    if(show_summary)
+    if(show_summary && !(plot_data)) // plotter used is vs-code's teleplot
         printSummary();
 }
 
+
+
 void setup()
 {
+    initLed();
 
-
-
-#ifdef BOARD_INIT
-    BOARD_INIT;
-#else
-    Wire.begin(SDA_PIN, SCL_PIN);
-#endif
+// #ifdef BOARD_INIT
+//     BOARD_INIT;
+// #else
+//     Wire.begin(SDA_PIN, SCL_PIN);
+// #endif
 
     Serial.begin(BAUDRATE);
-    initPwm();
+    
+    // initPwm(); // (check this) --> only if servos are interfaced and being used
+    
     motor1_controller.begin();
     motor2_controller.begin();
     motor3_controller.begin();
     motor4_controller.begin();
-    while (!Serial) {
-    }
+
+    setLed(1);
+    delay(1000);
+    setLed(0);
+
+    while (!Serial) {}
     Serial.println("Sampling process will spin the motors at its maximum RPM.");
     Serial.println("Please ensure that the robot is ELEVATED and there are NO OBSTRUCTIONS to the wheels.");
     Serial.println("");
     Serial.println("Type 'spin' and press enter to spin the motors.");
     Serial.println("Type 'sample' and press enter to spin the motors with motor summary.");
+    Serial.println("Type 'plot' and press enter to spin the motors and display feedback datas from the motors");
     Serial.println("Press enter to clear command.");
     Serial.println("");
+
 }
 
 void loop()
@@ -189,13 +211,18 @@ void loop()
         {
             cmd = "";
             Serial.println("\r\n");
-            sampleMotors(0);
+            sampleMotors(0, 0);
         }
         else if(character == '\r' and cmd.equals("sample\r"))
         {
             cmd = "";
             Serial.println("\r\n");
-            sampleMotors(1);
+            sampleMotors(1, 0);
+        }
+        else if(character == '\r' and cmd.equals("plot\r")){
+            cmd = "";
+            Serial.println("\r\n");
+            sampleMotors(1, 1);
         }
         else if(character == '\r')
         {
