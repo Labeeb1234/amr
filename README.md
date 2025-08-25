@@ -301,7 +301,7 @@
 - **Raspi 4B Setup and config**
   - As mentioned in the previous section we planned on implmenting the navigation stack on an offboard computer for a clean setup. So we moved the stack onto a Raspberry Pi-4 Model B 8GB RAM. The setup process roughly given below
     <div align="center">
-      <img src="https://github.com/user-attachments/assets/c78c4fd5-e2c2-4f12-b267-fd57a89dbd35" width=640 height=480 alt="Raspi-Setup">
+      <img src="https://github.com/user-attachments/assets/c78c4fd5-e2c2-4f12-b267-fd57a89dbd35" width=800 height=800 alt="Raspi-Setup">
     </div>
 
 ---
