@@ -137,7 +137,7 @@
         <img src="https://github.com/user-attachments/assets/d143d274-6666-402f-ae13-0082ded8f63b" width="1707" height="921" alt="PID response after low-pass filter">
       </div>
       
-  - From the plot GIFs we can see that the std of the control output(in RPM) with and without low pass filter is significantly different, higher in case of low pass filter
+  - From the transient response plots(given above) we can see that the std of the control output(in RPM) with and without low pass filter is significantly different, higher in case of low pass filter
   - The default firmware package was taken and stripped down to remove unnecessary components, focusing on our specific PID-tuning needs.
     - [Link to PID tuning script](https://github.com/Labeeb1234/amr/tree/main/AMR_Hardware/pid_tuning)
 
