@@ -129,12 +129,14 @@
   - The feedback motor RPM from the encoder (after post-processing) is sent into a low-pass filter(emea) to cut-off high frequency encoder noise and then the filtered feedback is sent to input feed for error calculation and PID computation. Observed a better less noisy response from the system by doing this.
     
       <div align="center">
-        <img src="" alt="PID response before low-pass filter">
+        <img src="https://github.com/user-attachments/assets/dcd5be99-8004-495e-bd48-e22cf8038071" width="1707" height="921" alt="PID response before low-pass filter">
       </div>
+
       <div align="center">
-        <img src="" alt="PID response after low-pass filter">
+        <img src="https://github.com/user-attachments/assets/d143d274-6666-402f-ae13-0082ded8f63b" width="1707" height="921" alt="PID response after low-pass filter">
       </div>
       
+  - From the plot GIFs we can see that the std of the control output(in RPM) with and without low pass filter is significantly different, higher in case of low pass filter
   - The default firmware package was taken and stripped down to remove unnecessary components, focusing on our specific PID-tuning needs.
     - [Link to PID tuning script](https://github.com/Labeeb1234/amr/tree/main/AMR_Hardware/pid_tuning)
 
