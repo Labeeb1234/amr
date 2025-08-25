@@ -306,15 +306,15 @@
 
 ---
 
-### Upper Layer ROS2 Stack Setup and Process
+### Upper Layer ROS2 Stack Setup and Process [For HUMBLE and IRON DISTROS](for Jazzy and kilted updates check the new repo linorobot2)
 
 - **Navigation Stack Setup**:  
-  As mentioned in the previous section, we utilized the template repository from **LinoRobot2** to set up the navigation stack for the hardware. This provided a solid foundation for our system's navigation capabilities.
+  As mentioned in the previous section, we utilized the template repository from **LinoRobot2 Navigation** to set up the navigation stack for the hardware. This provided a solid foundation for our system's navigation capabilities.
 
 - **Support Packages**:  
   The rest of the supporting packages were custom built, including:
   - The **bringup package** 
-  - The **bot model description package** (model based on CAD)  
+  - The **bot model description package** (model based on CAD-and older CAD model)  
   [Source code for these packages here]()
 
 - **RPLidar Integration**:  
@@ -333,6 +333,11 @@
   For navigation, we set up the **ROS2-NAV2 stack** to automate path planning. We tested and tuned the hardware using the default local and global planners (dwb-navfn).
    
   [Navigation parameters here]()
+  [Navgation parameters for SLAM here]()
+  [online async SLAM Mapper Params here ]()
+
+- **WavFrontier Exploration For Auto SLAM**:
+  - A ros2-pkg that implements wavfrontier algorithm[acknowledgements to these guys](https://github.com/robo-friends/m-explore-ros2) to explore automate the SLAM process by creating waypoints at "Frontiers" and sending those waypoints to the local controller which is launched with SLAM application.
 
 
 - **Note**
@@ -369,7 +374,15 @@ Next Demo on Automated-SLAM
 **Map Based Automated Navigation video** (tuned for holonomic motion)
 
 
+### Notes To Self:
 
+- CMDS TO RUN on the upper layer stack
+```
+bash
+** bringup (micro ros, rplidar, realsense cam, robot_localization[EKF_NODE], madgwick filter, lidar_filter{if required}, imu_handler, plotters{if required}) **
+** FOR SLAM: launch slam with slam params and nav params for slam **
+** FOR MAP based (AMCL) NAV: launch nav2 with nav params **
+```
 
 
 
