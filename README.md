@@ -132,7 +132,7 @@
         <img src="" alt="PID response before low-pass filter">
       </div>
       <div align="center">
-        <img src="https://github.com/user-attachments/assets/97281fa5-9d19-4549-b99b-0b16a3caefe6" alt="PID response after low-pass filter">
+        <img src="" alt="PID response after low-pass filter">
       </div>
       
   - The default firmware package was taken and stripped down to remove unnecessary components, focusing on our specific PID-tuning needs.
