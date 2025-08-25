@@ -127,11 +127,12 @@
   - The parameters for the PID controller are adjusted to fine-tune the movement accuracy and responsiveness of the AMR.
   - The PID tuning script implements control logic that communicates with the **ROS2** layer via **serial communication** (for now, as it has been properly tested). It includes rcl_c-based code that publishes odometry data from the encoders which is required to extract the motor velocity feedback for the PID tuning process and subscribes to the command topic for robot frame velocities for given cmd signals instead of direct motor signals (conveinence).
   - The feedback motor RPM from the encoder (after post-processing) is sent into a low-pass filter(emea) to cut-off high frequency encoder noise and then the filtered feedback is sent to input feed for error calculation and PID computation. Observed a better less noisy response from the system by doing this.
-    
+      - PID response without Low-Pass Filter
       <div align="center">
         <img src="https://github.com/user-attachments/assets/dcd5be99-8004-495e-bd48-e22cf8038071" width="1707" height="921" alt="PID response before low-pass filter">
       </div>
-
+ 
+      - PID response with Low-Pass Filter
       <div align="center">
         <img src="https://github.com/user-attachments/assets/d143d274-6666-402f-ae13-0082ded8f63b" width="1707" height="921" alt="PID response after low-pass filter">
       </div>
