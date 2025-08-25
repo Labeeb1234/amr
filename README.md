@@ -299,6 +299,10 @@
   - Part of the upper layer and lower layer (especially the microROS agent launching, realsense d435i and RPLidar-A2M8) was run on an offboard laptop placed and connected on top of the AMR chassis; we plan on replacing it with an offboard computer like NVIDIA Jetson or a Raspi 4B 8GB RAM model (one available to us as of now).
 
 - **Raspi 4B Setup and config**
+  - As mentioned in the previous section we planned on implmenting the navigation stack on an offboard computer for a clean setup. So we moved the stack onto a Raspberry Pi-4 Model B 8GB RAM. The setup process roughly given below
+    <div align="center">
+      <img src="https://github.com/user-attachments/assets/c78c4fd5-e2c2-4f12-b267-fd57a89dbd35" alt="Raspi-Setup">
+    </div>
 
 ---
 
