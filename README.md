@@ -291,7 +291,7 @@
 - **Main Firmware Code**
   - The main firmware code to run the functionalities of the bot (lower layer) and interfacing with ROS2 is given [here](https://github.com/Labeeb1234/amr/tree/main/AMR_Hardware/amr_ust_lower) . This code is for the serial based communication transport.
   - For the wifi/UDP based communication the code is [here](https://github.com/Labeeb1234/amr/tree/main/AMR_Hardware/amr_wifi_lower) , its not complete still working on it for testing.
- - For uploading the code just like in the previous section use the pio cli cmd for uploading.
+  - For uploading the code just like in the previous section use the pio cli cmd for uploading.
 
 ---
 
