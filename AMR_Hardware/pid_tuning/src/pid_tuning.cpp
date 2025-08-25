@@ -42,7 +42,7 @@ static volatile int32_t loop_start = -1;
 
 float Kp = 5.0;
 float Ki = 0.05;
-float Kd = 2.0;
+float Kd = 3.0;
 
 int total_motors = 4;
 
