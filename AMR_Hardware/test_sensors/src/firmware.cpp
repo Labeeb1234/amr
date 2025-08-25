@@ -45,11 +45,10 @@ IMU imu;
 MAG mag;
 
 
-
 // plotting using vs-code tele-plot extension
 void plot_imu_data(){
     
-    // // in ms^-2
+    // in ms^-2
     // Serial.print(">AccelX:");
     // Serial.println(imu_msg.linear_acceleration.x);
     // Serial.print(">AccelY:");
@@ -111,7 +110,7 @@ void loop() {
     mag_msg.magnetic_field.z -= mag_bias[2];
 #endif
 
-    //Serial.printf("ACC[x, y, z]: %f %f %f \n", imu_msg.linear_acceleration.x, imu_msg.linear_acceleration.y, imu_msg.linear_acceleration.z);
+    // Serial.printf("ACC[x, y, z]: %f %f %f \n", imu_msg.linear_acceleration.x, imu_msg.linear_acceleration.y, imu_msg.linear_acceleration.z);
     // Serial.printf("GYR[x`, y`, z`]: %f %f %f \n", imu_msg.angular_velocity.x, imu_msg.angular_velocity.y, imu_msg.angular_velocity.z);
     // Serial.printf("MAG[x, y, z]: %f %f %f \n", mag_msg.magnetic_field.x*1000000, mag_msg.magnetic_field.y*1000000, mag_msg.magnetic_field.z*1000000);
 
