@@ -1,1 +1,0 @@
-from .obs_randomizer import ObstacleSpawner
