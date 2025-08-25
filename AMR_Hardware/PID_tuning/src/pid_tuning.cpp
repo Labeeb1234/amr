@@ -1,9 +1,8 @@
 #include <Arduino.h>
-#include <string.h> 
+#include <string.h>
 #include <i2cdetect.h>
 #include <Wire.h>
-// #include <WebServer.h>
-// #include <ArduinoJson.h>
+
 #include "wifis.h"
 #include "syslog.h"
 #include "ota.h"
