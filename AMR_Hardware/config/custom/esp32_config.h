@@ -9,8 +9,8 @@
 #define LINO_BASE MECANUM                // Mecanum drive robot
 #define USE_GENERIC_1_IN_MOTOR_DRIVER   // Motor drivers with 1 Direction Pin(INA) and 1 PWM(ENABLE) pin.
 //uncomment the IMU you're using
-// #define USE_MPU6050_IMU
 #define USE_MPU9250_IMU
+#define USE_MPU9250MAG_MAG // for accessing magnetometer data from the MPU9250 
 
 // imu covariances
 #define ACCEL_COV { 0.01, 0.01, 0.01 } // 0.01
@@ -33,27 +33,34 @@ ROBOT ORIENTATION
 ROBOT ORIENTATION
          FRONT
          MOTOR1
-    MOTOR2  MOTOR3  (4W-90DEG-OMNI......yet to add!)
-         MOTOR4  
+    MOTOR2  MOTOR4  (4W-90DEG-OMNI......yet to add!)
+         MOTOR3  
          BACK
 */
 
-//define your robot' specs here
+//define your robot/DC-motor(in this case) specs here
 #define MOTOR_MAX_RPM 256                   // motor's max RPM
 #define MAX_RPM_RATIO 0.85                // max RPM allowed for each MAX_RPM_ALLOWED = MOTOR_MAX_RPM * MAX_RPM_RATIO
+// from fully charged battery supplying voltage
 #define MOTOR_OPERATING_VOLTAGE 12          // motor's operating voltage (used to calculate max RPM)
 #define MOTOR_POWER_MAX_VOLTAGE 12          // max voltage of the motor's power source (used to calculate max RPM)
 #define MOTOR_POWER_MEASURED_VOLTAGE 12     // current voltage reading of the power connected to the motor (used for calibration)
-#define COUNTS_PER_REV1 268.8                 // wheel1 encoder's no of ticks per rev
-#define COUNTS_PER_REV2 268.8                 // wheel2 encoder's no of ticks per rev
-#define COUNTS_PER_REV3 268.8                // wheel3 encoder's no of ticks per rev
-#define COUNTS_PER_REV4 268.8                 // wheel4 encoder's no of ticks per rev
-// #define COUNTS_PER_REV1  134.4 //134.4              // wheel1 encoder's no of ticks per rev
-// #define COUNTS_PER_REV2 134.4 //134.4                 // wheel2 encoder's no of ticks per rev
-// #define COUNTS_PER_REV3 134.4   // 134.4                // wheel3 encoder's no of ticks per rev
-// #define COUNTS_PER_REV4 134.4 // 134.4 
+
+// encoder specs after calibration
+// #define COUNTS_PER_REV1 268.8                 // wheel1 encoder's no of ticks per rev
+// #define COUNTS_PER_REV2 268.8                 // wheel2 encoder's no of ticks per rev
+// #define COUNTS_PER_REV3 268.8                // wheel3 encoder's no of ticks per rev
+// #define COUNTS_PER_REV4 268.8                 // wheel4 encoder's no of ticks per rev
+// calibrated values
+#define COUNTS_PER_REV1 343.0                 // wheel1 encoder's no of ticks per rev
+#define COUNTS_PER_REV2 339.0                 // wheel2 encoder's no of ticks per rev
+#define COUNTS_PER_REV3 347.0                // wheel3 encoder's no of ticks per rev
+#define COUNTS_PER_REV4 347.0                // wheel4 encoder's no of ticks per rev
+
 #define WHEEL_DIAMETER 0.152                    // wheel's diameter in meters
 #define WHEELS_DISTANCE_DIFF 1.12           // distance between left and right wheels
+
+// MCU-concerning params (as of now fixed to default values --> impacts the control algorithm rate)
 #define PWM_BITS 10                         // PWM Resolution of the microcontroller
 #define PWM_FREQUENCY 20000                 // PWM Frequency(Hz)
 
@@ -109,22 +116,20 @@ ROBOT ORIENTATION
 // #define AGENT_PORT 8888
 
 // Enable WiFi with null terminated list of multiple APs SSID and password
-#define WIFI_AP_LIST {{"inflab", "infinity@123"}, {NULL}}
-#define WIFI_MONITOR 2 // min. period to send wifi signal strength to syslog
-#define USE_ARDUINO_OTA
-#define USE_SYSLOG
-#define SYSLOG_SERVER {192, 168, 1, 77}  // eg IP of the desktop computer
-#define SYSLOG_PORT 514
+// #define WIFI_AP_LIST {{"inflab", "infinity@123"}, {NULL}}
+// #define WIFI_MONITOR 2 // min. period to send wifi signal strength to syslog
+// #define USE_ARDUINO_OTA
+// #define USE_SYSLOG
+// #define SYSLOG_SERVER {192, 168, 1, 77}  // eg IP of the desktop computer
+// #define SYSLOG_PORT 514
 
 #define DEVICE_HOSTNAME "esp32"
 #define APP_NAME "amr_ust_lower"
-// #define BAUDRATE 921600
 #define BAUDRATE 115200
 // #define BAUDRATE 9600
 #define SDA_PIN 21 // specify I2C pins
 #define SCL_PIN 22
 #define NODE_NAME "mecanum_node"
-// #define TOPIC_PREFIX "esp32/"
 #define CONTROL_TIMER 20
 // #define BATTERY_TIMER 2000
 
@@ -147,21 +152,21 @@ ROBOT ORIENTATION
 // // #define ECHO_PIN 32
 // #define USE_SHORT_BRAKE // for shorter stopping distance
 // #define WDT_TIMEOUT 60 // Sec
+
 #define BOARD_INIT {\ 
     Wire.begin(SDA_PIN, SCL_PIN); \ 
     Wire.setClock(400000); \ 
 }
-// #define BOARD_INIT_LATE {}
-// #define BOARD_LOOP {}
 
-#ifdef USE_SYSLOG
-#define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){ \
-    syslog(LOG_ERR, "%s RCCHECK failed %d", __FUNCTION__, temp_rc); \
-    return false; }}
-#else
-#define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){ \
-    flashLED(3); \
-    return false; }} // do not block
-#endif
+
+// #ifdef USE_SYSLOG
+// #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){ \
+//     syslog(LOG_ERR, "%s RCCHECK failed %d", __FUNCTION__, temp_rc); \
+//     return false; }}
+// #else
+// #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){ \
+//     flashLED(3); \
+//     return false; }} // do not block
+// #endif
 
 #endif
