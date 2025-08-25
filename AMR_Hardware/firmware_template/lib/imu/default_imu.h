@@ -163,7 +163,7 @@ class MPU9250IMU: public IMUInterface
 {
     private:
         const float accel_scale_ = 1 / 16384.0; // +-2g full scale readings
-        const float gyro_scale_ = 1 / 131.0; // 
+        const float gyro_scale_ = 1 / 131.0; //  +- 250 degrees/sec full scale readings
 
         MPU9250 accelgyro_;
 
@@ -204,8 +204,8 @@ class MPU9250IMU: public IMUInterface
             int16_t gx, gy, gz;
 
             accelgyro_.getRotation(&gx, &gy, &gz);
-
-            gyro_.x = gx * (double) gyro_scale_ * DEG_TO_RAD;
+            // conversion to rad/s from deg/s
+            gyro_.x = gx * (double) gyro_scale_ * DEG_TO_RAD; 
             gyro_.y = gy * (double) gyro_scale_ * DEG_TO_RAD;
             gyro_.z = gz * (double) gyro_scale_ * DEG_TO_RAD;
 

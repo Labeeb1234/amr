@@ -28,10 +28,12 @@ double PID::compute(float setpoint, float measured_value)
 {
     double error;
     double pid;
+    // const double intergral_limit = max_val_/ki_; 
 
     //setpoint is constrained between min and max to prevent pid from having too much error
     error = setpoint - measured_value;
     integral_ += error;
+    // integral_ = constrain(integral_, -intergral_limit, intergral_limit); // for tackling integral windup
     derivative_ = error - prev_error_;
 
     if(setpoint == 0 && error == 0)

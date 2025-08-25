@@ -122,6 +122,7 @@ class MPU9250MAG: public MAGInterface{
     private:
     MPU9250 magnetometer_;
     geometry_msgs__msg__Vector3 mag_;
+    // const double magentometer_scale_ = 0.00000006; // 1/(2^13/4800) += 4800uT full scale reading with 14 bit resolution
 
     public:
     MPU9250MAG(){}
