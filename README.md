@@ -363,21 +363,17 @@
 ---
 
 # ============================================================================================================
-### DEMOS
+## DEMOS
 
-Teleop-SLAM:
+### Teleop-SLAM:
 - [Teleop-SLAM](https://github.com/Labeeb1234/amr/blob/main/amr_demo_vids/SLAM_teleop.mp4)
 
 
-- The first test done on the system, to ensure connections between the lower layer and ROS layer are good enough, was a teleop test (shown below)
--  **teleop video**
-
-- Next Demo on teleop-based SLAM
 
 
  
 
-Next Demo on Automated-SLAM
+### Next Demo on Automated-SLAM
 - **NEED Tuning on hardware**
 - simulation results using the wavefrontier methods were quite good but the hardware params for the same methods need some tuning, although an automated mapless navigation showed some good results for the same demo (not too reliable though)
 
