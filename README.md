@@ -370,6 +370,9 @@
 
 - Next Demo on teleop-based SLAM
 -  **Teleop-SLAM**
+  <div>
+    <img src="" alt="Teleop-SLAM"/>
+  </div>
 
 Next Demo on Automated-SLAM
 - **NEED Tuning on hardware**
