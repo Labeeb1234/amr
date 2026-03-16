@@ -370,9 +370,8 @@
 
 - Next Demo on teleop-based SLAM
 -  **Teleop-SLAM**
-  <video width="320" height="240" controls>
-     <source src="https://github.com/Labeeb1234/amr/blob/main/amr_demo_vids/SLAM_teleop.mp4" type="video/mp4"/>
-  </video>
+
+- [Teleop-SLAM](https://github.com/Labeeb1234/amr/blob/main/amr_demo_vids/SLAM_teleop.mp4)
  
 
 Next Demo on Automated-SLAM
