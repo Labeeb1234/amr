@@ -365,7 +365,9 @@
 # ============================================================================================================
 ## DEMOS
 
-### Teleop-SLAM:
+### SLAM-Demos
+
+Teleop-SLAM:
 - [Teleop-SLAM](https://github.com/Labeeb1234/amr/blob/main/amr_demo_vids/SLAM_teleop.mp4)
 
 
