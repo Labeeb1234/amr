@@ -331,6 +331,9 @@
   To process the IMU data from the base IMU topic, which publishes at 10Hz, I developed a helper node called **imu_handler**. This node extracts the yaw rate and integrates it to publish the yaw data at the same rate as the base IMU publisher. This was done because we weren’t using a magnetometer, so only the gyroscope's yaw rate was available in the base IMU topic. This made the sensor fusion output significantly better than when we were using just yaw_rate from gyroscope.
   [Source code here](), [Integrated launch file here]()
 
+- **Optical Flow Sensor Integration(A work in progress and subject to testing)**
+  To add an extra layer of odom source for improving the robot localization accuracy via VIO 
+
 - **Localization with EKF**:  
   Due to the unreliability of pure dead reckoning-based localization, we used the [robot_localization](https://github.com/cra-ros-pkg/robot_localization) package to fuse the odometry and IMU data using an Extended Kalman Filter (EKF). The integration involved configuring the necessary parameters for sensor fusion, such as `(x, y, x_vel, y_vel, yaw_vel)`. We mostly used the default parameters with adjusted publishing frequencies.
 
